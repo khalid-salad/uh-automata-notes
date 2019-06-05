@@ -1,0 +1,364 @@
+\subsection{Regular Languages}\label{subsec:regular-languages}
+\subsubsection{Finite Automata}
+
+\begin{definition}
+A \textbf{Deterministic Finite-State Automata} (DFA) or \textbf{Finite-State Machine} is a quintuple $(A, Q, \tau, q_0, \mathcal{F})$ where 
+
+\begin{align*}
+    &A\text{ is the }\textbf{alphabet}\\
+    &Q\text{ is a finite, non-empty }\textbf{set of states}\\
+    &\tau:Q\times A\to Q\text{ is the }\textbf{transition function }\\
+    &q_0\text{ is the }\textbf{initial state}\\
+    &\mathcal{F}\subseteq Q\text{ is the set of }\textbf{final states}
+\end{align*}
+\end{definition}
+We can extend $\tau$ as follows: 
+
+$\tau^*:Q\times A^*\to Q$
+
+\[\tau^*(q, s) = \begin{cases} q &\mbox{ if } s=\varepsilon\\
+                             \tau^*(\tau(q, s_0), s') &\mbox{ if } s=s_0\cdot s'\end{cases}\]
+
+We proceed informally and use $\tau$ to refer to $\tau^*$. 
+
+Consider the following DFA:
+
+\begin{center}\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+  \tikzstyle{every state}=[fill={rgb:black,1;white,10}]
+
+  \node[state,initial](q_0){$q_0$};
+  \node[state, accepting](q_1)[right of=q_0]{$q_1$};
+  \node[state, accepting](q_2)[below of=q_1]{$q_2$};
+  \node[state](q_3)[left of=q_2]{$q_3$};
+
+  \path[->]
+  (q_0) edge                node {$a$}  (q_1)
+        edge  [loop above]  node {$b$}  ()
+  (q_1) edge                node {$a$}  (q_2)
+        edge  [loop above]  node {$b$}  ()
+  (q_2) edge                node {$a$}  (q_3)
+        edge  [loop below]  node {$b$}  ()
+  (q_3) edge                node {$a$}  (q_0)
+        edge  [loop below]  node {$b$}  ();
+\end{tikzpicture}\end{center}
+
+The figure indicates that we begin at state $q_0$. The double-circles for states $q_1$ and $q_2$ indicate that they are accepting or final states. An arrow indicates the state to move to after receiving an input. For example, if we receive the input string $abba$, we begin at state $q_0$ and receive $a$, so we move to state $q_1$. We then receive $b$ and stay in $q_1$. We repeat this for the next symbol, $b$, and then move to $q_2$ upon receiving the final $a$. Since $q_2$ is a final state, we say that this DFA \textbf{accepts} the string $abba$. 
+
+We can represent the above DFA using a table, as follows:
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ & 0 \\
+    & $q_1$ & $q_2$ & $q_1$ & 1 \\
+    & $q_2$ & $q_3$ & $q_2$ & 1\\
+    & $q_3$ & $q_0$ & $q_3$ & 0\\
+\end{tabular}\end{center}
+
+The first column indicates the states, while the first row indicates the symbols. The final column indicates whether a state is accepting: 0 refers to a non-final state, 1 to a final state. The remaining values indicate the transition function $\tau$, e.g. $\tau(q_0, a)=q_1$, indicated by the entry corresponding to row $q_0$ and column $a$. Finally, the arrow pointing to $q_0$ indicates that it is the starting position. 
+
+\begin{definition}
+Let $\underset{\sim}{D}$ be some DFA. Then $L(\underset{\sim}{D})$, the language accepted by the DFA, is \[\{s\in A^*|\tau(q_0, s)\in \mathcal{F}\}\]
+\end{definition}
+
+\begin{definition}
+A language is \textbf{regular} if and only if there exists a DFA that accepts it.
+\end{definition}
+
+\begin{definition}
+A \textbf{Non-Deterministic Finite-State Automata} (NFA) is a quintuple $(A, Q, \tau, q_0, \mathcal{F})$ where 
+\end{definition}
+
+\begin{align*}
+    &A\text{ is the }\textbf{alphabet}\\
+    &Q\text{ is a finite, non-empty }\textbf{set of states}\\
+    &\tau:Q\times A\to 2^Q\text{ is the }\textbf{transition function }\\
+    &q_0\text{ is the }\textbf{initial state}\\
+    &\mathcal{F}\subseteq Q\text{ is the set of }\textbf{final states}
+\end{align*}
+
+We can extend $\tau$ as follows: 
+
+$\tau^*:2^Q\times A^*\to 2^Q$
+
+\[\tau^*(P, s) = \begin{cases} P &\mbox{ if } s=\varepsilon\\
+                             \tau^*\left(\displaystyle\bigcup_{q\in P}\tau(q, s_0), s'\right) &\mbox{ if } s=s_0\cdot s'\end{cases}\]
+
+We proceed informally and use $\tau$ to refer to $\tau^*$. 
+
+Consider the following NFA:
+
+\begin{center}\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+  \tikzstyle{every state}=[fill={rgb:black,1;white,10}]
+
+  \node[state, initial](q_0){$q_0$};
+  \node[state, accepting](q_1)[right of=q_0]{$q_1$};
+  \node[state, accepting](q_2)[below of=q_1]{$q_2$};
+  \node[state](q_3)[left of=q_2]{$q_3$};
+
+  \path[->]
+  (q_0) edge                node {$a$}  (q_1)
+        edge  [loop above]  node {$b$}  ()
+  (q_1) edge                node {$a$}  (q_2)
+        edge                node {$a$}  (q_3)
+  (q_2) edge                node {$a$}  (q_3)
+        edge  [loop below]  node {$b$}  ()
+  (q_3) edge                node {$a$}  (q_0)
+        edge  [loop below]  node {$b$}  ();
+\end{tikzpicture}\end{center}
+
+The diagrams for an NFA and DFA follow the same notation. However, the notation for the table differs slightly:
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ & 0 \\
+    & $q_1$ & $q_2q_3$ & $\emptyset$ & 1 \\
+    & $q_2$ & $q_3$ & $q_2$ & 1\\
+    & $q_3$ & $q_0$ & $q_3$ & 0\\
+\end{tabular}\end{center}
+
+The values of the transition function are now sets. We informally refer to the set $\{q_0\}$ by $q_0$, and similarly the set $\{q_2, q_3\}$ by $q_2q_3$. In some cases, to avoid ambiguity, we will use commas, e.g. we may represent $\{q_2, q_3\}$ as $q_2,q_3$. We similarly say, given a string $s$, if there exists a path through an NFA that ends in a final state, we say that the NFA \textbf{accepts} $s$.
+
+Similarly, we define the set of languages accepted by an NFA $\underset{\sim}{N}$, $L(\underset{\sim}{N})$, as \[L(\underset{\sim}{N}) = \{s\in A^*|\tau(q_0, s)\cap\mathcal{F}\neq\emptyset\}\]
+
+We can convert an NFA to a DFA on the powerset $2^{\mathcal{Q}}$ by using the \textbf{subset construction}: begin with the initial state and traverse the NFA, adding unseen states to the left-most column until all paths have been exhausted. For example, with our NFA above, we begin with:
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ & 0 \\
+\end{tabular}\end{center}
+
+$q_0$ has already been seen, so we ignore it. $q_1$ is new, so we add it to the table:
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
+          & $q_1$ &       &       & 
+\end{tabular}\end{center}
+
+We now visit the corresponding states of $q_1$, which are $q_2q_3$ and $\emptyset$, both of which have not yet been visited. 
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
+          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          & $q_2q_3$ & & & \\
+          & $\emptyset$ & & &
+\end{tabular}\end{center}
+
+When $q_2$ receives $a$, it transitions to state $q_3$. When $q_3$ receives $a$, it transitions to state $q_0$, so $q_2q_3$ transitions to $q_0q_3$. Similarly, $q_2q_3$ transitions to state $q_2q_3$ when it receives $b$.
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
+          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          & $\emptyset$ & & &
+\end{tabular}\end{center}
+
+The empty set transitions to the empty set, by definition. 
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
+          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          & $\emptyset$ & $\emptyset$ & $\emptyset$ &
+\end{tabular}\end{center}
+
+$q_0q_3$ has not yet been visited, so we add it to the left-most column:
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
+          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          & $\emptyset$ & $\emptyset$ & $\emptyset$ &\\
+          & $q_0q_3$ & & & 
+\end{tabular}\end{center}
+
+Then we visit its corresponding states:
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
+          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          & $\emptyset$ & $\emptyset$ & $\emptyset$ &\\
+          & $q_0q_3$ & $q_0q_1$ & $q_0q_3$ & 
+\end{tabular}\end{center}
+
+Continuing, we end with the following DFA:
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
+          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          & $\emptyset$ & $\emptyset$ & $\emptyset$ &\\
+          & $q_0q_3$ & $q_0q_1$ & $q_0q_3$ & \\
+          & $q_0q_1$ & $q_1q_2q_3$ & $q_0$ & \\
+          & $q_1q_2q_3$ & $q_0q_2q_3$ & $q_2q_3$ & \\
+          & $q_0q_2q_3$ & $q_0q_1q_3$ & $q_0q_2q_3$ & \\
+          & $q_0q_1q_3$ & $q_0q_1q_2q_3$ & $q_0q_3$ & \\
+          & $q_0q_1q_2q_3$ & $q_0q_1q_2q_3$ & $q_0q_2q_3$ & \\
+\end{tabular}\end{center}
+
+However, we need to include the accepting states. The accepting states of the NFA are $q_1$ and $q_2$, and thus any state including either state is accepting:
+
+\begin{center}\begin{tabular}{c c|c c r}
+         & & $a$ & $b$ & \\\hline
+    $\to$ & $q_0$ & $q_1$ & $q_0$ & 0 \\
+          & $q_1$ & $q_2q_3$ & $\emptyset$ & 1 \\
+          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & 1 \\
+          & $\emptyset$ & $\emptyset$ & $\emptyset$ & 0\\
+          & $q_0q_3$ & $q_0q_1$ & $q_0q_3$ & 0 \\
+          & $q_0q_1$ & $q_1q_2q_3$ & $q_0$ & 1 \\
+          & $q_1q_2q_3$ & $q_0q_2q_3$ & $q_2q_3$ & 1 \\
+          & $q_0q_2q_3$ & $q_0q_1q_3$ & $q_0q_2q_3$ & 1 \\
+          & $q_0q_1q_3$ & $q_0q_1q_2q_3$ & $q_0q_3$ & 1 \\
+          & $q_0q_1q_2q_3$ & $q_0q_1q_2q_3$ & $q_0q_2q_3$ & 1\\
+\end{tabular}\end{center}
+
+Note that an NFA does not necessarily admit a DFA with as many states. Consider the following example:
+
+\begin{center}\begin{tabular}{c c| c c r}
+     & & $a$ & $b$ & \\\hline
+$\to$&0&$\{1,2,\hdots,n\}$ & 0 & 0 \\
+     & 1 & 2 & 1 & 0 \\
+     & 2 & 3 & 2 & 0 \\
+     & \vdots & \vdots & \vdots & \vdots \\
+     & $i$ & $i + 1$ & $i$ & 0 \\
+     & \vdots & \vdots & \vdots & \vdots \\
+     & $n-1$ & $n$ & $n-1$ & 0 \\
+     & $n$ & 1 & $n$ & 1
+\end{tabular}\end{center}
+
+The NFA above admits the following DFA:
+
+\begin{center}\begin{tabular}{c c| c c r}
+     & & $a$ & $b$ & \\\hline
+$\to$&0&$\{1,2,\hdots,n\}$ & 0 & 0 \\
+     & $\{1, 2,\hdots, n\}$ & $\{1, 2,\hdots, n\}$ & $\{1, 2,\hdots, n\}$ & 1 \\
+\end{tabular}\end{center}
+
+The above DFA contains only 2 states, despite the NFA containing $n+1$ states.
+
+For an NFA, there is no guarantee of a unique smallest NFA which accepts the same strings. However, for a DFA, such a notion exists.
+
+Consider two states, $p$ and $q$, and corresponding $L_p$ and $L_q$, where $L_p$ has initial state $p$ and $L_q$ has initial state $q$. We say that $p$ and $q$ are distinguishable if there exists a string $s$ such that $s$ is in $L_p$ and not in $L_q$, or vice-versa. We use this notion to \textbf{reduce} a DFA.
+
+Begin with a partition of $Q$ into subsets $\mathcal{F}$ and $Q-\mathcal{F}$, i.e., the accepting and rejecting states. For a pair of states $p, q$ if the result of transitioning $p$ and $q$ falls into different partitions, we partition the subset and continue.
+
+For example, given the following DFA:
+
+\begin{center}\begin{tabular}{c c| c c r}
+         & & $a$ & $b$ & \\\hline
+         $\to$ & 0 & 1 & 2 & 0\\
+               & 1 & 2 & 3 & 1\\
+               & 2 & 3 & 4 & 0\\
+               & 3 & 0 & 5 & 1\\
+               & 4 & 5 & 6 & 0\\
+               & 5 & 6 & 7 & 1\\
+               & 6 & 7 & 0 & 0\\
+               & 7 & 4 & 1 & 1
+    \end{tabular}\end{center}
+
+We have two partitions:
+
+\begin{center}\begin{tabular}{c|c|c|c|c|c|c|c}
+\multicolumn{4}{c|}{Rejecting} & \multicolumn{4}{|c}{Accepting}\\\hline
+\multicolumn{4}{c|}{0, 2, 4, 6} & \multicolumn{4}{|c}{1, 3, 5, 7}
+\end{tabular}\end{center}
+
+Now, 0 gets sent to the accepting partition by $a$ and to the rejecting partition by $b$. Similarly, 2, 4, and 6 get sent to the accepting partition by $a$ and to the rejecting partition by $b$. Thus, they belong to the same partition.
+
+In the same vein, 1 gets sent to the rejecting partition by $a$ and to the accepting partition by $b$. Similarly, 3, 5, and 7 get sent to the rejecting partition by $a$ and to the accepting partition by $b$. Thus, our next partition is
+
+\begin{center}\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\multicolumn{4}{|c|}{Rejecting} & \multicolumn{4}{|c|}{Accepting}\\\hline
+\multicolumn{4}{|c|}{0, 2, 4, 6} & \multicolumn{4}{|c|}{1, 3, 5, 7}\\
+\multicolumn{4}{|c|}{0, 2, 4, 6} & \multicolumn{4}{|c|}{1, 3, 5, 7}
+\end{tabular}\end{center}
+
+That our row is the same as the preceding one indicates that we have finished, and now have a minimal DFA. Call the first subset $p$ and the second $q$. When an element in $p$ receives $a$, it is sent to $q$. When it receives $b$, it is sent to $p$. Similar logic for $q$ gives our new DFA:
+
+\begin{center}\begin{tabular}{c c| c c r}
+         & & $a$ & $b$ & \\\hline
+         $\to$ & p & q & p & 0\\
+               & q & p & q & 1\\
+    \end{tabular}\end{center}
+
+Recall that $p$ began as a subset of the rejecting elements and $q$ the accepting elements, which informs the last column of the above table.
+    
+Not all DFAs can be reduced. An obvious example is the above reduced DFA. For a less trivial example, consider the following DFA:
+   
+    \begin{center}\begin{tabular}{c c| c c r}
+         & & $a$ & $b$ & \\\hline
+         $\to$ & 0 & 1 & 2 & 0\\
+               & 1 & 2 & 3 & 1\\
+               & 2 & 3 & 4 & 0\\
+               & 3 & 0 & 5 & 1\\
+               & 4 & 5 & 6 & 0\\
+               & 5 & 6 & 7 & 1\\
+               & 6 & 7 & 0 & 0\\
+               & 7 & 4 & 2 & 1
+    \end{tabular}\end{center}
+
+Begin, as in the previous problem, with two partitions:
+
+\begin{center}\begin{tabular}{c|c|c|c|c|c|c|c}
+\multicolumn{4}{c|}{Rejecting} & \multicolumn{4}{|c}{Accepting}\\\hline
+\multicolumn{4}{c|}{0, 2, 4, 6} & \multicolumn{4}{|c}{1, 3, 5, 7}
+\end{tabular}\end{center}
+
+As in the previous problem, 0, 2, 4, and 6 get sent to the same partition under $a$ and $b$, respectively. Under $a$, 1, 3, 5, and 7 go to the rejecting partition. However, under $b$, 7 goes to the rejecting partition while 1, 3, and 5 go to the accepting partition, which means we must create a new partition for 7.  
+
+\begin{center}\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\multicolumn{4}{|c|}{Rejecting} & \multicolumn{4}{|c|}{Accepting}\\\hline
+\multicolumn{4}{|c|}{0, 2, 4, 6} & \multicolumn{4}{|c|}{1, 3, 5, 7}\\\hline
+\multicolumn{4}{|c|}{0, 2, 4, 6} & \multicolumn{3}{|c|}{1, 3, 5} & 7
+\end{tabular}\end{center}
+
+We continue the process, noting that there is no need to consider singletones, i.e., the partition $\{7\}$ is already in its finale state. Under $a$, 0, 2, and 4 get sent to the $\{1, 3, 5\}$ partition. Under $b$, they get sent to the $\{0, 2, 4, 6\}$ partition. However, 6 gets sent to the $\{7\}$ partition, and so it must be partitioned separately. Similarly, 1 and 3 get sent to the $\{0, 2, 4, 6\}$ partition under $a$, and to the $\{1, 3, 5\}$ partition under b. 5, on the other hand, gets sent to the $\{7\}$ partition, and must be partitioned separately. In total, we have:
+
+\begin{center}\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\multicolumn{4}{|c|}{Rejecting} & \multicolumn{4}{|c|}{Accepting}\\\hline
+\multicolumn{4}{|c|}{0, 2, 4, 6} & \multicolumn{4}{|c|}{1, 3, 5, 7}\\\hline
+\multicolumn{4}{|c|}{0, 2, 4, 6} & \multicolumn{3}{|c|}{1, 3, 5} & 7\\\hline
+\multicolumn{3}{|c|}{0, 2, 4} & 6 & \multicolumn{2}{|c|}{1, 3} & 5 & 7
+\end{tabular}\end{center}
+
+We continue:
+
+\begin{center}\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\multicolumn{4}{|c|}{Rejecting} & \multicolumn{4}{|c|}{Accepting}\\\hline
+\multicolumn{4}{|c|}{0, 2, 4, 6} & \multicolumn{4}{|c|}{1, 3, 5, 7}\\\hline
+\multicolumn{4}{|c|}{0, 2, 4, 6} & \multicolumn{3}{|c|}{1, 3, 5} & 7\\\hline
+\multicolumn{3}{|c|}{0, 2, 4} & 6 & \multicolumn{2}{|c|}{1, 3} & 5 & 7\\\hline
+\multicolumn{2}{|c|}{0, 2} & 4 & \multicolumn{1}{c|}{6} & \multicolumn{1}{|c|}{1} & 3 & 5 & 7\\\hline
+0 & 2 & 4 & \multicolumn{1}{c|}{6} & \multicolumn{1}{|c|}{1} & 3 & 5 & 7
+\end{tabular}\end{center}
+
+Notice that the reduced DFA has 8 states, like the original! This means that the original DFA is already reduced, and cannot be reduced further.
+
+\subsubsection{Regular Expressions}
+\begin{definition}
+Given an alphabet $A$, we define a \textbf{regular expression}
+\begin{enumerate}[(a)]
+    \item \begin{itemize}
+        \item $a\in A$ is a regular expression denoting the language $\{a\}$
+        \item $\varepsilon$ is a regular expression denoting $\{\varepsilon\}$
+        \item $\emptyset$ is a regular expression denoting $\emptyset$
+    \end{itemize}
+    
+    \item If $\alpha$ and $\beta$ are regular expressions denoting the languages $L(\alpha)$ and $L(\beta)$, respectively, then 
+    \begin{itemize}
+        \item $\alpha\cup\beta$ denotes $L(\alpha)\cup L(\beta)$
+        \item $\alpha\cdot\beta$ denotes $L(\alpha)\cdot L(\beta)$
+        \item $\alpha^*$ denotes $L(\alpha)^*$
+    \end{itemize}
+\end{enumerate}
+\end{definition}
+
+\subsubsection{Regular Grammars}
+\subsubsection{Solutions of Certain Language Equations}

@@ -1,0 +1,65 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage{amsthm, amsfonts, xpatch}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{algpseudocode, algorithm}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{tabu}
+\usepackage{xcolor}
+\usepackage{tikz, tikz-qtree}
+\usetikzlibrary{arrows, automata, positioning}
+\usepackage{graphviz}
+\usepackage{subfig}
+\usepackage{blindtext}
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{multicol}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\newenvironment{solution}{\begin{proof}[\textnormal{\textbf{Solution}}]}{\end{proof}}
+\newenvironment{exercise}[1]{\begin{proof}[\textnormal{\textbf{Exercise #1:}}]\phantom{\qedhere}}{\end{proof}}
+
+\renewcommand\thesubfigure{\arabic{subfigure}}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+\begin{titlepage}\pagenumbering{gobble}
+	\centering
+	{\scshape\LARGE University of Houston\par}
+	\vspace{1cm}
+	{\scshape\Large Notes \par}
+	\vspace{1.5cm}
+	{\huge\bfseries COSC 3340 \par}
+	{\huge\bfseries Intro. to Automata and Computability \par}
+	\vspace{0.5cm}
+	{\large\bfseries Ernst Leiss\par}
+	\vspace{1cm}
+	{\Large\itshape Khalid Hourani}
+	\vspace{0.5cm}
+	{\large \par} %date
+	\vfill
+% Bottom of the page
+\end{titlepage}
+
+\tableofcontents
+\newpage\pagenumbering{arabic}
+
+\section{Formal Languages}\label{sec:introduction}
+\input{introduction.tex}
+\input{regular.tex}
+\input{accepted-by-turing-machines.tex}
+\input{exercise-set-1.tex}
+\end{document}
