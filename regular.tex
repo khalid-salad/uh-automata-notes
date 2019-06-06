@@ -368,5 +368,27 @@ By convention, we define precedence of the operations $\cup$, $\cdot$, and $^*$ 
 
 A regular expression $\alpha$ over an alphabet $A$ denotes the set of languages which accept $\alpha$. Thus, we would like to construct an NFA $\underset{\sim}{N}$ such that $L(\underset{\sim}{N})=L(\alpha)$.
 
+Suppose we wish to construct an NFA for only the letter $a$, i.e., this NFA rejects all strings but $a$. 
+
+An NFA for only $\varepsilon$ would appear as:
+
+And finally, an NFA for only $\emptyset$ is:
+
+Now, suppose we have an NFA for $\alpha$ and $\beta$. We wish to determine NFAs for $\alpha\cup\beta$, $\alpha\cdot\beta$, and $\alpha^*$. 
+
+We define \begin{align*}
+      \underset{\sim}{N_\alpha} &= (A, Q_{\alpha}, \tau_{\alpha}, q_0)\\
+      \underset{\sim}{N_\beta}  &= (A, Q_{\beta}, \tau_{\beta}, q_0)
+\end{align*}
+
+such that \begin{align*}
+      L(\underset{\sim}{N_\alpha}) &= L(\alpha)\\
+      L(\underset{\sim}{N_\beta})  &= L(\beta)\\
+      Q_\alpha\cap Q_\beta&=\{q_0\}
+\end{align*}
+
+and clarify that these automata are non-returning, i.e., that $q_0\not\in\tau(q_0, s)$ for any $s$ of length 1 or greater.
+
+
 \subsubsection{Regular Grammars}
 \subsubsection{Solutions of Certain Language Equations}
