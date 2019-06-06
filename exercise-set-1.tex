@@ -186,6 +186,36 @@ Reduce the following DFAs:
 \end{enumerate}
 \end{exercise}
 
+\begin{solution}\mbox{\\}
+    \begin{enumerate}[(a)]
+        \begin{multicols}{2}
+            \item \begin{tabular}[t]{|c|c|c|c|c|c|c|c|}\hline
+                \multicolumn{4}{|c|}{Rejecting} & \multicolumn{4}{|c|}{Accepting}\\\hline
+                \multicolumn{4}{|c|}{1, 3, 5, 7} & \multicolumn{4}{|c|}{2, 4, 6, 8}\\\hline
+                \multicolumn{4}{|c|}{1, 3, 5, 7} & \multicolumn{4}{|c|}{2, 4, 6, 8}\\\hline
+                \end{tabular}
+
+                Setting $p=\{1, 3, 5, 7\}$ and $q=\{2, 4, 6, 8\}$:
+
+                \begin{tabular}{r| c c r}
+                    & $a$ & $b$ & \\\hline
+                    $\to p$ & $q$ & $p$ & 0\\
+                          $q$ & $p$ & $q$ & 1\\
+               \end{tabular}
+               
+            \item \begin{tabular}[t]{|c|c|c|c|c|c|c|c|}\hline
+                \multicolumn{4}{|c|}{Rejecting} & \multicolumn{4}{|c|}{Accepting}\\\hline
+                \multicolumn{4}{|c|}{1, 3, 5, 7} & \multicolumn{4}{|c|}{2, 4, 6, 8}\\\hline
+                \multicolumn{4}{|c|}{1, 3, 5, 7} & \multicolumn{3}{|c|}{2, 4, 6} & \multicolumn{1}{c|}{8}\\\hline
+                \multicolumn{3}{|c}{1, 3, 5} & \multicolumn{1}{|c|}{7} & \multicolumn{2}{|c}{2, 6} & \multicolumn{1}{|c|}{4} & \multicolumn{1}{c|}{8}\\\hline
+                1 & 3 & 5 & \multicolumn{1}{c|}{7} & \multicolumn{1}{|c|}{2} & 6 & 4 & 8\\\hline
+                \end{tabular}
+                
+                The DFA is already reduced.
+        \end{multicols}
+    \end{enumerate}
+\end{solution}
+
 \begin{exercise}{3}
 Construct NFAs for the following regular expressions using the construction given in class; then find the corresponding DFAs; then reduce them:
 \begin{enumerate}[(a)]
