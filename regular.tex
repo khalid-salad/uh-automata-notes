@@ -46,12 +46,12 @@ The figure indicates that we begin at state $q_0$. The double-circles for states
 
 We can represent the above DFA using a table, as follows:
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ & 0 \\
-    & $q_1$ & $q_2$ & $q_1$ & 1 \\
-    & $q_2$ & $q_3$ & $q_2$ & 1\\
-    & $q_3$ & $q_0$ & $q_3$ & 0\\
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ & 0 \\
+    $q_1$ & $q_2$ & $q_1$ & 1 \\
+    $q_2$ & $q_3$ & $q_2$ & 1\\
+    $q_3$ & $q_0$ & $q_3$ & 0\\
 \end{tabular}\end{center}
 
 The first column indicates the states, while the first row indicates the symbols. The final column indicates whether a state is accepting: 0 refers to a non-final state, 1 to a final state. The remaining values indicate the transition function $\tau$, e.g. $\tau(q_0, a)=q_1$, indicated by the entry corresponding to row $q_0$ and column $a$. Finally, the arrow pointing to $q_0$ indicates that it is the starting position. 
@@ -108,140 +108,144 @@ Consider the following NFA:
 
 The diagrams for an NFA and DFA follow the same notation. However, the notation for the table differs slightly:
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ & 0 \\
-    & $q_1$ & $q_2q_3$ & $\emptyset$ & 1 \\
-    & $q_2$ & $q_3$ & $q_2$ & 1\\
-    & $q_3$ & $q_0$ & $q_3$ & 0\\
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ & 0 \\
+    $q_1$ & $q_2q_3$ & $\emptyset$ & 1 \\
+    $q_2$ & $q_3$ & $q_2$ & 1\\
+    $q_3$ & $q_0$ & $q_3$ & 0\\
 \end{tabular}\end{center}
 
 The values of the transition function are now sets. We informally refer to the set $\{q_0\}$ by $q_0$, and similarly the set $\{q_2, q_3\}$ by $q_2q_3$. In some cases, to avoid ambiguity, we will use commas, e.g. we may represent $\{q_2, q_3\}$ as $q_2,q_3$. We similarly say, given a string $s$, if there exists a path through an NFA that ends in a final state, we say that the NFA \textbf{accepts} $s$.
 
 Similarly, we define the set of languages accepted by an NFA $\underset{\sim}{N}$, $L(\underset{\sim}{N})$, as \[L(\underset{\sim}{N}) = \{s\in A^*|\tau(q_0, s)\cap\mathcal{F}\neq\emptyset\}\]
 
-We can convert an NFA to a DFA on the powerset $2^{\mathcal{Q}}$ by using the \textbf{subset construction}: begin with the initial state and traverse the NFA, adding unseen states to the left-most column until all paths have been exhausted. For example, with our NFA above, we begin with:
+It should be clear that each DFA is an NFA, but the reverse is not true. However, we can convert an NFA to a DFA on the powerset $2^{\mathcal{Q}}$ by using the \textbf{subset construction}: begin with the initial state and traverse the NFA, adding unseen states to the left-most column until all paths have been exhausted. For example, with our NFA above, we begin with:
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ & 0 \\
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ & 0 \\
 \end{tabular}\end{center}
 
 $q_0$ has already been seen, so we ignore it. $q_1$ is new, so we add it to the table:
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
-          & $q_1$ &       &       & 
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ &  \\
+          $q_1$ &       &       & 
 \end{tabular}\end{center}
 
 We now visit the corresponding states of $q_1$, which are $q_2q_3$ and $\emptyset$, both of which have not yet been visited. 
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
-          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
-          & $q_2q_3$ & & & \\
-          & $\emptyset$ & & &
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ &  \\
+          $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          $q_2q_3$ & & & \\
+          $\emptyset$ & & &
 \end{tabular}\end{center}
 
 When $q_2$ receives $a$, it transitions to state $q_3$. When $q_3$ receives $a$, it transitions to state $q_0$, so $q_2q_3$ transitions to $q_0q_3$. Similarly, $q_2q_3$ transitions to state $q_2q_3$ when it receives $b$.
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
-          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
-          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
-          & $\emptyset$ & & &
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ &  \\
+          $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          $\emptyset$ & & &
 \end{tabular}\end{center}
 
 The empty set transitions to the empty set, by definition. 
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
-          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
-          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
-          & $\emptyset$ & $\emptyset$ & $\emptyset$ &
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ &  \\
+          $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          $\emptyset$ & $\emptyset$ & $\emptyset$ &
 \end{tabular}\end{center}
 
 $q_0q_3$ has not yet been visited, so we add it to the left-most column:
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
-          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
-          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
-          & $\emptyset$ & $\emptyset$ & $\emptyset$ &\\
-          & $q_0q_3$ & & & 
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ &  \\
+          $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          $\emptyset$ & $\emptyset$ & $\emptyset$ &\\
+          $q_0q_3$ & & & 
 \end{tabular}\end{center}
 
 Then we visit its corresponding states:
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
-          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
-          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
-          & $\emptyset$ & $\emptyset$ & $\emptyset$ &\\
-          & $q_0q_3$ & $q_0q_1$ & $q_0q_3$ & 
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ &  \\
+          $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          $\emptyset$ & $\emptyset$ & $\emptyset$ &\\
+          $q_0q_3$ & $q_0q_1$ & $q_0q_3$ & 
 \end{tabular}\end{center}
 
 Continuing, we end with the following DFA:
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ &  \\
-          & $q_1$ & $q_2q_3$ & $\emptyset$ & \\
-          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
-          & $\emptyset$ & $\emptyset$ & $\emptyset$ &\\
-          & $q_0q_3$ & $q_0q_1$ & $q_0q_3$ & \\
-          & $q_0q_1$ & $q_1q_2q_3$ & $q_0$ & \\
-          & $q_1q_2q_3$ & $q_0q_2q_3$ & $q_2q_3$ & \\
-          & $q_0q_2q_3$ & $q_0q_1q_3$ & $q_0q_2q_3$ & \\
-          & $q_0q_1q_3$ & $q_0q_1q_2q_3$ & $q_0q_3$ & \\
-          & $q_0q_1q_2q_3$ & $q_0q_1q_2q_3$ & $q_0q_2q_3$ & \\
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ &  \\
+          $q_1$ & $q_2q_3$ & $\emptyset$ & \\
+          $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & \\
+          $\emptyset$ & $\emptyset$ & $\emptyset$ &\\
+          $q_0q_3$ & $q_0q_1$ & $q_0q_3$ & \\
+          $q_0q_1$ & $q_1q_2q_3$ & $q_0$ & \\
+          $q_1q_2q_3$ & $q_0q_2q_3$ & $q_2q_3$ & \\
+          $q_0q_2q_3$ & $q_0q_1q_3$ & $q_0q_2q_3$ & \\
+          $q_0q_1q_3$ & $q_0q_1q_2q_3$ & $q_0q_3$ & \\
+          $q_0q_1q_2q_3$ & $q_0q_1q_2q_3$ & $q_0q_2q_3$ & \\
 \end{tabular}\end{center}
 
 However, we need to include the accepting states. The accepting states of the NFA are $q_1$ and $q_2$, and thus any state including either state is accepting:
 
-\begin{center}\begin{tabular}{c c|c c r}
-         & & $a$ & $b$ & \\\hline
-    $\to$ & $q_0$ & $q_1$ & $q_0$ & 0 \\
-          & $q_1$ & $q_2q_3$ & $\emptyset$ & 1 \\
-          & $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & 1 \\
-          & $\emptyset$ & $\emptyset$ & $\emptyset$ & 0\\
-          & $q_0q_3$ & $q_0q_1$ & $q_0q_3$ & 0 \\
-          & $q_0q_1$ & $q_1q_2q_3$ & $q_0$ & 1 \\
-          & $q_1q_2q_3$ & $q_0q_2q_3$ & $q_2q_3$ & 1 \\
-          & $q_0q_2q_3$ & $q_0q_1q_3$ & $q_0q_2q_3$ & 1 \\
-          & $q_0q_1q_3$ & $q_0q_1q_2q_3$ & $q_0q_3$ & 1 \\
-          & $q_0q_1q_2q_3$ & $q_0q_1q_2q_3$ & $q_0q_2q_3$ & 1\\
+\begin{center}\begin{tabular}{r|c c r}
+         & $a$ & $b$ & \\\hline
+    $\to q_0$ & $q_1$ & $q_0$ & 0 \\
+          $q_1$ & $q_2q_3$ & $\emptyset$ & 1 \\
+          $q_2q_3$ & $q_0q_3$ & $q_2q_3$ & 1 \\
+          $\emptyset$ & $\emptyset$ & $\emptyset$ & 0\\
+          $q_0q_3$ & $q_0q_1$ & $q_0q_3$ & 0 \\
+          $q_0q_1$ & $q_1q_2q_3$ & $q_0$ & 1 \\
+          $q_1q_2q_3$ & $q_0q_2q_3$ & $q_2q_3$ & 1 \\
+          $q_0q_2q_3$ & $q_0q_1q_3$ & $q_0q_2q_3$ & 1 \\
+          $q_0q_1q_3$ & $q_0q_1q_2q_3$ & $q_0q_3$ & 1 \\
+          $q_0q_1q_2q_3$ & $q_0q_1q_2q_3$ & $q_0q_2q_3$ & 1\\
 \end{tabular}\end{center}
 
 Note that an NFA does not necessarily admit a DFA with as many states. Consider the following example:
 
-\begin{center}\begin{tabular}{c c| c c r}
-     & & $a$ & $b$ & \\\hline
-$\to$&0&$\{1,2,\hdots,n\}$ & 0 & 0 \\
-     & 1 & 2 & 1 & 0 \\
-     & 2 & 3 & 2 & 0 \\
-     & \vdots & \vdots & \vdots & \vdots \\
-     & $i$ & $i + 1$ & $i$ & 0 \\
-     & \vdots & \vdots & \vdots & \vdots \\
-     & $n-1$ & $n$ & $n-1$ & 0 \\
-     & $n$ & 1 & $n$ & 1
+\begin{center}\begin{tabular}{r| c c r}
+     & $a$ & $b$ & \\\hline
+$\to 0$&$\{1,2,\hdots,n\}$ & 0 & 0 \\
+     1 & 2 & 1 & 0 \\
+     2 & 3 & 2 & 0 \\
+     \vdots & \vdots & \vdots & \vdots \\
+     $i$ & $i + 1$ & $i$ & 0 \\
+     \vdots & \vdots & \vdots & \vdots \\
+     $n-1$ & $n$ & $n-1$ & 0 \\
+     $n$ & 1 & $n$ & 1
 \end{tabular}\end{center}
 
 The NFA above admits the following DFA:
 
-\begin{center}\begin{tabular}{c c| c c r}
-     & & $a$ & $b$ & \\\hline
-$\to$&0&$\{1,2,\hdots,n\}$ & 0 & 0 \\
-     & $\{1, 2,\hdots, n\}$ & $\{1, 2,\hdots, n\}$ & $\{1, 2,\hdots, n\}$ & 1 \\
+\begin{center}\begin{tabular}{r| c c r}
+     & $a$ & $b$ & \\\hline
+$\to 0$&$\{1,2,\hdots,n\}$ & 0 & 0 \\
+     $\{1, 2,\hdots, n\}$ & $\{1, 2,\hdots, n\}$ & $\{1, 2,\hdots, n\}$ & 1 \\
 \end{tabular}\end{center}
 
 The above DFA contains only 2 states, despite the NFA containing $n+1$ states.
+
+That every NFA admits a DFA which accepts the same language shows that the class of languages denoted by DFAs, $\mathcal{L}_{\text{DFA}}$, is the same as the class of languages denoted by NFAs, $\mathcal{L}_{\text{NFA}}$, i.e, that
+
+\[\mathcal{L}_{\text{DFA}} = \mathcal{L}_{\text{NFA}}\]
 
 For an NFA, there is no guarantee of a unique smallest NFA which accepts the same strings. However, for a DFA, such a notion exists.
 
@@ -251,16 +255,16 @@ Begin with a partition of $Q$ into subsets $\mathcal{F}$ and $Q-\mathcal{F}$, i.
 
 For example, given the following DFA:
 
-\begin{center}\begin{tabular}{c c| c c r}
-         & & $a$ & $b$ & \\\hline
-         $\to$ & 0 & 1 & 2 & 0\\
-               & 1 & 2 & 3 & 1\\
-               & 2 & 3 & 4 & 0\\
-               & 3 & 0 & 5 & 1\\
-               & 4 & 5 & 6 & 0\\
-               & 5 & 6 & 7 & 1\\
-               & 6 & 7 & 0 & 0\\
-               & 7 & 4 & 1 & 1
+\begin{center}\begin{tabular}{r| c c r}
+         & $a$ & $b$ & \\\hline
+         $\to 0$ & 1 & 2 & 0\\
+               1 & 2 & 3 & 1\\
+               2 & 3 & 4 & 0\\
+               3 & 0 & 5 & 1\\
+               4 & 5 & 6 & 0\\
+               5 & 6 & 7 & 1\\
+               6 & 7 & 0 & 0\\
+               7 & 4 & 1 & 1
     \end{tabular}\end{center}
 
 We have two partitions:
@@ -282,26 +286,26 @@ In the same vein, 1 gets sent to the rejecting partition by $a$ and to the accep
 
 That our row is the same as the preceding one indicates that we have finished, and now have a minimal DFA. Call the first subset $p$ and the second $q$. When an element in $p$ receives $a$, it is sent to $q$. When it receives $b$, it is sent to $p$. Similar logic for $q$ gives our new DFA:
 
-\begin{center}\begin{tabular}{c c| c c r}
-         & & $a$ & $b$ & \\\hline
-         $\to$ & p & q & p & 0\\
-               & q & p & q & 1\\
+\begin{center}\begin{tabular}{r| c c r}
+         & $a$ & $b$ & \\\hline
+         $\to p$ & $q$ & $p$ & 0\\
+               $q$ & $p$ & $q$ & 1\\
     \end{tabular}\end{center}
 
 Recall that $p$ began as a subset of the rejecting elements and $q$ the accepting elements, which informs the last column of the above table.
     
 Not all DFAs can be reduced. An obvious example is the above reduced DFA. For a less trivial example, consider the following DFA:
    
-    \begin{center}\begin{tabular}{c c| c c r}
-         & & $a$ & $b$ & \\\hline
-         $\to$ & 0 & 1 & 2 & 0\\
-               & 1 & 2 & 3 & 1\\
-               & 2 & 3 & 4 & 0\\
-               & 3 & 0 & 5 & 1\\
-               & 4 & 5 & 6 & 0\\
-               & 5 & 6 & 7 & 1\\
-               & 6 & 7 & 0 & 0\\
-               & 7 & 4 & 2 & 1
+    \begin{center}\begin{tabular}{r| c c r}
+         & $a$ & $b$ & \\\hline
+         $\to 0$ & 1 & 2 & 0\\
+               1 & 2 & 3 & 1\\
+               2 & 3 & 4 & 0\\
+               3 & 0 & 5 & 1\\
+               4 & 5 & 6 & 0\\
+               5 & 6 & 7 & 1\\
+               6 & 7 & 0 & 0\\
+               7 & 4 & 2 & 1
     \end{tabular}\end{center}
 
 Begin, as in the previous problem, with two partitions:
@@ -359,6 +363,10 @@ Given an alphabet $A$, we define a \textbf{regular expression}
     \end{itemize}
 \end{enumerate}
 \end{definition}
+
+By convention, we define precedence of the operations $\cup$, $\cdot$, and $^*$ in that order. Thus, \[b\cdot a^*\cup c=(b\cdot(a^*))\cup c)\]
+
+A regular expression $\alpha$ over an alphabet $A$ denotes the set of languages which accept $\alpha$. Thus, we would like to construct an NFA $\underset{\sim}{N}$ such that $L(\underset{\sim}{N})=L(\alpha)$.
 
 \subsubsection{Regular Grammars}
 \subsubsection{Solutions of Certain Language Equations}
