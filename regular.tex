@@ -459,27 +459,48 @@ Consider the example:
 
  This admits the following system of equations:
 
- \begin{align}
+ \begin{align*}
       X_1 &= aX_2\cup bX_3\\
       X_2 &= aX_2\cup bX_3\\
       X_3 &= aX_2\cup bX_3\cup\varepsilon
-\end{align}
+\end{align*}
 
 From our lemma, we have $X_2=a^*bX_3$:
 
-\begin{align}
+\begin{align*}
       X_1 &= aa^*bX_3\cup bX_3\\
       X_3 &= aa^*bX_3\cup bX_3\cup\varepsilon
-\end{align}
+\end{align*}
 
 which can be simplified:
 
-\begin{align}
+\begin{align*}
       X_1 &= (aa^*b\cup b)X_3\\
       X_3 &= (aa^*b\cup b)X_3\cup\varepsilon
-\end{align}
+\end{align*}
 
 Applying our lemma to $X_3$, we have \[X_3=(aa^*b\cup b)^*\] Subsituting into $X_1$ gives \[X_1=(aa^*b\cup b)(aa^*b\cup b)^*\] 
+
+One final example:
+
+\begin{center}\begin{tabular}{r| c c r}
+      & $a$ & $b$ & \\\hline
+      $\to 1$ & $\emptyset$ & 1, 2 & 1\\
+            2 & 1 & $\emptyset$ & 1\\
+ \end{tabular}\end{center}
+
+\begin{align*}
+      X_1 &= bX_1\cup bX_2\cup\varepsilon\\
+      X_2 &= aX_1\cup\varepsilon
+\end{align*}
+
+Substituting our equation for $X_2$ into $X_1$ gives 
+
+\begin{align*}
+      X_1&=bX_1\cup b(aX_1\cup\varepsilon)\cup\varepsilon\\
+         &=(b\cup ba)X_1\cup b\cup\varepsilon\\
+         &=(b\cup ba)^*(b\cup\varepsilon)
+\end{align*}
 
 Given any regular expression, the number of states in its corresponding NFA is the same as the number of symbols in the regular expression. 
 \subsubsection{Regular Grammars}
