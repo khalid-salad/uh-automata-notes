@@ -214,8 +214,8 @@ Reduce the following DFAs:
                 The DFA is already reduced.
         \end{multicols}
     \item We will rename the states for simplicity:
-    \begin{multicols}{2}
-        \begin{tabular}{r|c c c r}
+
+        \begin{center}\begin{tabular}{r|c c c r}
             & $a$ & $b$ & $c$ &\\\hline
                $\to1$ & 2 & 2 & 2 & 1\\
                 2 & 3 & 1 & 6 & 1\\
@@ -248,16 +248,16 @@ Reduce the following DFAs:
                 28 & 29 & 28 & 15 & 1\\
                 29 & 30 & 30 & 25 & 1\\
                 30 & 25 & 29 & 22 & 1
-           \end{tabular}
+           \end{tabular}\end{center}
 
            \begin{tabular}[t]{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
             \multicolumn{1}{|c|}{Rejecting} & \multicolumn{30}{|c|}{Accepting}\\\hline
             \multicolumn{1}{|c|}{0} & \multicolumn{30}{|c|}{$1,2,3,\hdots,30$}\\\hline
             \multicolumn{1}{|c|}{0} & \multicolumn{29}{|c|}{$1,2,4,5,\hdots,30$} & 3\\\hline
             \multicolumn{1}{|c|}{0} & \multicolumn{28}{|c|}{$1,4,5,\hdots,30$} & 2 & 3\\\hline
-            \multicolumn{1}{|c|}{0} & \multicolumn{26}{|c|}{$4,5,6,7,8,10\hdots,30$} & \multicolumn{2}{c|}{1, 9} & 2 & 3\\\hline
+            \multicolumn{1}{|c|}{0} & \multicolumn{26}{|c|}{$4,5,6,7,8,10\hdots,30$} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{9} & 2 & 3\\\hline
+            \multicolumn{1}{|c|}{0} & \multicolumn{22}{|c|}{$4,6,8,10\hdots,30$} & \multicolumn{1}{c|}{13} & \multicolumn{1}{c|}{16} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{9} & 2 & 3\\\hline
             \end{tabular}
-        \end{multicols}
     \end{enumerate}
 \end{solution}
 
