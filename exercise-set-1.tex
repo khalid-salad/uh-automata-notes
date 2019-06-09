@@ -250,14 +250,14 @@ Reduce the following DFAs:
                 30 & 25 & 29 & 22 & 1
            \end{tabular}\end{center}
 
-           \begin{tabular}[t]{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+           \begin{center}\begin{tabular}[t]{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
             \multicolumn{1}{|c|}{Rejecting} & \multicolumn{30}{|c|}{Accepting}\\\hline
             \multicolumn{1}{|c|}{0} & \multicolumn{30}{|c|}{$1,2,3,\hdots,30$}\\\hline
             \multicolumn{1}{|c|}{0} & \multicolumn{29}{|c|}{$1,2,4,5,\hdots,30$} & 3\\\hline
             \multicolumn{1}{|c|}{0} & \multicolumn{28}{|c|}{$1,4,5,\hdots,30$} & 2 & 3\\\hline
-            \multicolumn{1}{|c|}{0} & \multicolumn{26}{|c|}{$4,5,6,7,8,10\hdots,30$} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{9} & 2 & 3\\\hline
-            \multicolumn{1}{|c|}{0} & \multicolumn{22}{|c|}{$4,6,8,10\hdots,30$} & \multicolumn{1}{c|}{13} & \multicolumn{1}{c|}{16} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{9} & 2 & 3\\\hline
-            \end{tabular}
+            \multicolumn{1}{|c|}{0} & \multicolumn{26}{|c|}{$4,5,6,7,8,10,\hdots,30$} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{9} & 2 & 3\\\hline
+            \multicolumn{1}{|c|}{0} & \multicolumn{22}{|c|}{$4,6,8,10,\hdots,30$} & \multicolumn{1}{c|}{13} & \multicolumn{1}{c|}{16} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{9} & 2 & 3\\\hline
+            \end{tabular}\end{center}
     \end{enumerate}
 \end{solution}
 
@@ -309,13 +309,15 @@ Construct regular expressions for the languages accepted by the following automa
             X_4 &= aX_1\cup bX_4\cup cX_4\cup\varepsilon\\
                 &= aX_1\cup (b\cup c)X_4\cup\varepsilon\\
                 &= (b\cup c)X_4\cup aX_1\cup\varepsilon\\
-                &= (b\cup c)^*\cup aX_1\cup\varepsilon
+                &= (b\cup c)^*\cup aX_1\cup\varepsilon\\
+                &= (b\cup c)^*\cup\varepsilon\cup aX_1
         \end{align*}
     Similarly, 
         \begin{align*}
             X_3 &= b^*\cup aX_4\cup\varepsilon\\
-                &=b^*\cup a((b\cup c)^*\cup aX_1\cup\varepsilon)\cup\varepsilon\\
-                &=b^*\cup a(b\cup c)^*\cup a^2X_1\cup a)\cup\varepsilon    
+                &= b^*\cup a((b\cup c)^*\cup aX_1\cup\varepsilon)\cup\varepsilon\\
+                &= b^*\cup a(b\cup c)^*\cup a^2X_1\cup a\cup\varepsilon\\
+                &= b^*\cup a(b\cup c)^*\cup a\cup\varepsilon\cup a^2X_1
         \end{align*}
     Solving $X_2$:
     \begin{align*}
@@ -323,7 +325,17 @@ Construct regular expressions for the languages accepted by the following automa
             &= cX_2\cup aX_3\cup bX_1 \cup cX_3\cup\varepsilon\\
             &= cX_2\cup (a\cup c)X_3\cup bX_1\cup\varepsilon\\
             &= c^*\cup (a\cup c)X_3\cup bX_1\cup\varepsilon\\
-            &= c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a^2X_1\cup a)\cup\varepsilon)\cup bX_1\cup\varepsilon
+            &= c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a^2X_1\cup a\cup\varepsilon)\cup bX_1\cup\varepsilon\\
+            &= c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a\cup\varepsilon)\cup(a\cup c)a^2X_1\cup bX_1\cup\varepsilon\\
+            &= c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a\cup\varepsilon)\cup\varepsilon\cup((a\cup c)a^2\cup b)X_1
+    \end{align*}
+
+    Finally, solving for $X_1$:
+    \begin{align*}
+        X_1 &= aX_2\cup bX_2\cup cX_2\cup\varepsilon\\
+            &= (a\cup b\cup c)X_2\cup\varepsilon\\
+            &= (a\cup b\cup c)c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a\cup\varepsilon)\cup\varepsilon\cup((a\cup c)a^2\cup b)X_1\cup\varepsilon\\
+            &= ((a\cup c)a^2\cup b)^*\cup(a\cup b\cup c)c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a\cup\varepsilon)\cup\varepsilon
     \end{align*}
         \item 
 \end{enumerate}
