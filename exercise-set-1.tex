@@ -337,6 +337,32 @@ Construct regular expressions for the languages accepted by the following automa
             &= (a\cup b\cup c)c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a\cup\varepsilon)\cup\varepsilon\cup((a\cup c)a^2\cup b)X_1\cup\varepsilon\\
             &= ((a\cup c)a^2\cup b)^*\cup(a\cup b\cup c)c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a\cup\varepsilon)\cup\varepsilon
     \end{align*}
-        \item 
-\end{enumerate}
+        \item
+    \begin{align*}
+        X_A &= aX_B\cup bX_C\\
+        X_B &= aX_A\cup bX_C\\
+        X_C &= aX_B\cup bX_A\cup\varepsilon
+    \end{align*}
+    Plugging in the equation for $X_C$ into $X_B$
+    \begin{align*}
+        X_B &= aX_A\cup b(aX_B\cup bX_A\cup\varepsilon)\\
+            &= aX_A\cup baX_B\cup b^2X_A\cup b\\
+            &= baX_b\cup aX_A\cup b^2X_A\cup b\\
+            &= (ba)^*\cup aX_A\cup b^2X_A\cup b\\
+            &= (ba)^*\cup b\cup (a\cup b^2)X_A
+    \end{align*}
+    We substitute back into $X_C$:
+    \begin{align*}
+        X_C &= a((ba)^*\cup b\cup (a\cup b^2)X_A)\cup bX_A\cup\varepsilon\\
+            &= a(ba)^*\cup ab\cup (a^2\cup ab^2)X_A\cup bX_A\cup\varepsilon\\
+            &= a(ba)^*\cup ab\cup (a^2\cup ab^2\cup b)X_A\cup\varepsilon
+    \end{align*}
+    We now substitute the new equations for $X_B$ and $X_C$ into the equation for $X_A$
+    \begin{align*}
+        X_A &= a\left((ba)^*\cup b\cup (a\cup b^2)X_A\right)\cup b(a(ba)^*\cup ab\cup (a^2\cup ab^2\cup b)X_A\cup\varepsilon)\\
+            &= a(ba)^*\cup ab\cup a^2\cup ab^2X_A\cup ba(ba)^*\cup bab \cup (ba^2\cup bab^2\cup b^2)X_A\cup b\\
+            &= (ab^2\cup ba^2\cup bab^2\cup b^2)X_A\cup a(ba)^*\cup ab\cup a^2\cup ba(ba)^*\cup bab \cup b\\
+            &= (ab^2\cup ba^2\cup bab^2\cup b^2)^*\cup a(ba)^*\cup ab\cup a^2\cup ba(ba)^*\cup bab \cup b
+    \end{align*}
+    \end{enumerate}
 \end{solution}
