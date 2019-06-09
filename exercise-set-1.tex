@@ -129,10 +129,10 @@ Construct DFAs for the following NFAs using the subset construction:
        5 & 1 & 5 & 5 & 1\\
        4, 5 & 1, 5 & 4, 5 & 4, 5 & 1\\
        2, 4 & 3, 5 & 1, 4 & 2, 3 & 1\\
-       1, 5 & 1, 2 & 2, 5 & 2, 5 & 1\\
+       1, 5 &6& 2, 5 & 2, 5 & 1\\
        3, 5 & 1, 4 & 3, 5 & 5 & 1\\
        1, 4 & 2, 5 & 2, 4 & 2, 4 & 1\\
-       1, 2 & 2, 3 & 1, 2 & 2, 3 & 1\\
+      6& 2, 3 & 1, 2 & 2, 3 & 1\\
        2, 5 & 1, 3 & 1, 5 & 2, 3, 5 & 1\\
        2, 3, 5 & 1, 3, 4 & 1, 3, 5 & 2, 3, 5 & 1\\
        1, 3, 4 & 2, 4, 5 & 2, 3, 4 & 2, 4 & 1\\
@@ -213,6 +213,51 @@ Reduce the following DFAs:
                 
                 The DFA is already reduced.
         \end{multicols}
+    \item We will rename the states for simplicity:
+    \begin{multicols}{2}
+        \begin{tabular}{r|c c c r}
+            & $a$ & $b$ & $c$ &\\\hline
+               $\to1$ & 2 & 2 & 2 & 1\\
+                2 & 3 & 1 & 6 & 1\\
+                3 & 4 & 3 & 0 & 1\\
+                6 & 7 & 6 & 6 & 1\\
+                4 & 5 & 4 & 4 & 1\\
+                0 & 0 & 0 & 0 & 0\\
+                7 & 8 & 9 & 6 & 1\\
+                5 & 1 & 5 & 5 & 1\\
+                8 & 10 & 8 & 4 & 1\\
+                9 & 1 & 7 & 2 & 1\\
+                10 & 12 & 10 & 10 & 1\\
+                11 & 13 & 14 & 15 & 1\\
+                12 & 6 & 16 & 16 & 1\\
+                13 & 14 & 13 & 5 & 1\\
+                14 & 16 & 11 & 11 & 1\\
+                15 & 17 & 15 & 15 & 1\\
+                16 & 9 & 12 & 18 & 1\\
+                17 & 19 & 20 & 18 & 1\\
+                18 & 21 & 18 & 18 & 1\\
+                19 & 22 & 23 & 11 & 1\\
+                20 & 15 & 17 & 16 & 1\\
+                21 & 23 & 21 & 6 & 1\\
+                22 & 20 & 24 & 25 & 1\\
+                23 & 26 & 19 & 15 & 1\\
+                24 & 18 & 22 & 22 & 1\\
+                25 & 27 & 25 & 25 & 1\\
+                26 & 24 & 26 & 10 & 1\\
+                27 & 28 & 27 & 18 & 1\\
+                28 & 29 & 28 & 15 & 1\\
+                29 & 30 & 30 & 25 & 1\\
+                30 & 25 & 29 & 22 & 1
+           \end{tabular}
+
+           \begin{tabular}[t]{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+            \multicolumn{1}{|c|}{Rejecting} & \multicolumn{30}{|c|}{Accepting}\\\hline
+            \multicolumn{1}{|c|}{0} & \multicolumn{30}{|c|}{$1,2,3,\hdots,30$}\\\hline
+            \multicolumn{1}{|c|}{0} & \multicolumn{29}{|c|}{$1,2,4,5,\hdots,30$} & 3\\\hline
+            \multicolumn{1}{|c|}{0} & \multicolumn{28}{|c|}{$1,4,5,\hdots,30$} & 2 & 3\\\hline
+            \multicolumn{1}{|c|}{0} & \multicolumn{26}{|c|}{$4,5,6,7,8,10\hdots,30$} & \multicolumn{2}{c|}{1, 9} & 2 & 3\\\hline
+            \end{tabular}
+        \end{multicols}
     \end{enumerate}
 \end{solution}
 
@@ -248,3 +293,38 @@ Construct regular expressions for the languages accepted by the following automa
 \end{multicols}
 \end{enumerate}
 \end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[(a)]
+        \item 
+        
+        \begin{align*}
+            X_1 &= aX_2\cup bX_2\cup cX_2\cup\varepsilon\\
+            X_2 &= aX_3\cup bX_1 \cup c(X_2\cup X_3)\cup\varepsilon\\
+            X_3 &= aX_4\cup bX_3\cup\varepsilon\\
+            X_4 &= aX_1\cup bX_4\cup cX_4\cup\varepsilon  
+        \end{align*}
+        Solving for $X_4$ 
+        \begin{align*}
+            X_4 &= aX_1\cup bX_4\cup cX_4\cup\varepsilon\\
+                &= aX_1\cup (b\cup c)X_4\cup\varepsilon\\
+                &= (b\cup c)X_4\cup aX_1\cup\varepsilon\\
+                &= (b\cup c)^*\cup aX_1\cup\varepsilon
+        \end{align*}
+    Similarly, 
+        \begin{align*}
+            X_3 &= b^*\cup aX_4\cup\varepsilon\\
+                &=b^*\cup a((b\cup c)^*\cup aX_1\cup\varepsilon)\cup\varepsilon\\
+                &=b^*\cup a(b\cup c)^*\cup a^2X_1\cup a)\cup\varepsilon    
+        \end{align*}
+    Solving $X_2$:
+    \begin{align*}
+        X_2 &= aX_3\cup bX_1 \cup c(X_2\cup X_3)\cup\varepsilon\\
+            &= cX_2\cup aX_3\cup bX_1 \cup cX_3\cup\varepsilon\\
+            &= cX_2\cup (a\cup c)X_3\cup bX_1\cup\varepsilon\\
+            &= c^*\cup (a\cup c)X_3\cup bX_1\cup\varepsilon\\
+            &= c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a^2X_1\cup a)\cup\varepsilon)\cup bX_1\cup\varepsilon
+    \end{align*}
+        \item 
+\end{enumerate}
+\end{solution}
