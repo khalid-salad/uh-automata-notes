@@ -272,6 +272,56 @@ Construct NFAs for the following regular expressions using the construction give
 \end{enumerate}
 \end{exercise}
 
+\begin{solution}\mbox{\\}
+\begin{enumerate}[(a)]
+    \item
+    \begin{center}\begin{multicols}{2}\begin{tabular}[t]{r| c r}
+        \multicolumn{3}{c}{NFA for $a$}\\
+        & $a$ & \\\hline
+        $\to q_0$ & $q_1$ & 0\\
+        $q_1$ & $\emptyset$ & 1              
+   \end{tabular}
+
+   \begin{tabular}[t]{r| c r}
+    \multicolumn{3}{c}{NFA for $a$}\\
+    & $a$ & \\\hline
+    $\to q_0$ & $q_2$ & 0\\
+    $q_2$ & $\emptyset$ & 1              
+\end{tabular}
+\end{multicols}\end{center}
+Concatenate these to get $a^2$
+
+\begin{center}\begin{tabular}[t]{r| c r}
+    \multicolumn{3}{c}{NFA for $a^2$}\\
+    & $a$ & \\\hline
+    $\to q_0$ & $q_1$ & 0\\
+    $q_1$ & $q_2$ & 0\\
+    $q_2$ & $\emptyset$ & 1              
+\end{tabular}\end{center}
+
+Similarly, we have 
+
+\begin{center}\begin{tabular}[t]{r| c r}
+    \multicolumn{3}{c}{NFA for $a^3$}\\
+    & $a$ & \\\hline
+    $\to q_0$ & $q_3$ & 0\\
+    $q_3$ & $q_4$ & 0\\
+    $q_4$ & $q_5$ & 0\\
+    $q_5$ & $\emptyset$ & 1              
+\end{tabular}\end{center}
+
+\begin{center}\begin{tabular}[t]{r| c r}
+    \multicolumn{3}{c}{NFA for $a^5$}\\
+    & $a$ & \\\hline
+    $\to q_0$ & $q_6$ & 0\\
+    $q_6$ & $q_7$ & 0\\
+    $q_7$ & $q_8$ & 0\\
+    $q_8$ & $q_9$ & 0\\
+    $q_9$ & $\emptyset$ & 1              
+\end{tabular}\end{center}
+\item 
+\end{enumerate}
+\end{solution}
 \begin{exercise}{4}
 Construct regular expressions for the languages accepted by the following automata:
 \begin{enumerate}[(a)]

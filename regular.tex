@@ -440,6 +440,36 @@ where $Q_{\alpha^*}=Q_{\alpha}$, $\mathcal{F}_{\alpha^*}=\mathcal{F}_{\alpha}\cu
       \tau_{\alpha}(q, a) & \text{ if } q\in Q_{\alpha}-\mathcal{F}_{\alpha}
 \end{cases}\]
 
+This allows us to construct NFAs from a regular expression. Suppose we have a regular expression $ab$ over $\{a, b\}$. Then we have 
+\begin{center}
+\begin{multicols}{2}
+\begin{tabular}{r| c c r}
+      \multicolumn{4}{c}{NFA for $a$}\\
+      & $a$ & $b$ & \\\hline
+      $\to q_0$ & $q_1$ & $\emptyset$ & 0\\
+            $q_1$ & $\emptyset$ & $\emptyset$ & 1
+ \end{tabular}
+
+ \begin{tabular}{r| c c r}
+      \multicolumn{4}{c}{NFA for $b$}\\
+      & $a$ & $b$ & \\\hline
+      $\to q_0$ & $\emptyset$ & $q_2$ & 0\\
+            $q_2$ & $\emptyset$ & $\emptyset$ & 1
+ \end{tabular}
+\end{multicols}
+\end{center}
+
+Applying the above construction for concatenation gives
+\begin{center}
+\begin{tabular}{r| c c r}
+      \multicolumn{4}{c}{NFA for $ab$}\\
+      & $a$ & $b$ & \\\hline
+      $\to q_0$ & $q_1$ & $\emptyset$ & 0\\
+          $q_1$ & $\emptyset$ & $q_2$ & 0\\
+          $q_2$ & $\emptyset$ & $\emptyset$ & 1
+ \end{tabular}
+\end{center}
+
 \subsubsection{Solutions of Certain Language Equations}
 
 Given a regular expression, we can form an NFA which admits the same language by solving \textbf{Language Equations}. We show the following lemma before proceeding to examples:
