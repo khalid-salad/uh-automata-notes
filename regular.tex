@@ -419,7 +419,9 @@ The \textbf{Concatenation} is constructed
 
 \[\underset{\sim}{N_{\alpha\beta}}=(A, Q_{\alpha\beta}, \tau_{\alpha\beta}, q_0, \mathcal{F}_{\alpha\beta})\] 
 
-where $Q_{\alpha\beta}=Q_{\alpha}\cup Q_{\beta}$, $\mathcal{F}_{\alpha\beta}=\mathcal{F}_{\beta}$ if $q_0\not\in \mathcal{F}_{\beta}$ and $\mathcal{F}_{\alpha\beta}=\mathcal{F}_{\alpha}\cup(\mathcal{F}_{\beta}-\{q_0\})$ if $q_0\in \mathcal{F}_{\beta}$ and, for all $q\in Q_{\alpha\beta}$ and $a\in A$
+where $Q_{\alpha\beta}=Q_{\alpha}\cup Q_{\beta}$,
+
+\[\mathcal{F}_{\alpha\beta}=\begin{cases}\mathcal{F}_{\beta} &\text{ if } q_0\not\in \mathcal{F}_{\beta}\\ \mathcal{F}_{\alpha}\cup(\mathcal{F}_{\beta}-\{q_0\}) &\text{ if } q_0\in \mathcal{F}_{\beta}\end{cases}\] and, for all $q\in Q_{\alpha\beta}$ and $a\in A$
 
 \[\tau_{\alpha\beta}(q, a) = \begin{cases}
       \tau_{\alpha}(q, a)\cup\tau_{\beta}(q_0, a) & \text{ if } q\in\mathcal{F}_{\alpha}\\
@@ -551,5 +553,32 @@ Substituting our equation for $X_2$ into $X_1$ gives
          &=(b\cup ba)^*(b\cup\varepsilon)
 \end{align*}
 
-Given any regular expression, the number of states in its corresponding NFA is the same as the number of symbols in the regular expression. 
 \subsubsection{Regular Grammars}
+
+Suppose we have a DFA \[\underset{\sim}{D}=(A, Q, \tau, q_0, \mathcal{F})\] with $|Q|=n$. Consider the following set of equations
+
+\begin{align*}
+      q_1 &= \tau(q_0, a_1)\\
+      q_2 &= \tau(q_1, a_2)\\
+          &\vdots\\
+      q_i &= \tau(q_{i-1}, a_i)\\
+          &\vdots\\
+      q_{n-1} &= \tau(q_{n-2}, a_{n-1})\\
+      q_n &= \tau(q_{n-1}, a_n)
+\end{align*}
+
+Notice that we have $n+1$ states above, but only $n$ states in $Q$. Then, by the Pidgeonhole Principle, there must be some state $q_i$ that is visited twice. In other words, there exist an $i, j$ with $i < j$ such that $q_i=q_j$. We then consider a string $s=a_1a_2\hdots a_n$. Let $v_1=a_1a_2\hdots a_i$, $v_2=a_{i+1}a_{i+2}\hdots a_j$, and $v_3=a_{j+1}a_{j+2}\hdots a_n$. We see that 
+
+\[\tau(q_0, s)=\tau(q_0, v_1v_2^kv_3)\] for all $k\geq0$. 
+
+\begin{center}\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+      \tikzstyle{every state}=[fill={rgb:black,1;white,10}]
+    
+      \node[state,initial](q_0){$q_0$};
+      \node[state](q_i)[right of=q_0]{$q_i$};
+      \node[state](q_n)[right of=q_i]{$q_n$};    
+      \path[->]
+      (q_0) edge                node {$v_1$}  (q_i)
+      (q_i) edge                node {$v_3$}  (q_n)
+            edge  [loop above]  node {$v_2$}  ();
+    \end{tikzpicture}\end{center}
