@@ -358,30 +358,37 @@ Construct regular expressions for the languages accepted by the following automa
             X_4 &= aX_1\cup bX_4\cup cX_4\cup\varepsilon\\
                 &= aX_1\cup (b\cup c)X_4\cup\varepsilon\\
                 &= (b\cup c)X_4\cup aX_1\cup\varepsilon\\
-                &= (b\cup c)^*\cup aX_1\cup\varepsilon\\
-                &= (b\cup c)^*(\varepsilon\cup aX_1)\\
-                &= (b\cup c)^*\cup (b\cup c)^*aX_1
+                &= (b\cup c)^*(aX_1\cup\varepsilon)\\
+                &= (b\cup c)^*aX_1\cup (b\cup c)^*
         \end{align*}
     Similarly, 
         \begin{align*}
             X_3 &= aX_4\cup bX_3\cup\varepsilon\\
-                &= a\left((b\cup c)^*\cup (b\cup c)^*aX_1\right)\cup bX_3\cup\varepsilon\\
-                &= bX_3\cup a\left((b\cup c)^*\cup (b\cup c)^*aX_1\right)\cup\varepsilon\\
-                &= b^*(a\left((b\cup c)^*\cup (b\cup c)^*aX_1\right)\cup\varepsilon)\\
-                &= b^*a(b\cup c)^*\cup b^*(b\cup c)^*aX_1\cup b^*
+                &= a\left((b\cup c)^*aX_1\cup (b\cup c)^*\right)\cup bX_3\cup\varepsilon\\
+                &= a(b\cup c)^*aX_1\cup a(b\cup c)^*\cup bX_3\cup\varepsilon\\
+                &= bX_3\cup a(b\cup c)^*aX_1\cup a(b\cup c)^*\cup\varepsilon\\
+                &= b^*(a(b\cup c)^*aX_1\cup a(b\cup c)^*\cup\varepsilon)\\
+                &= b^*a(b\cup c)^*aX_1\cup b^*a(b\cup c)^*\cup b^*
         \end{align*}
     Solving $X_2$:
     \begin{align*}
         X_2 &= aX_3\cup bX_1 \cup c(X_2\cup X_3)\cup\varepsilon\\
-            &= (a\cup c)X_3 \cup bX_1 \cup cX_2\cup\varepsilon
+            &= (a\cup c)X_3 \cup bX_1 \cup cX_2\cup\varepsilon\\
+            &= (a\cup c)(b^*a(b\cup c)^*aX_1\cup b^*a(b\cup c)^*\cup b^*)\cup bX_1 \cup cX_2\cup\varepsilon\\
+            &= cX_2\cup (a\cup c)(b^*a(b\cup c)^*aX_1\cup b^*a(b\cup c)^*\cup b^*)\cup bX_1\cup\varepsilon\\
+            &= c^*((a\cup c)(b^*a(b\cup c)^*aX_1\cup b^*a(b\cup c)^*\cup b^*)\cup bX_1\cup\varepsilon)\\
+            &= c^*(a\cup c)(b^*a(b\cup c)^*aX_1\cup c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*bX_1\cup c^*\\
+            &= c^*(a\cup c)b^*a(b\cup c)^*aX_1\cup c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*bX_1\cup c^*\\
+            &= (c^*(a\cup c)b^*a(b\cup c)^*a\cup c^*b)X_1\cup c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*
     \end{align*}
 
     Finally, solving for $X_1$:
     \begin{align*}
         X_1 &= aX_2\cup bX_2\cup cX_2\cup\varepsilon\\
             &= (a\cup b\cup c)X_2\cup\varepsilon\\
-            &= (a\cup b\cup c)c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a\cup\varepsilon)\cup\varepsilon\cup((a\cup c)a^2\cup b)X_1\cup\varepsilon\\
-            &= ((a\cup c)a^2\cup b)^*\cup(a\cup b\cup c)c^*\cup (a\cup c)(b^*\cup a(b\cup c)^*\cup a\cup\varepsilon)
+            &= (a\cup b\cup c)((c^*(a\cup c)b^*a(b\cup c)^*a\cup c^*b)X_1\cup c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*)\cup\varepsilon\\
+            &= (a\cup b\cup c)(c^*(a\cup c)b^*a(b\cup c)^*a\cup c^*b)X_1\cup (a\cup b\cup c)c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*)\cup\varepsilon\\
+            &= \left((a\cup b\cup c)(c^*(a\cup c)b^*a(b\cup c)^*a\cup c^*b)\right)^*((a\cup b\cup c)c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*)\cup\varepsilon)
     \end{align*}
         \item
     \begin{align*}
@@ -393,22 +400,22 @@ Construct regular expressions for the languages accepted by the following automa
     \begin{align*}
         X_B &= aX_A\cup b(aX_B\cup bX_A\cup\varepsilon)\\
             &= aX_A\cup baX_B\cup b^2X_A\cup b\\
-            &= baX_b\cup aX_A\cup b^2X_A\cup b\\
-            &= (ba)^*\cup aX_A\cup b^2X_A\cup b\\
-            &= (ba)^*\cup b\cup (a\cup b^2)X_A
+            &= baX_B\cup (ba\cup b^2)X_A\cup b\\
+            &= (ba)^*((ba\cup b^2)X_A\cup b)\\
+            &= (ba)^*(ba\cup b^2)X_A\cup (ba)^*b
     \end{align*}
     We substitute back into $X_C$:
     \begin{align*}
-        X_C &= a((ba)^*\cup b\cup (a\cup b^2)X_A)\cup bX_A\cup\varepsilon\\
-            &= a(ba)^*\cup ab\cup (a^2\cup ab^2)X_A\cup bX_A\cup\varepsilon\\
-            &= a(ba)^*\cup ab\cup (a^2\cup ab^2\cup b)X_A\cup\varepsilon
+        X_C &= aX_B\cup bX_A\cup\varepsilon\\
+            &= a((ba)^*(ba\cup b^2)X_A\cup (ba)^*b)\cup bX_A\cup\varepsilon
     \end{align*}
     We now substitute the new equations for $X_B$ and $X_C$ into the equation for $X_A$
     \begin{align*}
-        X_A &= a\left((ba)^*\cup b\cup (a\cup b^2)X_A\right)\cup b(a(ba)^*\cup ab\cup (a^2\cup ab^2\cup b)X_A\cup\varepsilon)\\
-            &= a(ba)^*\cup ab\cup a^2\cup ab^2X_A\cup ba(ba)^*\cup bab \cup (ba^2\cup bab^2\cup b^2)X_A\cup b\\
-            &= (ab^2\cup ba^2\cup bab^2\cup b^2)X_A\cup a(ba)^*\cup ab\cup a^2\cup ba(ba)^*\cup bab \cup b\\
-            &= (ab^2\cup ba^2\cup bab^2\cup b^2)^*\cup a(ba)^*\cup ab\cup a^2\cup ba(ba)^*\cup bab \cup b
+        X_A &= aX_B\cup bX_C\\
+            &= a((ba)^*(ba\cup b^2)X_A\cup (ba)^*b)\cup b(a((ba)^*(ba\cup b^2)X_A\cup (ba)^*b)\cup bX_A\cup\varepsilon)\\
+            &= a(ba)^*(ba\cup b^2)X_A\cup a(ba)^*b\cup ba((ba)^*(ba\cup b^2)X_A\cup b(ba)^*b)\cup b^2X_A\cup b\\
+            &= (a(ba)^*(ba\cup b^2)\cup ba(ba)^*(ba\cup b^2)\cup b^2)X_A\cup bab(ba)^*b)\cup b^2X_A\cup b\\
+            &= (a(ba)^*(ba\cup b^2)\cup ba(ba)^*(ba\cup b^2)\cup b^2)^*bab(ba)^*b)\cup b^2X_A\cup b
     \end{align*}
     \end{enumerate}
 \end{solution}
