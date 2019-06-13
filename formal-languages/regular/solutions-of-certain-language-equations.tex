@@ -7,15 +7,15 @@ Given a regular expression, we can form an NFA which admits the same language by
 \end{lemma}
 
 \begin{proof}
-      Clearly, \(L^*\cdot M\) is a solution, since \[L^*\cdot M = L\cdot (L^*\cdot M)\cup M\]. To prove uniqueness, suppose \(s_1\) and \(s_2\) are distinct solutions. There must exist a shortest-length string in \(s_1\), say \(s\). 
+      Clearly, \(L^*\cdot M\) is a solution, since \[L^*\cdot M = L\cdot (L^*\cdot M)\cup M\] To prove uniqueness, suppose \(s_1\) and \(s_2\) are distinct solutions. There must exist a shortest-length string in \(s_1\), say \(s\). 
 \end{proof}
 
-Consider the following NFA:
+Consider the following NFA\@:
 
-\begin{center}\begin{tabular}{r| c c r}
+\begin{center}\begin{tabular}{r c c r}
       & \(a\) & \(b\) & \\\bottomrule
       \(\to 1\) & 2 & 1, 3 & 0\\
-            2 & \(\emptyset\) & 3 & 0\\
+            2 & \(\emptyset \) & 3 & 0\\
             3 & 2, 3 & 1 & 1
  \end{tabular}\end{center}
 
@@ -45,21 +45,21 @@ We now apply our lemma to the equation for \(X_3\)
 
 \begin{align*}
       X_1 &= (ab\cup b)X_3\cup bX_1\\
-      X_3 &= (ab\cup a)^*(bX_1\cup\varepsilon)
+      X_3 &= {(ab\cup a)}^*(bX_1\cup\varepsilon)
 \end{align*}
 
 We substitute \(X_3\) into the equation for \(X_1\)
 
 \begin{align*}
-      X_1&=(ab\cup b)(ab\cup a)^*(bX_1\cup\varepsilon)\cup bX_1\\
-         &=\left((ab\cup b)(ab\cup a)^*\cup b\right)X_1\cup (ab\cup b)(ab\cup a)^*\cup bX_1\\
-         &=\left((ab\cup b)(ab\cup a)^*\cup b\right)X_1\cup (ab\cup b)(ab\cup a)^*\\
-         &=\left((ab\cup b)(ab\cup a)^*\cup b\right)^*(ab\cup b)(ab\cup a)^*
+      X_1 &= (ab\cup b){(ab\cup a)}^*(bX_1\cup\varepsilon)\cup bX_1\\
+          &= \left((ab\cup b){(ab\cup a)}^*\cup b\right)X_1\cup (ab\cup b){(ab\cup a)}^*\cup bX_1\\
+          &= \left((ab\cup b){(ab\cup a)}^*\cup b\right)X_1\cup (ab\cup b){(ab\cup a)}^*\\
+          &= {\left((ab\cup b){(ab\cup a)}^*\cup b\right)}^*(ab\cup b){(ab\cup a)}^*
 \end{align*}
 
 Consider the example:
 
-\begin{center}\begin{tabular}{r| c c r}
+\begin{center}\begin{tabular}{r c c r}
       & \(a\) & \(b\) & \\\bottomrule
       \(\to 1\) & 2 & 3 & 0\\
             2 & 2 & 3 & 0\\
@@ -88,26 +88,26 @@ which can be simplified:
       X_3 &= (aa^*b\cup b)X_3\cup\varepsilon
 \end{align*}
 
-Applying our lemma to \(X_3\), we have \[X_3=(aa^*b\cup b)^*\] Subsituting into \(X_1\) gives \[X_1=(aa^*b\cup b)(aa^*b\cup b)^*\] 
+Applying our lemma to \(X_3\), we have \[X_3={(aa^*b\cup b)}^*\] Subsituting into \(X_1\) gives \[X_1=(aa^*b\cup b){(aa^*b\cup b)}^*\] 
 
 One final example:
 
-\begin{center}\begin{tabular}{r| c c r}
+\begin{center}\begin{tabular}{r c c r}
       & \(a\) & \(b\) & \\\bottomrule
-      \(\to 1\) & \(\emptyset\) & 1, 2 & 1\\
-            2 & 1 & \(\emptyset\) & 1\\
+      \(\to 1\) & \(\emptyset \) & 1, 2 & 1\\
+            2 & 1 & \(\emptyset \) & 1\\
  \end{tabular}\end{center}
 
 \begin{align*}
-      X_1 &= bX_1\cup bX_2\cup\varepsilon\\
+      X_1 &= bX_1\cup bX_2\cup\varepsilon \\
       X_2 &= aX_1\cup\varepsilon
 \end{align*}
 
 Substituting our equation for \(X_2\) into \(X_1\) gives 
 
 \begin{align*}
-      X_1&=bX_1\cup b(aX_1\cup\varepsilon)\cup\varepsilon\\
-         &=(b\cup ba)X_1\cup b\cup\varepsilon\\
-         &=(b\cup ba)^*(b\cup\varepsilon)
+      X_1&=bX_1\cup b(aX_1\cup\varepsilon)\cup\varepsilon \\
+         &=(b\cup ba)X_1\cup b\cup\varepsilon \\
+         &={(b\cup ba)}^*(b\cup\varepsilon)
 \end{align*}
 

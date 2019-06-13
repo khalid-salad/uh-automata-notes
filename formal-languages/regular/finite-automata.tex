@@ -119,7 +119,7 @@ The diagrams for an NFA and DFA follow the same notation. However, the notation 
     \(q_3\) & \(q_0\) & \(q_3\) & 0\\
 \end{tabular}\end{center}
 
-The values of the transition function are now sets. We informally refer to the set \( \{q_0\} \) by \(q_0\), and similarly the set \( \{q_2, q_3\} \) by \(q_2q_3\). In some cases, to avoid ambiguity, we will use commas, e.g., we may represent \( \{q_2, q_3\} \) as \(q_2,q_3\). We similarly say, given a string \(s\), if there exists a path through an NFA that ends in a final state, we say that the NFA \textbf{accepts} \(s\).
+The values of the transition function are now sets. We informally refer to the set \( \{q_0\} \) by \(q_0\), and similarly the set \( \{q_2, q_3\} \) by \(q_2q_3\). In some cases, to avoid ambiguity, we will use commas, e.g.\@ we may represent \( \{q_2, q_3\} \) as \(q_2,q_3\). We similarly say, given a string \(s\), if there exists a path through an NFA that ends in a final state, we say that the NFA \textbf{accepts} \(s\).
 
 Similarly, we define the set of languages accepted by an NFA \(\underset{\sim}{N}\), \(L(\underset{\sim}{N})\), as \[L(\underset{\sim}{N}) = \{s\in A^*|\tau(q_0, s)\cap\mathcal{F}\neq\emptyset \} \]
 
