@@ -2,68 +2,68 @@
 \begin{exercise}{1}
     Prove that the following languages are not regular:
     \begin{enumerate}[(a)]
-        \item $L=\{x\in(0\cup1)^*2(0\cup1)^*|\text{number of 0s before 2} = \text{number of 1s after 2}\}$
-        \item $L=\{x\in(0\cup1)^*2(0\cup1)^*|\text{number of 0s before 2} \neq \text{number of 1s after 2}\}$
-        \item $L=\{a^{i^2}|i\geq1\}$
-        \item $L=\{a^{2^i}|i\geq1\}$
+        \item \(L=\{x\in(0\cup1)^*2(0\cup1)^*|\text{number of 0s before 2} = \text{number of 1s after 2}\}\)
+        \item \(L=\{x\in(0\cup1)^*2(0\cup1)^*|\text{number of 0s before 2} \neq \text{number of 1s after 2}\}\)
+        \item \(L=\{a^{i^2}|i\geq1\}\)
+        \item \(L=\{a^{2^i}|i\geq1\}\)
     \end{enumerate}
 \end{exercise}
 \begin{solution}\mbox{\\}
 \begin{enumerate}[(a)]
-    \item Suppose, by way of contradiction, that $L$ is regular and that $p$ is its pumping length. Consider the string $s=0^p21^p$. Clearly, $|s|\geq p$. Thus, by the \textbf{Pumping Lemma}, there exist strings $s_1, s_2, s_3$ such that $s=s_1s_2s_3$ with $|s_1s_2|\leq p$ and $|s_2|\geq1$ and, for all $n\geq 1$, $s_1s_2^ns_3\in L$. Observe that $s_1s_2=0^k$ for some $k\leq p$ (for otherwise $|s_1s_2| > p$), hence $s_3=0^{p-k}21^p$. Thus, we write $s_1=0^{k-q}$ and $s_2=0^{q}$ for some $q\geq1$. By the pumping lemma, 
+    \item Suppose, by way of contradiction, that \(L\) is regular and that \(p\) is its pumping length. Consider the string \(s=0^p21^p\). Clearly, \(|s|\geq p\). Thus, by the \textbf{Pumping Lemma}, there exist strings \(s_1, s_2, s_3\) such that \(s=s_1s_2s_3\) with \(|s_1s_2|\leq p\) and \(|s_2|\geq1\) and, for all \(n\geq 1\), \(s_1s_2^ns_3\in L\). Observe that \(s_1s_2=0^k\) for some \(k\leq p\) (for otherwise \(|s_1s_2| > p\)), hence \(s_3=0^{p-k}21^p\). Thus, we write \(s_1=0^{k-q}\) and \(s_2=0^{q}\) for some \(q\geq1\). By the pumping lemma, 
     \begin{align*}
         s_1s_2^ns_3 &= 0^{k-q}(0^q)^n0^{p-k}21^p\\
                     &= 0^{k-q}0^{qn}0^{p-k}21^p\\
                     &= 0^{p+q(n-1)}21^p
     \end{align*}
 
-    is in $L$. However, for $n\geq2$, there are more 0s before the 2 than 1s after, hence $s_1s_2^ns_3\not\in L$. A contradiction. Thus, $L$ is not regular.
+    is in \(L\). However, for \(n\geq2\), there are more 0s before the 2 than 1s after, hence \(s_1s_2^ns_3\not\in L\). A contradiction. Thus, \(L\) is not regular.
 
-    \item Suppose, by way of contradiction, that $L$ is regular and that $p$ is its pumping length. Consider the string $s=0^p21^{p+p!}$. Clearly, $|s|\geq p$. Thus, by the \textbf{Pumping Lemma}, there exist strings $s_1, s_2, s_3$ such that $s=s_1s_2s_3$ with $|s_1s_2|\leq p$ and $|s_2|\geq1$ and, for all $n\geq 1$, $s_1s_2^ns_3\in L$. Observe that $s_1s_2=0^k$ for some $k\leq p$ (for otherwise $|s_1s_2| > p$), hence $s_3=0^{p-k}21^{p+p!}$. Thus, we write $s_1=0^{k-q}$ and $s_2=0^{q}$ for some $q\geq1$. By the pumping lemma, 
+    \item Suppose, by way of contradiction, that \(L\) is regular and that \(p\) is its pumping length. Consider the string \(s=0^p21^{p+p!}\). Clearly, \(|s|\geq p\). Thus, by the \textbf{Pumping Lemma}, there exist strings \(s_1, s_2, s_3\) such that \(s=s_1s_2s_3\) with \(|s_1s_2|\leq p\) and \(|s_2|\geq1\) and, for all \(n\geq 1\), \(s_1s_2^ns_3\in L\). Observe that \(s_1s_2=0^k\) for some \(k\leq p\) (for otherwise \(|s_1s_2| > p\)), hence \(s_3=0^{p-k}21^{p+p!}\). Thus, we write \(s_1=0^{k-q}\) and \(s_2=0^{q}\) for some \(q\geq1\). By the pumping lemma, 
     \begin{align*}
         s_1s_2^ns_3 &= 0^{k-q}(0^q)^n0^{p-k}21^{p+p!}\\
                     &= 0^{k-q}0^{qn}0^{p-k}21^{p+p!}\\
                     &= 0^{p+q(n-1)}21^{p+p!}
     \end{align*}
 
-    is in $L$. Now, since $q\leq p$, $q|p!$. Thus, taking $n=\frac{p!}{q}+1$, we have 
+    is in \(L\). Now, since \(q\leq p\), \(q|p!\). Thus, taking \(n=\frac{p!}{q}+1\), we have 
     \begin{align*}
         s_1s_2^ns_3 &= 0^{p+q(\frac{p!}{q}+1-1)}21^{p+p!}\\
                     &= 0^{p+q(\frac{p!}{q})}21^{p+p!}\\
                     &= 0^{p+p!}21^{p+p!}
     \end{align*}
     
-    Thus, $s_1s_2^ns_3\not\in L$, a contradiction. Therefore $L$ is not regular.
-    \item In order to reach a contradiction, suppose $L$ is regular and that $p$ is its pumping length. Consider the string $s=a^{p^2}$. By the pumping lemma, we have $s=s_1s_2s_3$. Since $|s_1s_2|\leq p$, this forces $s_1s_2=a^k$ for some $0<k\leq p$ and $s_3=a^{p^2-k}$. Then $s_1=a^{k-r}$ and $s_2=a^r$ for some $0<r\leq k$. Then
+    Thus, \(s_1s_2^ns_3\not\in L\), a contradiction. Therefore \(L\) is not regular.
+    \item In order to reach a contradiction, suppose \(L\) is regular and that \(p\) is its pumping length. Consider the string \(s=a^{p^2}\). By the pumping lemma, we have \(s=s_1s_2s_3\). Since \(|s_1s_2|\leq p\), this forces \(s_1s_2=a^k\) for some \(0<k\leq p\) and \(s_3=a^{p^2-k}\). Then \(s_1=a^{k-r}\) and \(s_2=a^r\) for some \(0<r\leq k\). Then
     \begin{align*}
         s_1s_2^ns_3 &= a^{k-r}(a^r)^na^{p^2-k}\\
                     &= a^{k-r}a^{rn}a^{p^2-k}\\
                     &= a^{p^2+rn-r}\\
                     &= a^{p^2+r(n-1)}
     \end{align*}
-    Take $n=2$. Then $s_1s_2^ns_3=a^{p^2+r}\in L$. However, $p^2+r$ cannot be a perfect square: since $r \leq p$, we have 
+    Take \(n=2\). Then \(s_1s_2^ns_3=a^{p^2+r}\in L\). However, \(p^2+r\) cannot be a perfect square: since \(r \leq p\), we have 
     \begin{align*}
         p^2+r &\leq p^2 + p\\
               &< p^2 + p + 1\\
               &= (p+1)^2
     \end{align*}
     
-    Thus, $s_1s_2^ns_3\not\in L$, a contradiction. Therefore $L$ is not regular.
-    \item In order to reach a contradiction, suppose $L$ is regular and that $p$ is its pumping length. Consider the string $s=a^{2^p}$. By the pumping lemma, we have $s=s_1s_2s_3$. Since $|s_1s_2|\leq p$, this forces $s_1s_2=a^k$ for some $0<k\leq p$ and $s_3=a^{2^p-k}$. Then $s_1=a^{k-r}$ and $s_2=a^r$ for some $0<r\leq k$. Then
+    Thus, \(s_1s_2^ns_3\not\in L\), a contradiction. Therefore \(L\) is not regular.
+    \item In order to reach a contradiction, suppose \(L\) is regular and that \(p\) is its pumping length. Consider the string \(s=a^{2^p}\). By the pumping lemma, we have \(s=s_1s_2s_3\). Since \(|s_1s_2|\leq p\), this forces \(s_1s_2=a^k\) for some \(0<k\leq p\) and \(s_3=a^{2^p-k}\). Then \(s_1=a^{k-r}\) and \(s_2=a^r\) for some \(0<r\leq k\). Then
     \begin{align*}
         s_1s_2^ns_3 &= a^{k-r}(a^r)^na^{2^p-k}\\
                     &= a^{k-r}a^{rn}a^{2^p-k}\\
                     &= a^{2^p+rn-r}\\
                     &= a^{2^p+r(n-1)}
     \end{align*}
-    Take $n=2$. Then $s_1s_2^ns_3=a^{2^p+r}\in L$. However, $2^p+r$ cannot be a power of 2: since $r \leq p$, we have 
+    Take \(n=2\). Then \(s_1s_2^ns_3=a^{2^p+r}\in L\). However, \(2^p+r\) cannot be a power of 2: since \(r \leq p\), we have 
     \begin{align*}
         2^p+r &\leq 2^p + p\\
               &< 2^p + 2^p\\
               &= 2^{p+1}
     \end{align*}
     
-    Thus, $s_1s_2^ns_3\not\in L$, a contradiction. Therefore $L$ is not regular.
+    Thus, \(s_1s_2^ns_3\not\in L\), a contradiction. Therefore \(L\) is not regular.
 \end{enumerate}
     
 \end{solution}

@@ -8,51 +8,51 @@
 \end{definition}
 
 \begin{definition}
- The \textbf{length} of a string, $s$, denoted $|s|$, is the number of symbols in $s$. 
+ The \textbf{length} of a string, \(s\), denoted \(|s|\), is the number of symbols in \(s\). 
 \end{definition}
 
 \begin{definition}
- Given strings $s=s_1s_2\hdots s_n$ and $t=t_1t_2\hdots t_m$, their \textbf{concatenation} is defined 
+ Given strings \(s=s_1s_2\hdots s_n\) and \(t=t_1t_2\hdots t_m\), their \textbf{concatenation} is defined 
  
- \[s\cdot t=s_1s_2\cdots s_nt_1t_2\cdots t_m\]
+ \[s\cdot t=s_1s_2\cdots s_n t_1t_2\cdots t_m\]
 \end{definition}
 
-We denote by $\varepsilon$ the \textbf{empty string}, the unique string of 0 characters. 
+We denote by \(\varepsilon \) the \textbf{empty string}, the unique string of 0 characters. 
 
 \begin{definition}
- Let $A$ be any alphabet. The \textbf{Kleene Closure} of $A$, denoted $A^*$, is the set of all strings of any length over $A$.  
+ Let \(A\) be any alphabet. The \textbf{Kleene Closure} of \(A\), denoted \(A^*\), is the set of all strings of any length over \(A\).  
 \end{definition}
 
 \begin{theorem}
- Let $A$ be any finite set. Then $A^*$ is countably infinite. 
+ Let \(A\) be any finite set. Then \(A^*\) is countably infinite. 
 \end{theorem}
 
 \begin{proof}
- That $A^*$ is infinite is straightforward: since $A$ is non-empty, take $a\in A$. Then $\{a, aa, aaa, \hdots\}\subseteq A^*$.
+ That \(A^*\) is infinite is straightforward: since \(A\) is non-empty, take \(a\in A\). Then \(\{a, aa, aaa, \hdots\}\subseteq A^*\).
  
- To see that it is countable, we first write $|A|=n$. Now, consider the set of all strings of length 0. This is simply $\{\varepsilon\}$. Moreover, there are $n$ strings of length 1, $n^2$ strings of length 2, $n^3$ strings of length 3, and so on. Thus, we map $\varepsilon$ to 0, the strings of length 1 to $1, 2, \hdots, n$, the strings of length 2 to $n+1, n+2, \hdots, n+n^2$, the strings of length 3 to $n+n^2+1, n+n^2+2,\hdots, n+n^2+n^3$, and so on. This is a bijection from $A^*$ to $\mathbb{N}$, which completes the proof.
+ To see that it is countable, we first write \(|A|=n\). Now, consider the set of all strings of length 0. This is simply \(\{\varepsilon\}\). Moreover, there are \(n\) strings of length 1, \(n^2\) strings of length 2, \(n^3\) strings of length 3, and so on. Thus, we map \(\varepsilon\) to 0, the strings of length 1 to \(1, 2, \hdots, n\), the strings of length 2 to \(n+1, n+2, \hdots, n+n^2\), the strings of length 3 to \(n+n^2+1, n+n^2+2,\hdots, n+n^2+n^3\), and so on. This is a bijection from \(A^*\) to \(\mathbb{N}\), which completes the proof.
 \end{proof}
 
 \begin{definition}
- Given an alphabet $A$, a \textbf{formal language} or simply \textbf{language} $L$ is any subset of $A^*$. 
+ Given an alphabet \(A\), a \textbf{formal language} or simply \textbf{language} \(L\) is any subset of \(A^*\). 
 \end{definition}
 
 \begin{theorem}
- Given an alphabet $A$, the set of languages over $A$ is uncountable. 
+ Given an alphabet \(A\), the set of languages over \(A\) is uncountable. 
 \end{theorem}
 
 \begin{proof}
- Suppose, by way of contradiction, that the set of languages were countable, i.e., that we can enumerate the set as $\{L_1, L_2, L_3, \hdots\}$. Consider the set of all strings $\{s_1, s_2, s_3, \hdots\}$. Let $L$ be the language defined as follows: 
+ Suppose, by way of contradiction, that the set of languages were countable, i.e., that we can enumerate the set as \(\{L_1, L_2, L_3, \hdots\}\). Consider the set of all strings \(\{s_1, s_2, s_3, \hdots\}\). Let \(L\) be the language defined as follows: 
  
 \[s_i\in L\text{ if and only if } s_i\not\in L_i\]
 
- To see that $L$ is not in the above list, consider $s_i$. If $s_i$ is in $L$, then $s_i$ is not in $L_i$, by construction, and $L\neq L_i$. Similarly, if $s_i$ is not in $L$, then $s_i$ must be in $L_i$, by construction, and $L\neq L_i$. In other words, for all $i$, $L\neq L_i$. Then $L$ is not in the above list, which is a contradiction. Hence, the set of languages is uncountable. 
+ To see that \(L\) is not in the above list, consider \(s_i\). If \(s_i\) is in \(L\), then \(s_i\) is not in \(L_i\), by construction, and \(L\neq L_i\). Similarly, if \(s_i\) is not in \(L\), then \(s_i\) must be in \(L_i\), by construction, and \(L\neq L_i\). In other words, for all \(i\), \(L\neq L_i\). Then \(L\) is not in the above list, which is a contradiction. Hence, the set of languages is uncountable. 
 \end{proof}
 
 All set operations, such as union, intersection, complement, set-difference, etc. can be applied to languages, since languages are simply subsets of a Kleene Closure of an alphabet.
 
 \begin{definition}
- Given two languages $L_1$ and $L_2$, the concatenation $L_1\cdot L_2$ is given by
+ Given two languages \(L_1\) and \(L_2\), the concatenation \(L_1\cdot L_2\) is given by
  
  \[L_1\cdot L_2=\{s\cdot t|s\in L_1\text{ and } t\in L_2\}\]
 \end{definition}
@@ -64,7 +64,7 @@ Clearly, we have
     L\cdot\{\varepsilon\} &= L = \{\varepsilon\}\cdot L
 \end{align*}
 
-Note that $L_1\cdot L_2$ is not the same as $L_1\times L_2$. Let $L_1=L_2=\{\varepsilon, 0, 00\}$. Then
+Note that \(L_1\cdot L_2\) is not the same as \(L_1\times L_2\). Let \(L_1=L_2=\{\varepsilon, 0, 00\}\). Then
 
 \[L_1\times L_2=\{(\varepsilon, \varepsilon), (\varepsilon, 0), (\varepsilon, 00), (0, \varepsilon), (0, 0), (0, 00), (00, \varepsilon), (00, 0), (00, 00)\}\]
 
@@ -73,7 +73,7 @@ whereas
 \[L_1\cdot L_2=\{\varepsilon, 0, 00, 000, 0000\}\]
 
 \begin{definition}
- Given a language $L$, the \textbf{Kleene Closure} of $L$, $L^*$, is 
+ Given a language \(L\), the \textbf{Kleene Closure} of \(L\), \(L^*\), is 
  
  \[L^*=\bigcup_{i=0}^{\infty}L^i\]
  
@@ -81,14 +81,14 @@ whereas
 L \cdot L^{i-1} & \mbox{otherwise }\end{cases}\]
 \end{definition}
 
-Note that, while $0^0$ is normally left undefined, we define $\emptyset^0=\{\varepsilon\}$.
+Note that, while \(0^0\) is normally left undefined, we define \(\emptyset^0=\{\varepsilon\}\).
 
 \begin{theorem}
- $L^*$ is finite if and only if $L=\emptyset$ or $L=\{\varepsilon\}$.
+ \(L^*\) is finite if and only if \(L=\emptyset\) or \(L=\{\varepsilon\}\).
 \end{theorem}
 
 \begin{proof}
- If $L=\emptyset$, then $L^i=\emptyset^i=\emptyset$ for $i>0$. Then 
+ If \(L=\emptyset\), then \(L^i=\emptyset^i=\emptyset\) for \(i>0\). Then 
  
  \begin{align*}\emptyset^*&=\bigcup_{i=0}^{\infty}\emptyset^i\\
                           &=\emptyset^0\cup\bigcup_{i=1}^{\infty}\emptyset^i\\
@@ -96,12 +96,12 @@ Note that, while $0^0$ is normally left undefined, we define $\emptyset^0=\{\var
                           &=\{\varepsilon\}
 \end{align*}
 
-Similarly, if $L=\{\varepsilon\}$, then $L^i=\{\varepsilon\}$ for all $i$, and 
+Similarly, if \(L=\{\varepsilon\}\), then \(L^i=\{\varepsilon\}\) for all \(i\), and 
 
  \begin{align*}\{\varepsilon\}^*&=\bigcup_{i=0}^{\infty}\{\varepsilon\}^i\\
                           &=\bigcup_{i=1}^{\infty}\{\varepsilon\}\\
                           &=\{\varepsilon\}
 \end{align*}
 
-However, if $L$ is neither $\emptyset$ nor $\{\varepsilon\}$, then there exists a string $s\in L$ with length at least 1. Then $s, ss, sss, \hdots$, are in $L^*$, hence $L^*$ is infinite.
+However, if \(L\) is neither \(\emptyset\) nor \(\{\varepsilon\}\), then there exists a string \(s\in L\) with length at least 1. Then \(s, ss, sss, \hdots\), are in \(L^*\), hence \(L^*\) is infinite.
 \end{proof}

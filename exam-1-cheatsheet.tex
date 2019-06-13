@@ -7,38 +7,38 @@ Partition all states into accepting vs rejecting. Apply all transitions to a ``r
 \subsubsection{Converting a Regular Expression to an NFA}
 \begin{enumerate}
 
-\item[NFA for $a$:]\begin{center}\begin{tabular}{r| c c r}
-    & $a$ & $b\neq a$ & \\\hline
-    $\to q_0$ & $q_1$ & $\emptyset$ & 0\\
-          $q_1$ & $\emptyset$ & $\emptyset$ & 1\\
+\item[NFA for \(a\):]\begin{center}\begin{tabular}{r| c c r}
+    & \(a\) & \(b\neq a\) & \\\bottomrule
+    \(\to q_0\) & \(q_1\) & \(\emptyset\) & 0\\
+          \(q_1\) & \(\emptyset\) & \(\emptyset\) & 1\\
 \end{tabular}\end{center}
 
-\item[NFA for $\varepsilon$:]\begin{center}\begin{tabular}{r| c r}
-    & $c\in A$ & \\\hline
-    $\to q_0$ & $\emptyset$ & 1\\
+\item[NFA for \(\varepsilon\):]\begin{center}\begin{tabular}{r| c r}
+    & \(c\in A\) & \\\bottomrule
+    \(\to q_0\) & \(\emptyset\) & 1\\
 \end{tabular}\end{center}
 
-\item[NFA for $\emptyset$:]\begin{center}\begin{tabular}{r| c r}
-    & $c\in A$ & \\\hline
-    $\to q_0$ & $\emptyset$ & 0\\
+\item[NFA for \(\emptyset\):]\begin{center}\begin{tabular}{r| c r}
+    & \(c\in A\) & \\\bottomrule
+    \(\to q_0\) & \(\emptyset\) & 0\\
 \end{tabular}\end{center}
 \end{enumerate}
 
 \begin{center}\textbf{Union}\end{center} 
 
-Union initial states, copy remaining states from $\alpha$ and $\beta$. Final states are final states from $\alpha$ and $\beta$. 
+Union initial states, copy remaining states from \(\alpha\) and \(\beta\). Final states are final states from \(\alpha\) and \(\beta\). 
 
 \begin{center}\textbf{Concatenation}\end{center}
 
-For final states of $\alpha$, union the state from $\alpha$ with the initial state from $\beta$. Copy non-final states from $\alpha$ and non-initial states from $\beta$. Final states:
+For final states of \(\alpha\), union the state from \(\alpha\) with the initial state from \(\beta\). Copy non-final states from \(\alpha\) and non-initial states from \(\beta\). Final states:
 
-If the initial state is rejecting in $\beta$, final states are final states from $\beta$. 
+If the initial state is rejecting in \(\beta\), final states are final states from \(\beta\). 
 
-If the initial state is accepting in $\beta$, final states are final states from $\alpha$ and $\beta$, except the initial state in $\beta$. 
+If the initial state is accepting in \(\beta\), final states are final states from \(\alpha\) and \(\beta\), except the initial state in \(\beta\). 
 
 \begin{center}\textbf{Kleene Closure}\end{center}
 
-Union final states with the initial state. Copy non-final states. Final states are final states from $\alpha$ and the initial state.
+Union final states with the initial state. Copy non-final states. Final states are final states from \(\alpha\) and the initial state.
 
 \subsubsection{Converting an NFA to a Regular Expression}
 

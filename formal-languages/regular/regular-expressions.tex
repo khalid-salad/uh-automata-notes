@@ -1,49 +1,49 @@
 \subsubsection{Regular Expressions}\label{subsubsec:regular-expressions}
 \begin{definition}
-Given an alphabet $A$, we define a \textbf{regular expression}
+Given an alphabet \(A\), we define a \textbf{regular expression}
 \begin{enumerate}[(a)]
     \item \begin{itemize}
-        \item $a\in A$ is a regular expression denoting the language $\{a\}$
-        \item $\varepsilon$ is a regular expression denoting $\{\varepsilon\}$
-        \item $\emptyset$ is a regular expression denoting $\emptyset$
+        \item \(a\in A\) is a regular expression denoting the language \(\{a\}\)
+        \item \(\varepsilon\) is a regular expression denoting \(\{\varepsilon\}\)
+        \item \(\emptyset\) is a regular expression denoting \(\emptyset\)
     \end{itemize}
     
-    \item If $\alpha$ and $\beta$ are regular expressions denoting the languages $L(\alpha)$ and $L(\beta)$, respectively, then 
+    \item If \(\alpha\) and \(\beta\) are regular expressions denoting the languages \(L(\alpha)\) and \(L(\beta)\), respectively, then 
     \begin{itemize}
-        \item $\alpha\cup\beta$ denotes $L(\alpha)\cup L(\beta)$
-        \item $\alpha\cdot\beta$ denotes $L(\alpha)\cdot L(\beta)$
-        \item $\alpha^*$ denotes $L(\alpha)^*$
+        \item \(\alpha\cup\beta\) denotes \(L(\alpha)\cup L(\beta)\)
+        \item \(\alpha\cdot\beta\) denotes \(L(\alpha)\cdot L(\beta)\)
+        \item \(\alpha^*\) denotes \(L(\alpha)^*\)
     \end{itemize}
 \end{enumerate}
 \end{definition}
 
-By convention, we define precedence of the operations $\cup$, $\cdot$, and $^*$ in that order. Thus, \[b\cdot a^*\cup c=(b\cdot(a^*))\cup c)\]
+By convention, we define precedence of the operations \(\cup\), \(\cdot\), and \(^*\) in that order. Thus, \[b\cdot a^*\cup c=(b\cdot(a^*))\cup c)\]
 
-A regular expression $\alpha$ over an alphabet $A$ denotes the set of languages which accept $\alpha$. Thus, we would like to construct an NFA $\underset{\sim}{N}$ such that $L(\underset{\sim}{N})=L(\alpha)$.
+A regular expression \(\alpha\) over an alphabet \(A\) denotes the set of languages which accept \(\alpha\). Thus, we would like to construct an NFA \(\underset{\sim}{N}\) such that \(L(\underset{\sim}{N})=L(\alpha)\).
 
-The following NFA rejects all strings but $a$:
+The following NFA rejects all strings but \(a\):
 
 \begin{center}\begin{tabular}{r| c c r}
-      & $a$ & $b\neq a$ & \\\hline
-      $\to q_0$ & $q_1$ & $\emptyset$ & 0\\
-            $q_1$ & $\emptyset$ & $\emptyset$ & 1\\
+      & \(a\) & \(b\neq a\) & \\\bottomrule
+      \(\to q_0\) & \(q_1\) & \(\emptyset\) & 0\\
+            \(q_1\) & \(\emptyset\) & \(\emptyset\) & 1\\
  \end{tabular}\end{center}
 
-An NFA for only $\varepsilon$ would appear as:
+An NFA for only \(\varepsilon\) would appear as:
 
 \begin{center}\begin{tabular}{r| c r}
-      & $c\in A$ & \\\hline
-      $\to q_0$ & $\emptyset$ & 1\\
+      & \(c\in A\) & \\\bottomrule
+      \(\to q_0\) & \(\emptyset\) & 1\\
  \end{tabular}\end{center}
 
-And finally, an NFA for only $\emptyset$ is:
+And finally, an NFA for only \(\emptyset\) is:
 
 \begin{center}\begin{tabular}{r| c r}
-      & $c\in A$ & \\\hline
-      $\to q_0$ & $\emptyset$ & 0\\
+      & \(c\in A\) & \\\bottomrule
+      \(\to q_0\) & \(\emptyset\) & 0\\
  \end{tabular}\end{center}
 
-Now, suppose we have an NFA for $\alpha$ and $\beta$. We wish to determine NFAs for $\alpha\cup\beta$, $\alpha\cdot\beta$, and $\alpha^*$. 
+Now, suppose we have an NFA for \(\alpha\) and \(\beta\). We wish to determine NFAs for \(\alpha\cup\beta\), \(\alpha\cdot\beta\), and \(\alpha^*\). 
 
 We define \begin{align*}
       \underset{\sim}{N_\alpha} &= (A, Q_{\alpha}, \tau_{\alpha}, q_0, \mathcal{F}_{\alpha})\\
@@ -56,11 +56,11 @@ such that \begin{align*}
       Q_\alpha\cap Q_\beta&=\{q_0\}
 \end{align*}
 
-and clarify that these automata are non-returning, i.e., that $q_0\not\in\tau(q_0, s)$ for any $s$ of length 1 or greater.
+and clarify that these automata are non-returning, i.e., that \(q_0\not\in\tau(q_0, s)\) for any \(s\) of length 1 or greater.
 
 We construct the \textbf{Union} \[\underset{\sim}{N_{\alpha\cup\beta}}=(A, Q_{\alpha\cup\beta}, \tau_{\alpha\cup\beta}, q_0, \mathcal{F}_{\alpha\cup\beta})\] 
 
-where $Q_{\alpha\cup\beta}=Q_{\alpha}\cup Q_{\beta}$, $\mathcal{F}_{\alpha\cup\beta}=\mathcal{F}_{\alpha}\cup F_{\beta}$ and, for all $q\in Q_{\alpha\cup\beta}$ and $a\in A$
+where \(Q_{\alpha\cup\beta}=Q_{\alpha}\cup Q_{\beta}\), \(\mathcal{F}_{\alpha\cup\beta}=\mathcal{F}_{\alpha}\cup F_{\beta}\) and, for all \(q\in Q_{\alpha\cup\beta}\) and \(a\in A\)
 
 \[\tau_{\alpha\cup\beta}(q, a) = \begin{cases}
       \tau_{\alpha}(q_0, a)\cup\tau_{\beta}(q_0, a) & \text{ if } q=q_0\\
@@ -72,9 +72,9 @@ The \textbf{Concatenation} is constructed
 
 \[\underset{\sim}{N_{\alpha\beta}}=(A, Q_{\alpha\beta}, \tau_{\alpha\beta}, q_0, \mathcal{F}_{\alpha\beta})\] 
 
-where $Q_{\alpha\beta}=Q_{\alpha}\cup Q_{\beta}$,
+where \(Q_{\alpha\beta}=Q_{\alpha}\cup Q_{\beta}\),
 
-\[\mathcal{F}_{\alpha\beta}=\begin{cases}\mathcal{F}_{\beta} &\text{ if } q_0\not\in \mathcal{F}_{\beta}\\ \mathcal{F}_{\alpha}\cup(\mathcal{F}_{\beta}-\{q_0\}) &\text{ if } q_0\in \mathcal{F}_{\beta}\end{cases}\] and, for all $q\in Q_{\alpha\beta}$ and $a\in A$
+\[\mathcal{F}_{\alpha\beta}=\begin{cases}\mathcal{F}_{\beta} &\text{ if } q_0\not\in \mathcal{F}_{\beta}\\ \mathcal{F}_{\alpha}\cup(\mathcal{F}_{\beta}-\{q_0\}) &\text{ if } q_0\in \mathcal{F}_{\beta}\end{cases}\] and, for all \(q\in Q_{\alpha\beta}\) and \(a\in A\)
 
 \[\tau_{\alpha\beta}(q, a) = \begin{cases}
       \tau_{\alpha}(q, a)\cup\tau_{\beta}(q_0, a) & \text{ if } q\in\mathcal{F}_{\alpha}\\
@@ -86,28 +86,28 @@ Finally, the \textbf{Kleene Closure} is constructed
 
 \[\underset{\sim}{N_{\alpha^*}}=(A, Q_{\alpha^*}, \tau_{\alpha^*}, q_0, \mathcal{F}_{\alpha^*})\] 
 
-where $Q_{\alpha^*}=Q_{\alpha}$, $\mathcal{F}_{\alpha^*}=\mathcal{F}_{\alpha}\cup\{q_0\}$ and, for all $q\in Q_{\alpha^*}$ and $a\in A$
+where \(Q_{\alpha^*}=Q_{\alpha}\), \(\mathcal{F}_{\alpha^*}=\mathcal{F}_{\alpha}\cup\{q_0\}\) and, for all \(q\in Q_{\alpha^*}\) and \(a\in A\)
 
 \[\tau_{\alpha^*}(q, a) = \begin{cases}
       \tau_{\alpha}(q, a)\cup\tau_{\alpha}(q_0, a) & \text{ if } q\in\mathcal{F}_{\alpha}\\
       \tau_{\alpha}(q, a) & \text{ if } q\in Q_{\alpha}-\mathcal{F}_{\alpha}
 \end{cases}\]
 
-This allows us to construct NFAs from a regular expression. Suppose we have a regular expression $ab$ over $\{a, b\}$. Then we have 
+This allows us to construct NFAs from a regular expression. Suppose we have a regular expression \(ab\) over \(\{a, b\}\). Then we have 
 \begin{center}
 \begin{multicols}{2}
 \begin{tabular}{r| c c r}
-      \multicolumn{4}{c}{NFA for $a$}\\
-      & $a$ & $b$ & \\\hline
-      $\to q_0$ & $q_1$ & $\emptyset$ & 0\\
-            $q_1$ & $\emptyset$ & $\emptyset$ & 1
+      \multicolumn{4}{c}{NFA for \(a\)}\\
+      & \(a\) & \(b\) & \\\bottomrule
+      \(\to q_0\) & \(q_1\) & \(\emptyset\) & 0\\
+            \(q_1\) & \(\emptyset\) & \(\emptyset\) & 1
  \end{tabular}
 
  \begin{tabular}{r| c c r}
-      \multicolumn{4}{c}{NFA for $b$}\\
-      & $a$ & $b$ & \\\hline
-      $\to q_0$ & $\emptyset$ & $q_2$ & 0\\
-            $q_2$ & $\emptyset$ & $\emptyset$ & 1
+      \multicolumn{4}{c}{NFA for \(b\)}\\
+      & \(a\) & \(b\) & \\\bottomrule
+      \(\to q_0\) & \(\emptyset\) & \(q_2\) & 0\\
+            \(q_2\) & \(\emptyset\) & \(\emptyset\) & 1
  \end{tabular}
 \end{multicols}
 \end{center}
@@ -115,10 +115,10 @@ This allows us to construct NFAs from a regular expression. Suppose we have a re
 Applying the above construction for concatenation gives
 \begin{center}
 \begin{tabular}{r| c c r}
-      \multicolumn{4}{c}{NFA for $ab$}\\
-      & $a$ & $b$ & \\\hline
-      $\to q_0$ & $q_1$ & $\emptyset$ & 0\\
-          $q_1$ & $\emptyset$ & $q_2$ & 0\\
-          $q_2$ & $\emptyset$ & $\emptyset$ & 1
+      \multicolumn{4}{c}{NFA for \(ab\)}\\
+      & \(a\) & \(b\) & \\\bottomrule
+      \(\to q_0\) & \(q_1\) & \(\emptyset\) & 0\\
+          \(q_1\) & \(\emptyset\) & \(q_2\) & 0\\
+          \(q_2\) & \(\emptyset\) & \(\emptyset\) & 1
  \end{tabular}
 \end{center}

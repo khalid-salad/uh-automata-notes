@@ -1,25 +1,25 @@
 \subsubsection{Context-Free Grammars}\label{subsec:context-free-grammars}
 \begin{definition}
-    A \textbf{Context-Free Grammar} is a quartuple $G=(N, T, P, S)$ where 
+    A \textbf{Context-Free Grammar} is a quartuple \(G=(N, T, P, S)\) where 
           \begin{align*}
                 & N\text{ is a finite, non-empty set of variables (also called non-terminals)}\\
                 & T\text{ is an alphabet of terminals}\\
-                & P\subseteq N\times(N\cup T)^*\text{ is a finite set of productions}\\
+                & P\subseteq N\times{(N\cup T)}^*\text{ is a finite set of productions}\\
                 & S\in N\text{ is the starting symbol}
           \end{align*}
 
-          For any $(A, \gamma)\in P$, we write $A\to\gamma$, and say $A$ \textbf{produces} $\gamma$. 
+          For any \((A, \gamma)\in P\), we write \(A\to\gamma \), and say \(A\) \textbf{produces} \(\gamma \). 
 \end{definition}
 
 By convention, we use upper-case letters to denote variables, lower-case to denote terminals and strings over the terminals, and Greek letters to denote strings over variables and terminals.
 
 \begin{definition}
-    Given strings $\alpha$ and $\beta$, we say $\alpha$ \textbf{derives} $\beta$ if there exist $A, \alpha_1,\alpha_2,\gamma$ such that 
+    Given strings \(\alpha \) and \(\beta \), we say \(\alpha \) \textbf{derives} \(\beta \) if there exist \(A, \alpha_1,\alpha_2,\gamma \) such that 
     \begin{align*}
           \alpha &= \alpha_1A\alpha_2\\
           \beta  &= \alpha_1\gamma\alpha_2\\
           A&\to \gamma\in P
     \end{align*}
 
-    and we write this $\alpha\Rightarrow\beta$. 
+    and we write this \(\alpha\Rightarrow\beta \). 
 \end{definition}
