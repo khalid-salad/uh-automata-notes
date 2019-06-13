@@ -34,6 +34,21 @@
     \end{align*}
     
     Thus, $s_1s_2^ns_3\not\in L$, a contradiction. Therefore $L$ is not regular.
+    \item In order to reach a contradiction, suppose $L$ is regular and that $p$ is its pumping length. Consider the string $s=a^{p^2}$. By the pumping lemma, we have $s=s_1s_2s_3$. Since $|s_1s_2|\leq p$, this forces $s_1s_2=a^k$ for some $0<k\leq p$ and $s_3=a^{p^2-k}$. Then $s_1=a^{k-r}$ and $s_2=a^r$ for some $0<r\leq k$. Then
+    \begin{align*}
+        s_1s_2^ns_3 &= a^{k-r}(a^r)^na^{p^2-k}\\
+                    &= a^{k-r}a^{rn}a^{p^2-k}\\
+                    &= a^{p^2+rn-r}\\
+                    &= a^{p^2+r(n-1)}
+    \end{align*}
+    Take $n=2$. Then $s_1s_2^ns_3=a^{p^2+r}\in L$. However, $p^2+r$ cannot be a perfect square: since $r \leq p$, we have 
+    \begin{align*}
+        p^2+r &\leq p^2 + p\\
+              &< p^2 + p + 1\\
+              &= (p+1)^2
+    \end{align*}
+    
+    Thus, $s_1s_2^ns_3\not\in L$, a contradiction. Therefore $L$ is not regular.
     \item In order to reach a contradiction, suppose $L$ is regular and that $p$ is its pumping length. Consider the string $s=a^{2^p}$. By the pumping lemma, we have $s=s_1s_2s_3$. Since $|s_1s_2|\leq p$, this forces $s_1s_2=a^k$ for some $0<k\leq p$ and $s_3=a^{2^p-k}$. Then $s_1=a^{k-r}$ and $s_2=a^r$ for some $0<r\leq k$. Then
     \begin{align*}
         s_1s_2^ns_3 &= a^{k-r}(a^r)^na^{2^p-k}\\
