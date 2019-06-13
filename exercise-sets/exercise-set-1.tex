@@ -1,0 +1,376 @@
+\subsection{Exercise Set 1}\label{subsec:exercise-set-1}
+
+\begin{exercise}{1}
+Construct DFAs for the following NFAs using the subset construction:
+\begin{enumerate}[(a)]
+\begin{multicols}{3}
+    \item\begin{tabular}[t]{r|c r}
+         & $a$ & \\\hline
+    $\to 1$ & 2 & 0 \\
+    2 & 3 & 0 \\
+    3 & 4 & 0\\
+    4 & 5 & 0\\
+    5 & 6 & 0\\
+    6 & 7 & 0\\
+    7 & 1, 2 & 1
+        \end{tabular}
+    \item\begin{tabular}[t]{r| c c c r}
+            & $a$ & $b$ & $c$ & \\\hline
+        $\to 1$ & 2 & 2 & 2 & 1\\
+              2 & 3 & 1 & 1, 2 & 1\\
+              3 & 4 & 3 & $\emptyset$ & 1 \\
+              4 & 5 & 4 & 4 & 1\\
+              5 & 1 & 5 & 5 & 1
+    \end{tabular}
+    \item \begin{tabular}[t]{r| c c c r}
+            & $a$ & $b$ & $c$ & \\\hline
+        $\to 1$ & 2 & 2 & 2 & 1\\
+              2 & 3 & 1 & 2, 3 & 1\\
+              3 & 4 & 3 & $\emptyset$ & 1 \\
+              4 & 5 & 4 & 4 & 1\\
+              5 & 1 & 5 & 5 & 1
+    \end{tabular}
+\end{multicols}
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}\mbox{\\}
+\begin{enumerate}[(a)]
+\begin{multicols}{2}
+    \item\begin{tabular}[t]{r|c r}
+         & $a$ & \\\hline
+            $\to1$ & 2 & 0 \\
+            2 & 3 & 0 \\
+            3 & 4 & 0\\
+            4 & 5 & 0\\
+            5 & 6 & 0\\
+            6 & 7 & 0\\
+            7 & 1, 2 & 1\\
+            1, 2 & 2, 3 & 0\\
+            2, 3 & 3, 4 & 0\\
+            3, 4 & 4, 5 & 0\\
+            4, 5 & 5, 6 & 0\\
+            5, 6 & 6, 7 & 0\\
+            6, 7 & 1, 2, 7 & 1\\
+            1, 2, 7 & 1, 2, 3 & 1\\
+            1, 2, 3 & 2, 3, 4 & 0\\
+            2, 3, 4 & 3, 4, 5 & 0\\
+            3, 4, 5 & 4, 5, 6 & 0\\
+            4, 5, 6 & 5, 6, 7 & 0\\
+            5, 6, 7 & 1, 2, 6, 7 & 1\\
+            1, 2, 6, 7 & 1, 2, 3, 7 & 1\\
+            1, 2, 3, 7 & 1, 2, 3, 4 & 1\\
+            1, 2, 3, 4 & 2, 3, 4, 5 & 0\\
+            2, 3, 4, 5 & 3, 4, 5, 6 & 0\\
+            3, 4, 5, 6 & 4, 5, 6, 7 & 0\\
+            4, 5, 6, 7 & 1, 2, 5, 6, 7 & 1\\
+            1, 2, 5, 6, 7 & 1, 2, 3, 6, 7 & 1\\
+            1, 2, 3, 6, 7 & 1, 2, 3, 4, 7 & 1\\
+            1, 2, 3, 4, 7 & 1, 2, 3, 4, 5 & 1\\
+            1, 2, 3, 4, 5 & 2, 3, 4, 5, 6 & 0\\
+            2, 3, 4, 5, 6 & 3, 4, 5, 6, 7 & 0\\
+            3, 4, 5, 6, 7 & 1, 2, 4, 5, 6, 7 & 1\\
+            1, 2, 4, 5, 6, 7 & 1, 2, 3, 5, 6, 7 & 1\\
+            1, 2, 3, 5, 6, 7 & 1, 2, 3, 4, 6, 7 & 1\\
+            1, 2, 3, 4, 6, 7 & 1, 2, 3, 4, 5, 7 & 1\\
+            1, 2, 3, 4, 5, 7 & 1, 2, 3, 4, 5, 6 & 1\\
+            1, 2, 3, 4, 5, 6 & 2, 3, 4, 5, 6, 7 & 0\\
+            2, 3, 4, 5, 6, 7 & 1, 2, 3, 4, 5, 6 7 & 1\\
+            1, 2, 3, 4, 5, 6, 7 & 1, 2, 3, 4, 5, 6, 7 & 1
+        \end{tabular}
+        
+        \item\begin{tabular}[t]{r|c c c r}
+            & $a$ & $b$ & $c$ &\\\hline
+               $\to1$ & 2 & 2 & 2 & 1\\
+                2 & 3 & 1 & 1, 2 & 1\\
+                3 & 4 & 3 & $\emptyset$ & 1\\
+                1, 2 & 2, 3 & 1, 2 & 1, 2 & 1\\
+                4 & 5 & 4 & 4 & 1\\
+                $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & 0\\
+                2, 3 & 3, 4 & 1, 3 & 1, 2 & 1\\
+                5 & 1 & 5 & 5 & 1\\
+                3, 4 & 4, 5 & 3, 4 & 4 & 1\\
+                1, 3 & 2, 4 & 2, 3 & 2 & 1\\
+                4, 5 & 1, 5 & 4, 5 & 4, 5 & 1\\
+                2, 4 & 3, 5 & 1, 4 & 1, 2, 4 & 1\\
+                1, 5 & 1, 2 & 2, 5 & 2, 5 & 1\\
+                3, 5 & 1, 4 & 3, 5 & 5 & 1\\
+                1, 4 & 2, 5 & 2, 4 & 2, 4 & 1\\
+                1, 2, 4 & 2, 3, 5 & 1, 2, 4 & 1, 2, 4 & 1\\
+                2, 5 & 1, 3 & 1, 5 & 1, 2, 5 & 1\\
+                2, 3, 5 & 1, 3, 4 & 1, 3, 5 & 1, 2, 5 & 1\\
+                1, 2, 5 & 1, 2, 3 & 1, 2, 5 & 1, 2, 5 & 1\\
+                1, 3, 4 & 2, 4, 5 & 2, 3, 4 & 2, 4 & 1\\
+                1, 3, 5 & 1, 2, 4 & 2, 3, 5 & 2, 5 & 1\\
+                1, 2, 3 & 2, 3, 4 & 1, 2, 3 & 1, 2 & 1\\
+                2, 4, 5 & 1, 3, 5 & 1, 4, 5 & 1, 2, 4, 5 & 1\\
+                2, 3, 4 & 3, 4, 5 & 1, 3, 4 & 1, 2, 4 & 1\\
+                1, 4, 5 & 1, 2, 5 & 2, 4, 5 & 2, 4, 5 & 1\\
+                1, 2, 4, 5 & 1, 2, 3, 5 & 1, 2, 4, 5 & 1, 2, 4, 5 & 1\\
+                3, 4, 5 & 1, 4, 5 & 3, 4, 5 & 4, 5 & 1\\
+                1, 2, 3, 5 & 1, 2, 3, 4 & 1, 2, 3, 5 & 1, 2, 5 & 1\\
+                1, 2, 3, 4 & 2, 3, 4, 5 & 1, 2, 3, 4 & 1, 2, 4 & 1\\
+                2, 3, 4, 5 & 1, 3, 4, 5 & 1, 3, 4, 5 & 1, 2, 4, 5 & 1\\
+                1, 3, 4, 5 & 1, 2, 4, 5 & 2, 3, 4, 5 & 2, 4, 5 & 1
+           \end{tabular}
+\end{multicols}
+
+\item\begin{tabular}[t]{r|c c c r}
+    & $a$ & $b$ & $c$ &\\\hline
+       $\to1$ & 2 & 2 & 2 & 1\\
+       2 & 3 & 1 & 2, 3 & 1\\
+       3 & 4 & 3 & $\emptyset$ & 1\\
+       2, 3 & 3, 4 & 1, 3 & 2, 3 & 1\\
+       4 & 5 & 4 & 4 & 1\\
+       $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & 0\\
+       3, 4 & 4, 5 & 3, 4 & 4 & 1\\
+       1, 3 & 2, 4 & 2, 3 & 2 & 1\\
+       5 & 1 & 5 & 5 & 1\\
+       4, 5 & 1, 5 & 4, 5 & 4, 5 & 1\\
+       2, 4 & 3, 5 & 1, 4 & 2, 3 & 1\\
+       1, 5 &6& 2, 5 & 2, 5 & 1\\
+       3, 5 & 1, 4 & 3, 5 & 5 & 1\\
+       1, 4 & 2, 5 & 2, 4 & 2, 4 & 1\\
+       6 & 2, 3 & 1, 2 & 2, 3 & 1\\
+       2, 5 & 1, 3 & 1, 5 & 2, 3, 5 & 1\\
+       2, 3, 5 & 1, 3, 4 & 1, 3, 5 & 2, 3, 5 & 1\\
+       1, 3, 4 & 2, 4, 5 & 2, 3, 4 & 2, 4 & 1\\
+       1, 4, 5 & 1, 2, 4 & 2, 4, 5 & 2, 4, 5 & 1\\
+       2, 4, 5 & 1, 3, 5 & 1, 4, 5 & 2, 3, 4, 5 & 1\\
+       2, 3, 4 & 3, 4, 5 & 1, 3, 4 & 2, 3, 4 & 1\\
+       1, 2, 4 & 2, 3, 5 & 1, 2, 4 & 2, 3, 4 & 1\\
+       1, 3, 5 & 1, 2, 4 & 2, 3, 5 & 2, 5 & 1\\
+       2, 3, 4, 5 & 1, 3, 4, 5 & 1, 3, 4, 5 & 2, 3, 4, 5 & 1\\
+       3, 4, 5 & 1, 4, 5 & 3, 4, 5 & 4, 5 & 1\\
+       1, 3, 4, 5 & 1, 2, 4, 5 & 2, 3, 4, 5 & 2, 4, 5 & 1\\
+       1, 2, 4, 5 & 1, 2, 3, 5 & 1, 2, 4, 5 & 2, 3, 4, 5 & 1\\
+       1, 2, 3, 5 & 1, 2, 3, 4 & 1, 2, 3, 5 & 2, 3, 5 & 1\\
+       1, 2, 3, 4 & 2, 3, 4, 5 & 1, 2, 3, 4 & 2, 3, 4 & 1\\
+   \end{tabular}
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}{2}
+Reduce the following DFAs:
+\begin{enumerate}[(a)]
+\begin{multicols}{3}
+    \item \begin{tabular}[t]{c c| c c r}
+         & & $a$ & $b$ & \\\hline
+         $\to$ & 1 & 2 & 3 & 0\\
+               & 2 & 3 & 2 & 1\\
+               & 3 & 4 & 5 & 0\\
+               & 4 & 1 & 8 & 1\\
+               & 5 & 6 & 7 & 0\\
+               & 6 & 7 & 6 & 1\\
+               & 7 & 8 & 1 & 0\\
+               & 8 & 5 & 4 & 1
+    \end{tabular}
+    
+    \item \begin{tabular}[t]{c c| c c r}
+         & & $a$ & $b$ & \\\hline
+         $\to$ & 1 & 2 & 3 & 0\\
+               & 2 & 3 & 2 & 1\\
+               & 3 & 4 & 5 & 0\\
+               & 4 & 1 & 8 & 1\\
+               & 5 & 6 & 7 & 0\\
+               & 6 & 7 & 6 & 1\\
+               & 7 & 8 & 1 & 0\\
+               & 8 & 5 & 5 & 1
+    \end{tabular}
+    
+    \item Your result of 1(b).
+    
+    \item Your result of 1(c).
+\end{multicols}
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}\mbox{\\}
+    \begin{enumerate}[(a)]
+        \begin{multicols}{2}
+            \item \begin{tabular}[t]{|c|c|c|c|c|c|c|c|}\hline
+                \multicolumn{4}{|c|}{Rejecting} & \multicolumn{4}{|c|}{Accepting}\\\hline
+                \multicolumn{4}{|c|}{1, 3, 5, 7} & \multicolumn{4}{|c|}{2, 4, 6, 8}\\\hline
+                \multicolumn{4}{|c|}{1, 3, 5, 7} & \multicolumn{4}{|c|}{2, 4, 6, 8}\\\hline
+                \end{tabular}
+
+                Setting $p=\{1, 3, 5, 7\}$ and $q=\{2, 4, 6, 8\}$:
+
+                \begin{tabular}{r| c c r}
+                    & $a$ & $b$ & \\\hline
+                    $\to p$ & $q$ & $p$ & 0\\
+                          $q$ & $p$ & $q$ & 1\\
+               \end{tabular}
+               
+            \item \begin{tabular}[t]{|c|c|c|c|c|c|c|c|}\hline
+                \multicolumn{4}{|c|}{Rejecting} & \multicolumn{4}{|c|}{Accepting}\\\hline
+                \multicolumn{4}{|c|}{1, 3, 5, 7} & \multicolumn{4}{|c|}{2, 4, 6, 8}\\\hline
+                \multicolumn{4}{|c|}{1, 3, 5, 7} & \multicolumn{3}{|c|}{2, 4, 6} & \multicolumn{1}{c|}{8}\\\hline
+                \multicolumn{3}{|c}{1, 3, 5} & \multicolumn{1}{|c|}{7} & \multicolumn{2}{|c}{2, 6} & \multicolumn{1}{|c|}{4} & \multicolumn{1}{c|}{8}\\\hline
+                1 & 3 & 5 & \multicolumn{1}{c|}{7} & \multicolumn{1}{|c|}{2} & 6 & 4 & 8\\\hline
+                \end{tabular}
+                
+                The DFA is already reduced.
+        \end{multicols}
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}{3}
+Construct NFAs for the following regular expressions using the construction given in class; then find the corresponding DFAs; then reduce them:
+\begin{enumerate}[(a)]
+\begin{multicols}{2}
+    \item $(a^2 \cup a^3 \cup a^5)^*$ over $\{a\}$
+    \item $(a^2)^*(a^3)^*(a^5)^*$ over $\{a\}$
+    \item $(abc \cup ab)^*aa^*(ab)^*$ over $\{a, b, c\}$
+    \item $0^*(00\cup11)^*(01\cup10)^*1^*$ over $\{0, 1\}$
+\end{multicols}
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}\mbox{\\}
+\begin{enumerate}[(a)]
+    \item
+    \begin{center}\begin{multicols}{2}\begin{tabular}[t]{r| c r}
+        \multicolumn{3}{c}{NFA for $a$}\\
+        & $a$ & \\\hline
+        $\to q_0$ & $q_1$ & 0\\
+        $q_1$ & $\emptyset$ & 1              
+   \end{tabular}
+
+   \begin{tabular}[t]{r| c r}
+    \multicolumn{3}{c}{NFA for $a$}\\
+    & $a$ & \\\hline
+    $\to q_0$ & $q_2$ & 0\\
+    $q_2$ & $\emptyset$ & 1              
+\end{tabular}
+\end{multicols}\end{center}
+Concatenate these to get $a^2$
+
+\begin{center}\begin{tabular}[t]{r| c r}
+    \multicolumn{3}{c}{NFA for $a^2$}\\
+    & $a$ & \\\hline
+    $\to q_0$ & $q_1$ & 0\\
+    $q_1$ & $q_2$ & 0\\
+    $q_2$ & $\emptyset$ & 1              
+\end{tabular}\end{center}
+
+Similarly, we have 
+
+\begin{center}\begin{tabular}[t]{r| c r}
+    \multicolumn{3}{c}{NFA for $a^3$}\\
+    & $a$ & \\\hline
+    $\to q_0$ & $q_3$ & 0\\
+    $q_3$ & $q_4$ & 0\\
+    $q_4$ & $q_5$ & 0\\
+    $q_5$ & $\emptyset$ & 1              
+\end{tabular}\end{center}
+
+\begin{center}\begin{tabular}[t]{r| c r}
+    \multicolumn{3}{c}{NFA for $a^5$}\\
+    & $a$ & \\\hline
+    $\to q_0$ & $q_6$ & 0\\
+    $q_6$ & $q_7$ & 0\\
+    $q_7$ & $q_8$ & 0\\
+    $q_8$ & $q_9$ & 0\\
+    $q_9$ & $\emptyset$ & 1              
+\end{tabular}\end{center}
+\item 
+\end{enumerate}
+\end{solution}
+\begin{exercise}{4}
+Construct regular expressions for the languages accepted by the following automata:
+\begin{enumerate}[(a)]
+\begin{multicols}{2}
+    \item \begin{tabular}[t]{c c| c c c c}
+         & & $a$ & $b$ & $c$ & \\\hline
+         $\to$ & 1 & 2 & 2 & 2 & 1\\
+               & 2 & 3 & 1 & 2, 3 & 1\\
+               & 3 & 4 & 3 & $\emptyset$ & 1\\
+               & 4 & 1 & 4 & 4 & 1
+    \end{tabular}
+    \item \begin{tabular}[t]{c c| c c c}
+         & & $a$ & $b$ & \\\hline
+         $\to$ & $A$ & $B$ & $C$ & 0\\
+               & $B$ & $A$ & $C$ & 0\\
+               & $C$ & $B$ & $A$ & 1 
+    \end{tabular}
+\end{multicols}
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[(a)]
+        \item 
+        
+        \begin{align*}
+            X_1 &= aX_2\cup bX_2\cup cX_2\cup\varepsilon\\
+            X_2 &= aX_3\cup bX_1 \cup c(X_2\cup X_3)\cup\varepsilon\\
+            X_3 &= aX_4\cup bX_3\cup\varepsilon\\
+            X_4 &= aX_1\cup bX_4\cup cX_4\cup\varepsilon  
+        \end{align*}
+        Solving for $X_4$ 
+        \begin{align*}
+            X_4 &= aX_1\cup bX_4\cup cX_4\cup\varepsilon\\
+                &= aX_1\cup (b\cup c)X_4\cup\varepsilon\\
+                &= (b\cup c)X_4\cup aX_1\cup\varepsilon\\
+                &= (b\cup c)^*(aX_1\cup\varepsilon)\\
+                &= (b\cup c)^*aX_1\cup (b\cup c)^*
+        \end{align*}
+    Similarly, 
+        \begin{align*}
+            X_3 &= aX_4\cup bX_3\cup\varepsilon\\
+                &= a\left((b\cup c)^*aX_1\cup (b\cup c)^*\right)\cup bX_3\cup\varepsilon\\
+                &= a(b\cup c)^*aX_1\cup a(b\cup c)^*\cup bX_3\cup\varepsilon\\
+                &= bX_3\cup a(b\cup c)^*aX_1\cup a(b\cup c)^*\cup\varepsilon\\
+                &= b^*(a(b\cup c)^*aX_1\cup a(b\cup c)^*\cup\varepsilon)\\
+                &= b^*a(b\cup c)^*aX_1\cup b^*a(b\cup c)^*\cup b^*
+        \end{align*}
+    Solving $X_2$:
+    \begin{align*}
+        X_2 &= aX_3\cup bX_1 \cup c(X_2\cup X_3)\cup\varepsilon\\
+            &= (a\cup c)X_3 \cup bX_1 \cup cX_2\cup\varepsilon\\
+            &= (a\cup c)(b^*a(b\cup c)^*aX_1\cup b^*a(b\cup c)^*\cup b^*)\cup bX_1 \cup cX_2\cup\varepsilon\\
+            &= cX_2\cup (a\cup c)(b^*a(b\cup c)^*aX_1\cup b^*a(b\cup c)^*\cup b^*)\cup bX_1\cup\varepsilon\\
+            &= c^*((a\cup c)(b^*a(b\cup c)^*aX_1\cup b^*a(b\cup c)^*\cup b^*)\cup bX_1\cup\varepsilon)\\
+            &= c^*(a\cup c)(b^*a(b\cup c)^*aX_1\cup c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*bX_1\cup c^*\\
+            &= c^*(a\cup c)b^*a(b\cup c)^*aX_1\cup c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*bX_1\cup c^*\\
+            &= (c^*(a\cup c)b^*a(b\cup c)^*a\cup c^*b)X_1\cup c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*
+    \end{align*}
+
+    Finally, solving for $X_1$:
+    \begin{align*}
+        X_1 &= aX_2\cup bX_2\cup cX_2\cup\varepsilon\\
+            &= (a\cup b\cup c)X_2\cup\varepsilon\\
+            &= (a\cup b\cup c)((c^*(a\cup c)b^*a(b\cup c)^*a\cup c^*b)X_1\cup c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*)\cup\varepsilon\\
+            &= (a\cup b\cup c)(c^*(a\cup c)b^*a(b\cup c)^*a\cup c^*b)X_1\cup (a\cup b\cup c)c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*)\cup\varepsilon\\
+            &= \left((a\cup b\cup c)(c^*(a\cup c)b^*a(b\cup c)^*a\cup c^*b)\right)^*((a\cup b\cup c)c^*(a\cup c)(c^*b^*a(b\cup c)^*\cup c^*b^*)\cup c^*)\cup\varepsilon)
+    \end{align*}
+        \item
+    \begin{align*}
+        X_A &= aX_B\cup bX_C\\
+        X_B &= aX_A\cup bX_C\\
+        X_C &= aX_B\cup bX_A\cup\varepsilon
+    \end{align*}
+    Plugging in the equation for $X_C$ into $X_B$
+    \begin{align*}
+        X_B &= aX_A\cup b(aX_B\cup bX_A\cup\varepsilon)\\
+            &= aX_A\cup baX_B\cup b^2X_A\cup b\\
+            &= baX_B\cup (ba\cup b^2)X_A\cup b\\
+            &= (ba)^*((ba\cup b^2)X_A\cup b)\\
+            &= (ba)^*(ba\cup b^2)X_A\cup (ba)^*b
+    \end{align*}
+    We substitute back into $X_C$:
+    \begin{align*}
+        X_C &= aX_B\cup bX_A\cup\varepsilon\\
+            &= a((ba)^*(ba\cup b^2)X_A\cup (ba)^*b)\cup bX_A\cup\varepsilon
+    \end{align*}
+    We now substitute the new equations for $X_B$ and $X_C$ into the equation for $X_A$
+    \begin{align*}
+        X_A &= aX_B\cup bX_C\\
+            &= a((ba)^*(ba\cup b^2)X_A\cup (ba)^*b)\cup b(a((ba)^*(ba\cup b^2)X_A\cup (ba)^*b)\cup bX_A\cup\varepsilon)\\
+            &= a(ba)^*(ba\cup b^2)X_A\cup a(ba)^*b\cup ba((ba)^*(ba\cup b^2)X_A\cup b(ba)^*b)\cup b^2X_A\cup b\\
+            &= (a(ba)^*(ba\cup b^2)\cup ba(ba)^*(ba\cup b^2)\cup b^2)X_A\cup bab(ba)^*b)\cup b^2X_A\cup b\\
+            &= (a(ba)^*(ba\cup b^2)\cup ba(ba)^*(ba\cup b^2)\cup b^2)^*bab(ba)^*b)\cup b^2X_A\cup b
+    \end{align*}
+    \end{enumerate}
+\end{solution}

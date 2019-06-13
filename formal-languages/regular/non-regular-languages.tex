@@ -1,0 +1,45 @@
+\subsubsection{Non-Regular Languages}\label{subsubsec:non-regular-languages}
+Suppose we have a DFA \[\underset{\sim}{D}=(A, Q, \tau, q_0, \mathcal{F})\] with $|Q|=n$. Consider the following set of equations
+
+\begin{align*}
+      q_1 &= \tau(q_0, a_1)\\
+      q_2 &= \tau(q_1, a_2)\\
+          &\vdots\\
+      q_i &= \tau(q_{i-1}, a_i)\\
+          &\vdots\\
+      q_{n-1} &= \tau(q_{n-2}, a_{n-1})\\
+      q_n &= \tau(q_{n-1}, a_n)
+\end{align*}
+
+Notice that we have $n+1$ states above, but only $n$ states in $Q$. Then, by the Pidgeonhole Principle, there must be some state $q_i$ that is visited twice. In other words, there exist an $i, j$ with $i < j$ such that $q_i=q_j$. We then consider a string $s=a_1a_2\hdots a_n$. Let $v_1=a_1a_2\hdots a_i$, $v_2=a_{i+1}a_{i+2}\hdots a_j$, and $v_3=a_{j+1}a_{j+2}\hdots a_n$. We see that 
+
+\[\tau(q_0, s)=\tau(q_0, v_1v_2^kv_3)\] for all $k\geq0$. 
+
+\begin{center}\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+      \tikzstyle{every state}=[fill={rgb:black,1;white,10}]
+    
+      \node[state,initial](q_0){$q_0$};
+      \node[state](q_i)[right of=q_0]{$q_i$};
+      \node[state](q_n)[right of=q_i]{$q_n$};    
+      \path[->]
+      (q_0) edge                node {$v_1$}  (q_i)
+      (q_i) edge                node {$v_3$}  (q_n)
+            edge  [loop above]  node {$v_2$}  ();
+    \end{tikzpicture}\end{center}
+
+Thus, we state \textbf{The Pumping Lemma} and provide a proof:
+
+\begin{theorem}[The Pumping Lemma]
+      Let $L$ be any regular language. Then there exists a $p>0$ (called the \textbf{pumping length} such that, for any string $s\in A^*$ such that $|s|>=p$, we can write \[s=s_1s_2s_3\] where 
+      \begin{itemize}
+            \item $|s_2|\geq 1$
+            \item $|s_1s_2|\leq p$
+            \item $L$ accepts $s_1s_2^ns_3$ for all $n\geq0$.
+      \end{itemize}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+We can use the above theorem to prove that certain languages are not regular. 

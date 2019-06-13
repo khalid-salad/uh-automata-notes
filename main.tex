@@ -25,6 +25,7 @@
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{booktabs}
 
 \newenvironment{solution}{\begin{proof}[\textnormal{\textbf{Solution}}]}{\end{proof}}
 \newenvironment{exercise}[1]{\begin{proof}[\textnormal{\textbf{Exercise #1:}}]\phantom{\qedhere}}{\end{proof}}
@@ -57,13 +58,7 @@
 \tableofcontents
 \newpage\pagenumbering{arabic}
 
-\section{Formal Languages}\label{sec:introduction}
-\input{introduction.tex}
-\input{regular/regular.tex}
-\input{accepted-by-turing-machines.tex}
-\input{context-free/context-free.tex}
-\input{exercise-set-1.tex}
-\input{exercise-set-2.tex}
-\section{Exam Cheatsheets}
-\input{exam-1-cheatsheet.tex}
+\input{formal-languages/formal-languages.tex}
+\input{exercise-sets/exercise-sets.tex}
+\input{cheatsheets/cheatsheets.tex}
 \end{document}

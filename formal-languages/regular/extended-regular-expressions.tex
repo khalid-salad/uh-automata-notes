@@ -1,0 +1,42 @@
+\subsubsection{Extended Regular Expressions}\label{subsubsec:extended-regular-expressions"}
+The languages we have discussed so far are \textbf{regular languages}. That is, 
+
+\begin{itemize}
+      \item Deterministic Finite Automaton
+      \item Non-Deterministic Finite Automaton
+      \item Regular Expression
+      \item Solution of Languages Equations
+\end{itemize}
+
+are all regular languages. The following are \textbf{Closure Properties} of a regular language:
+
+\begin{theorem}
+      Let $\mathcal{L_1}$ and $\mathcal{L_2}$ be regular languages in some alphabet $A$. Then
+      \begin{enumerate}[1)]
+            \item $\mathcal{L}_1\cup\mathcal{L}_2$
+            \item $\mathcal{L}_1\cdot \mathcal{L}_2$
+            \item $\mathcal{L}_1^*$
+            \item $\overline{\mathcal{L}_1}$
+      \end{enumerate}
+
+      are all regular languages in $A$.
+\end{theorem}
+
+\begin{proof}
+      1, 2, and 3 follow from the definitions of regular expressions. For 4, consider a DFA $\underset{\sim}{D}=(A, Q, \tau, q_0, \mathcal{F})$ and consider any word $s\in A^*$. Further, let $\underset{\sim}{D'}=(A, Q, \tau, q_0, Q-\mathcal{F})$. If $w\in L(\underset{\sim}{D})$, then $w\not\in L(\underset{\sim}{D'})$. On the other hand, if $w\not\in L(\underset{\sim}{D})$, then $w\in L(\underset{\sim}{D'})$. Then $L(\underset{\sim}{D'})=\overline{L(\underset{\sim}{D})}$.
+\end{proof}
+
+This allows us to define the regular expression $\overline{\alpha}$:
+
+\begin{definition}
+      Let $\alpha$ be any regular expression in some alphabet $A$. Then the regular expression $\overline{\alpha}$ is defined by \[\overline{\alpha}=\overline{L(\alpha)}\] If a regular expression contains a complement, it is an \textbf{extended regular expression}.
+\end{definition}
+
+We can construct the DFA of the complement of a regular expression by finding the corresponding DFA and swapping the accepting and rejecting states. For example, consider the regular expression $\overline{01^*}\cap\overline{10^*}$ over $\{0, 1\}$. 
+
+\[\overline{01^*}\cap\overline{10^*}=\overline{\overline{01^*}\cup\overline{10^*}}\]
+
+Similarly, we consider the example $\overline{(\overline{01^*}0)^*}$ over $\{0,1,2\}$.
+
+It should be noted that the above process of swapping accepting and rejecting states \textit{only works on a DFA}. Thus, if you wish to take the complement of an NFA, you must first convert it to a DFA. 
+
