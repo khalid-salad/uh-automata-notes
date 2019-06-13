@@ -1,0 +1,63 @@
+\subsection{Normal Forms}\label{subsec:normal-forms}
+\subsubsection{Chomsky Normal Form}\label{subsubsec:chomsky-normal-form}
+\begin{definition}
+    A context-free language is in \textbf{Chomsky Normal Form} if all of its productions are of the form 
+    \[A \to BC\]
+    or
+    \[A \to a\]
+    or
+    \[S\to\varepsilon \]
+\end{definition}
+
+\begin{theorem}
+    If \(G\) is a context-free grammar, there exists a Chomsky Normal Form grammar for \(L(G)-\{\varepsilon \} \)
+\end{theorem}
+
+\subsubsection{Greibach Normal Form}
+\begin{definition}
+    A context-free language is in \textbf{Greibach Normal Form} if all of its productions are of the form
+    \[A\to aA_1A_2\hdots A_n\]
+    or 
+    \[S\to\varepsilon \]
+\end{definition}
+
+For any CFG \(G\), we preprocess the language:
+
+\begin{itemize}
+    \item Eliminate useless symbols
+    \item Eliminate \(\varepsilon \) productions: \(A\to\varepsilon \)
+    \item Eliminate unit productions: \(A\to B\)
+\end{itemize}
+
+For example, suppose \(G\) is a context-free grammar given by:\@
+
+\begin{align*}
+    S &\to aSb|cAd\\
+    A &\to aSc|bAd 
+\end{align*}
+
+Then \(L(G)=\emptyset \), since every terminal produces a string with a terminal. Thus, we can elminate \(S\) and \(A\). In general, for any context-free grammar $G$, if no string $s$ exists such that \(A\Rightarrow w\), then we can eliminate \(A\). 
+
+Consider the following example:\@
+
+\begin{align*}
+    S &\to aS|bA|\varepsilon \\
+    A &\to cAA|dBB\\
+    B &\to aBA|bAA|cAC\\
+    C &\to aCb|S
+\end{align*}
+
+Notice that \(S\) produces \(\varepsilon \), and so we cannot eliminate it. Similarly, \(C\) produces \(S\), so we cannot eliminate it. At this point, it should be apparent that \(A\) and \(B\) do not produce terminals, and therefore can be eliminated. Further, we can eliminate terminals \(c\) and \(d\) since they are not involved in the productions of \(C\) or \(S\). Graphically, we have
+
+\begin{tabular}{c c c c}
+    \(S\) & & & \\
+    \(A\) & & & \\
+    \(B\) & & & \\
+    \(C\) & & &
+\end{tabular}
+
+Now note that \(C\) cannot be reached from \(S\), the starting state. Thus, we can eliminate \(C\), and similarly eliminate \(b\). Thus, our grammar can be reduced to 
+
+\[S \to aS|\varepsilon \]
+
+To summarize: if a terminal string cannot be reached from a variable, or a variable cannot be reached from the starting symbol, it can be eliminated.

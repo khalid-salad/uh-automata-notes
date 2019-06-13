@@ -340,7 +340,7 @@ Construct regular expressions for the languages accepted by the following automa
         X_1 &= aX_2\cup bX_2\cup cX_2\cup\varepsilon \\
             &= (a\cup b\cup c)X_2\cup\varepsilon \\
             &= (a\cup b\cup c)((c^*(a\cup c)b^*a{(b\cup c)}^*a\cup c^*b)X_1\cup c^*(a\cup c)(c^*b^*a{(b\cup c)}^*\cup c^*b^*)\cup c^*)\cup\varepsilon \\
-            &= (a\cup b\cup c)(c^*(a\cup c)b^*a{(b\cup c)}^*a\cup c^*b)X_1\cup (a\cup b\cup c)c^*(a\cup c)(c^*b^*a{(b\cup c)}^*\cup c^*b^*)\cup c^*)\cup\varepsilon \\
+            &= (a\cup b\cup c)(c^*(a\cup c)b^*a{(b\cup c)}^*a\cup c^*b)X_1\cup (a\cup b\cup c)c^*(a\cup c)(c^*b^*a{(b\cup c)}^*\cup c^*b^*)\cup c^*\cup\varepsilon \\
             &= {\left((a\cup b\cup c)(c^*(a\cup c)b^*a{(b\cup c)}^*a\cup c^*b)\right)}^*((a\cup b\cup c)c^*(a\cup c)(c^*b^*a{(b\cup c)}^*\cup c^*b^*)\cup c^*)\cup\varepsilon
     \end{align*}
         \item

@@ -32,16 +32,11 @@ Notice that we have \(n+1\) states above, but only \(n\) states in \(Q\). Then, 
 Thus, we state \textbf{The Pumping Lemma} and provide a proof:
 
 \begin{theorem}[The Pumping Lemma]
-      Let \(L\) be any regular language. Then there exists a \(p>0\) (called the \textbf{pumping length} such that, for any string \(s\in A^*\) such that \(|s|>=p\), we can write \[s=s_1s_2s_3\] where 
+      Let \( L \) be any reguar language with corresponding DFA \((A, Q, \tau, q_0, \mathcal{F})\). Then there exists a \(p>0\) (called the \textbf{pumping length}) such that, for any string \(s\) of length \(p\) or longer, we can write \(s=s_1s_2s_3\) and
       \begin{itemize}
             \item \(|s_2|\geq 1\)
             \item \(|s_1s_2|\leq p\)
-            \item \(L\) accepts \(s_1s_2^n s_3\) for all \(n\geq0\).
+            \item \(\tau(q_0, s)=\tau(q_0, s_1s_2^n s_3)\) for all \(n\geq0\)
       \end{itemize}
 \end{theorem}
-
-\begin{proof}
-
-\end{proof}
-
 We can use the above theorem to prove that certain languages are not regular. 
