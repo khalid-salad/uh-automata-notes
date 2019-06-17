@@ -1,0 +1,45 @@
+\subsection{Preprocessing a CFG}\label{subsec:preprocessing-a-cfg}
+For any CFG \(G\), we preprocess the language:
+
+\begin{itemize}
+    \item Eliminate useless symbols
+    \item Eliminate \(\varepsilon \) productions: \(A\to\varepsilon \)
+    \item Eliminate unit productions: \(A\to B\)
+\end{itemize}
+
+\subsubsection{Eliminating Useless Symbols}\label{subsubsec:eliminating-useless-symbols}
+For example, suppose \(G\) is a context-free grammar given by:\@
+
+\begin{align*}
+    S &\to aSb\mid cAd\\
+    A &\to aSc\mid bAd 
+\end{align*}
+
+Then \(L(G)=\emptyset \), since every terminal produces a string with a terminal. Thus, we can elminate \(S\) and \(A\). In general, for any context-free grammar \(G\), if no string \(s\) exists such that \(A\Rightarrow s\), then we can eliminate \(A\). 
+
+Consider the following example:\@
+
+\begin{align*}
+    S &\to aS\mid bA\mid \varepsilon \\
+    A &\to cAA\mid dBB\\
+    B &\to aBA\mid bAA\mid cAC\\
+    C &\to aCb\mid S
+\end{align*}
+
+Notice that \(S\) produces \(\varepsilon \), and so we cannot eliminate it. Similarly, \(C\) produces \(S\), so we cannot eliminate it. At this point, it should be apparent that \(A\) and \(B\) do not produce terminals, and therefore can be eliminated. Further, we can eliminate terminals \(c\) and \(d\) since they are not involved in the productions of \(C\) or \(S\). Graphically, we have
+
+\begin{tabular}{c c c c}
+    \(S\) & & & \\
+    \(A\) & & & \\
+    \(B\) & & & \\
+    \(C\) & & &
+\end{tabular}
+
+Now note that \(C\) cannot be reached from \(S\), the starting state. Thus, we can eliminate \(C\), and similarly eliminate \(b\). Thus, our grammar can be reduced to 
+
+\[S \to aS\mid \varepsilon \]
+
+To summarize: if a terminal string cannot be reached from a variable, or a variable cannot be reached from the starting symbol, it can be eliminated.
+
+\subsubsection{Eliminating \(\varepsilon \) Productions}\label{subsubsec:eliminating-epsilon-productions}
+\subsubsection{Eliminating Unit Productions}\label{subsubsec:eliminating-unit-productions}

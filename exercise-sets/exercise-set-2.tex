@@ -26,7 +26,7 @@
                     &= 0^{p+q(n-1)}21^{p+p!}
     \end{align*}
 
-    is in \(L\). Now, since \(q\leq p\), \(q|p{!}\). Thus, taking \(n=\frac{p!}{q}+1\), we have 
+    is in \(L\). Now, since \(q\leq p\), \(q\mid p{!}\). Thus, taking \(n=\frac{p!}{q}+1\), we have 
     \begin{align*}
         s_1s_2^n s_3 &= 0^{p+q(\frac{p!}{q}+1-1)}21^{p+p!}\\
                     &= 0^{p+q(\frac{p!}{q})}21^{p+p!}\\
@@ -67,3 +67,10 @@
 \end{enumerate}
     
 \end{solution}
+
+\begin{exercise}{2}
+    Construct DFAs for the following extended regular expressions:
+    \begin{enumerate}[(a)]
+        \item \(\left[\overline{{(000)}^*}\cap\left({(01)}^*\cup{(10)}^*\right)\right]\cap\overline{{(11)}^*}\) over \( \{0,1\} \)
+    \end{enumerate}
+\end{exercise}
