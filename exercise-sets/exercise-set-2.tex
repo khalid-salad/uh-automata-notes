@@ -72,5 +72,22 @@
     Construct DFAs for the following extended regular expressions:
     \begin{enumerate}[(a)]
         \item \(\left[\overline{{(000)}^*}\cap\left({(01)}^*\cup{(10)}^*\right)\right]\cap\overline{{(11)}^*}\) over \( \{0,1\} \)
+        \item \(\overline{{(0\cup1)}^*01^*10^*01^*1{(0\cup1)}^*} - {(10\cup01)}^*\) over \( \{0, 1, 2\} \)
+    \end{enumerate}
+\end{exercise}
+
+\begin{exercise}{3}
+    Construct Chomsky Normal Form grammars for \(L(G)-\varepsilon \) for the following cfgs \(G\):
+    \begin{enumerate}[(a)]
+        \item \(G=\left(\{a, b\}, \{S, A\}, S, \{S\to aAAaS\mid a, A\to bAA\mid aSSSA\mid \varepsilon \}\right)\)
+        \item \(G=\left(\{a, b, c\}, \{S, A, B\}, S, \{S\to aAA\mid A, A\to bBBB\mid B\mid \varepsilon, B\to bSSS\mid S\mid \varepsilon \}\right)\)
+    \end{enumerate}
+\end{exercise}
+
+\begin{exercise}{4}
+    Construct Greibach Normal Form grammars for \(L(G)-\varepsilon \) for the following cfgs \(G\):
+    \begin{enumerate}[(a)]
+        \item \(G=\left(\{a, b\}, \{S, A, B\}, S, \{S\to SaS\mid A, A\to AAAb\mid B\mid \varepsilon, B\to SSS\mid a \}\right)\)
+        \item \(G=\left(\{a, b\}, \{S, A, B, C\}, S, \{S\to ASS\mid a, A\to bBBB\mid BAA\mid \varepsilon, B\to CSS\mid SSC, C\to SS\mid b\}\right)\)
     \end{enumerate}
 \end{exercise}

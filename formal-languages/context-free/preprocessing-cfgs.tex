@@ -41,5 +41,51 @@ Now note that \(C\) cannot be reached from \(S\), the starting state. Thus, we c
 
 To summarize: if a terminal string cannot be reached from a variable, or a variable cannot be reached from the starting symbol, it can be eliminated.
 
-\subsubsection{Eliminating \(\varepsilon \) Productions}\label{subsubsec:eliminating-epsilon-productions}
+\subsubsection{Eliminating \texorpdfstring{\(\varepsilon \)}{e} Productions}\label{subsubsec:eliminating-epsilon-productions}
+
+To remove \(\varepsilon \) productions, we find the nullable non-terminals (variables). These are the non-terminals from which \(\varepsilon \) can be derived. Specifically, a variable \(A\) is nullable if it is of the form \[A\to\varepsilon \] or \[A\to A_1A_2A_3\hdots A_n\] where each \(A_i\) is nullable. Then, simply replace each \textit{combination of nullable variables} with \(\varepsilon \) and eliminate \(\varepsilon \) from the right-hand side. 
+
+For example, consider the grammar
+
+\begin{align*}
+    S &\to ABCd\\
+    A &\to BC\\
+    B &\to bB \mid \varepsilon \\
+    C &\to cC \mid \varepsilon
+\end{align*}
+
+Clearly, \(B\) and \(C\) are nullable. Then \(A\) is nullable because it produces \(BC\). We then have 
+
+\begin{align*}
+    S &\to ABCd \mid {\color{red}\cancel{A}}BCd \mid A{\color{red}\cancel{B}}Cd \mid AB{\color{red}\cancel{C}}d \mid {\color{red}\cancel{A}}{\color{red}\cancel{B}}Cd \mid {\color{red}\cancel{A}}B{\color{red}\cancel{C}}d \mid A{\color{red}\cancel{B}}{\color{red}\cancel{C}}d \mid {\color{red}\cancel{A}}{\color{red}\cancel{B}}{\color{red}\cancel{C}}d \\
+    A &\to BC \mid {\color{red}\cancel{B}}C \mid B{\color{red}\cancel{C}} \mid {\color{red}\cancel{B}}{\color{red}\cancel{C}}\\
+    B &\to bB \mid b{\color{red}\cancel{B}} \\
+    C &\to cC \mid c{\color{red}\cancel{C}}
+\end{align*}
+
+which becomes 
+
+\begin{align*}
+    S &\to ABCd \mid BCd \mid ACd \mid ABd \mid Cd \mid Bd \mid Ad \mid d\\
+    A &\to BC \mid C \mid B\\
+    B &\to bB \mid b \\
+    C &\to cC \mid c
+\end{align*}
+
 \subsubsection{Eliminating Unit Productions}\label{subsubsec:eliminating-unit-productions}
+
+To eliminate a unit production, simply replace any unit production \[A\to B\] with the productions for \(B\). For example, consider the following grammar:
+
+\begin{align*}
+    S &\to Aa \mid B\\
+    A &\to b \mid B\\
+    B &\to A \mid a
+\end{align*}
+
+We see that \(S\to B\), \(A\to B\), and \(B\to A\) are unit rules, and replace them
+
+\begin{align*}
+    S &\to Aa \mid A \mid a\\
+    A &\to b \mid A \mid a\\
+    B &\to b \mid B \mid a
+\end{align*}

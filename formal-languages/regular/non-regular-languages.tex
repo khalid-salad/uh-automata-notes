@@ -42,11 +42,11 @@ Thus, we state \textbf{The Pumping Lemma} and provide a proof:
 We can use the above theorem to prove that certain languages are not regular. 
 
 \begin{theorem}
-      The language given by \[ L=\{a^ib^i|i\geq0\} \] is not regular.
+      The language given by \[ L=\{a^i b^i|i\geq0\} \] is not regular.
 \end{theorem}
 
 \begin{proof}
-      Suppose, by way of contradiction, that \(L\) is regular with pumping length \(p\). Consider the string \(s=a^pb^p\). By the pumping lemma, we can write \(s=s_1s_2s_3\) with \(|s_1s_2|\leq p\) and \(|s_2|\geq 1\). Then \(s_1=a^p-k\) and \(s_2=a^k\) for some \(1\leq k\leq p\). Further, we have 
+      Suppose, by way of contradiction, that \(L\) is regular with pumping length \(p\). Consider the string \(s=a^p b^p\). By the pumping lemma, we can write \(s=s_1s_2s_3\) with \(|s_1s_2|\leq p\) and \(|s_2|\geq 1\). Then \(s_1=a^p-k\) and \(s_2=a^k\) for some \(1\leq k\leq p\). Further, we have 
       \begin{align*}
             s_1s_2^n s_3 &= a^{p-k}{(a^k)}^n b^p\\
                          &= a^{p-k}a^{kn}b^p\\

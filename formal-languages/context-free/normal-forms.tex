@@ -1,7 +1,7 @@
 \subsection{Normal Forms}\label{subsec:normal-forms}
 \subsubsection{Chomsky Normal Form}\label{subsubsec:chomsky-normal-form}
 \begin{definition}
-    A context-free language $G$ is in \textbf{Chomsky Normal Form} if all of its productions are of the form 
+    A context-free language \(G\) is in \textbf{Chomsky Normal Form}\footnote{This is also called \textbf{Chomsky Reduced Form}. Sometimes, Chomsky Normal Form includes the production \(S\to\varepsilon \). In our usage, CNF and CRF are identical and do not include a \(\varepsilon \) production.}if all of its productions are of the form 
     \begin{align*}A &\to BC\\
                   A &\to a\\
     \end{align*}
@@ -18,20 +18,8 @@
 
 % how to convert from a CFG to CNF
 
-Consider the following context-free grammar:
-
-\begin{align*}
-    A_1 &\to A_2A_2\\
-    A_2 &\to A_3A_3\\
-        &\vdots\\
-    A_{n-1}&\to A_nA_n\\
-    A_n &\to a
-\end{align*}
-
-This language generates a single word: \(a^{2^{n-2}}\)
-
 \subsubsection{Greibach Normal Form}\label{subsubsec:greibach-normal-form}
 \begin{definition}
-    A context-free language is in \textbf{Greibach Normal Form} if all of its productions are of the form
+    A context-free language is in \textbf{Greibach Normal Form}\footnote{Sometimes, the production \(S\to\varepsilon \) is incuded. In our use, there is no \(\varepsilon \) production.} if all of its productions are of the form
     \[A\to aA_1A_2\hdots A_n\]
 \end{definition}
