@@ -1,1 +1,60 @@
 \subsection{Pumping Lemma for Context-Free Languages}\label{pumping-lemma-for-context-free-languages}
+
+Like with regular languages, there exists a pumping lemma for context-free languages. 
+
+\begin{theorem}
+    Let \(L\) be a context-free language. Then there exists a \(p\) such that for all strings \(s\) such that \(|s|\geq p\), there exist strings \(s_1\), \(s_2\), \(s_3\), \(s_4\), \(s_5\) such that 
+    \begin{itemize}
+        \item \(|s_2 s_4|\geq 1\)
+        \item \(|s_2 s_3 s_4|\leq p\)
+        \item \(s_1 s_2^n s_3 s_4^n s_5\in L\) for all \(n\geq0\)
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+We can use this to show that certain languages are not context-free. For example, 
+
+\begin{theorem}
+    \(L=\{a^n b^n c^n\mid n\geq1\} \) is not a context-free language.
+\end{theorem}
+
+\begin{proof}
+    Suppose, by way of contradiction, that \(L\) is a context-free language with pumping length \(p\). Without loss of generality, suppose it is in Chomsky Normal Form. Consider the string \(s=a^p b^p c^p\). Write \(s=s_1 s_2 s_3 s_4 s_5\) with \(|s_2 s_4|\geq 1\) and \(|s_2 s_3 s_4|\leq p\). We consider \(s_2 s_3 s_4\): clearly, it cannot contain \(a\), \(b\), \textit{and} \(c\), for then it would have length greater than \(p\). Thus, \(s_2 s_3 s_4\) must be one of the following
+    
+    \begin{enumerate}[1.]
+        \item \(s_2 s_3 s_4 = a^i\)
+        \item \(s_2 s_3 s_4 = a^i b^j\)
+        \item \(s_2 s_3 s_4 = b^i\)
+        \item \(s_2 s_3 s_4 = b^i c^j\)
+        \item \(s_2 s_3 s_4 = c^i\)
+    \end{enumerate}
+
+    We prove each case separately:
+
+    \begin{enumerate}[1.]
+        \item Write \(s_1=a^x\), \(s_2=a^y\), \(s_3=a^z\), \(s_4=a^w\). Then \(s_5=a^{p-(x+y+z+w)}b^p c^p\) At least one of \(y\) and \(w\) is non-zero. Then, by the pumping lemma, 
+            \begin{align*} 
+                s_1 s_2^n s_3 s_4^n s_5 &= a^x a^{ny} a^z a^{nw} a^{p-(x+y+z+w)}b^p c^p\\
+                                        &= a^{p+(n-1)(y+w)}b^p c^p
+            \end{align*}
+            The above is clearly not in \(L\) for any \(n\geq 2\).
+        \item There are two cases: 
+            \begin{enumerate}[(a)]
+                \item \(s_2\) contains \(b\)
+                \item \(s_2\) does not contain \(b\)
+            \end{enumerate}
+
+            In case (a), we have \(s_1=a^x\), \(s_2=a^{p-x}b^y\), \(s_3=b^z\), \(s_4=b^w\), and \(s_5=b^{p-(y+z+w)}c^p\). Pumping gives 
+
+            \begin{align*}
+                s_1 s_2^n s_3 s_4^n s_5 &= a^x a^{n(p-x)} b^{ny} b^z b^{nw}b^{p-(y+z+w)}c^p \\
+                                        &= a^{n(p-x)+x} b^{p+(n-1)(y+w)} c^p\\
+            \end{align*}
+            For \(n\geq 2\), there are more \(b\)s than \(c\)s, so the above string is not in \(L\). A contradiction.
+            
+            In case (b), we have \(s_1=a^x\), \(s_2=a^y\), \(s_3=a^z b^w\), \(s_4=\)
+    \end{enumerate}
+\end{proof}

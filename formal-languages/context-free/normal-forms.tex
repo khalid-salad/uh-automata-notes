@@ -15,11 +15,38 @@
 
 \end{proof}
 
+To convert to Chomsky Normal Form, first preprocess the CFG. Then, for any production containing a non-solitary terminal, \(a\), replace \(a\) with \(X_a\), where \(X_a\to a\). After this, we replace every production \[A\to X_1X_2\hdots X_n\] with the following productions
 
-% how to convert from a CFG to CNF
+\begin{align*}
+    A &\to X_1 A_1 \\
+    A_1 &\to X_2 A_2 \\
+    A_2 &\to X_3 A_3 \\
+        &\vdots \\
+    A_{n-2} &\to X_{n-1} X_n
+\end{align*}
 
 \subsubsection{Greibach Normal Form}\label{subsubsec:greibach-normal-form}
 \begin{definition}
     A context-free language is in \textbf{Greibach Normal Form}\footnote{Sometimes, the production \(S\to\varepsilon \) is incuded. In our use, there is no \(\varepsilon \) production.} if all of its productions are of the form
     \[A\to aA_1A_2\hdots A_n\]
 \end{definition}
+
+To convert a CFG to Greibach Normal Form, you must remove left-recursion. First, preprocess the CFG\@. Then, for any production 
+
+\[A\to A\alpha_1 \mid A\alpha_2 \mid A\alpha_3 \mid \hdots \mid A\alpha_m \mid \beta_1 \mid \beta_2 \mid \beta_3 \mid \hdots \mid \beta_n\] 
+
+where no \(\beta_i\) begins with \(A\), replace the productions for \(A\) with 
+
+\begin{align*}
+    A  &\to \beta_1 A'\mid \beta_2 A'\mid \beta_3 A'\mid \hdots \mid \beta_n A'\\
+    A' &\to \alpha_1 A'\mid \alpha_2 A'\mid \alpha_3 A' \mid \hdots \mid \alpha_m A'
+\end{align*}
+Consider the following example:
+
+\begin{align*}
+    S &\to AS\mid a\\
+    A &\to BS\mid b\\
+    B &\to CS\mid c\\
+    C &\to SS\mid d
+\end{align*}
+
