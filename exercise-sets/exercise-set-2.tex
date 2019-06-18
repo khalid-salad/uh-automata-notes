@@ -10,7 +10,7 @@
 \end{exercise}
 \begin{solution}\mbox{\\}
 \begin{enumerate}[(a)]
-    \item Suppose, by way of contradiction, that \(L\) is regular and that \(p\) is its pumping length. Consider the string \(s=0^p21^p\). Clearly, \(|s|\geq p\). Thus, by the \textbf{Pumping Lemma}, there exist strings \(s_1, s_2, s_3\) such that \(s=s_1s_2s_3\) with \(|s_1s_2|\leq p\) and \(|s_2|\geq1\) and, for all \(n\geq 1\), \(s_1s_2^n s_3\in L\). Observe that \(s_1s_2=0^k\) for some \(k\leq p\) (for otherwise \(|s_1s_2| > p\)), hence \(s_3=0^{p-k}21^p\). Thus, we write \(s_1=0^{k-q}\) and \(s_2=0^{q}\) for some \(q\geq1\). By the pumping lemma, 
+    \item Suppose, by way of contradiction, that \(L\) is regular and that \(p\) is its pumping length. Consider the string \(s=0^p21^p\). Clearly, \(|s|\geq p\). Thus, by the \textbf{Pumping Lemma}, there exist strings \(s_1, s_2, s_3\) such that \(s=s_1s_2s_3\) with \(|s_1s_2|\leq p\) and \(|s_2|\geq1\) and, for all \(n\geq 0\), \(s_1s_2^n s_3\in L\). Observe that \(s_1s_2=0^k\) for some \(k\leq p\) (for otherwise \(|s_1s_2| > p\)), hence \(s_3=0^{p-k}21^p\). Thus, we write \(s_1=0^{k-q}\) and \(s_2=0^{q}\) for some \(q\geq1\). By the pumping lemma, 
     \begin{align*}
         s_1s_2^n s_3 &= 0^{k-q}{(0^q)}^n0^{p-k}21^p\\
                     &= 0^{k-q}0^{qn}0^{p-k}21^p\\
@@ -19,7 +19,7 @@
 
     is in \(L\). However, for \(n\geq2\), there are more 0s before the 2 than 1s after, hence \(s_1s_2^n s_3\not\in L\). A contradiction. Thus, \(L\) is not regular.
 
-    \item Suppose, by way of contradiction, that \(L\) is regular and that \(p\) is its pumping length. Consider the string \(s=0^p21^{p+p!}\). Clearly, \(|s|\geq p\). Thus, by the \textbf{Pumping Lemma}, there exist strings \(s_1\), \(s_2\), \(s_3\) such that \(s=s_1s_2s_3\) with \(|s_1s_2|\leq p\) and \(|s_2|\geq1\) and, for all \(n\geq 1\), \(s_1s_2^n s_3\in L\). Observe that \(s_1s_2=0^k\) for some \(k\leq p\) (for otherwise \(|s_1s_2| > p\)), hence \(s_3=0^{p-k}21^{p+p!}\). Thus, we write \(s_1=0^{k-q}\) and \(s_2=0^{q}\) for some \(q\geq1\). By the pumping lemma, 
+    \item Suppose, by way of contradiction, that \(L\) is regular and that \(p\) is its pumping length. Consider the string \(s=0^p21^{p+p!}\). Clearly, \(|s|\geq p\). Thus, by the \textbf{Pumping Lemma}, there exist strings \(s_1\), \(s_2\), \(s_3\) such that \(s=s_1s_2s_3\) with \(|s_1s_2|\leq p\) and \(|s_2|\geq1\) and, for all \(n\geq 0\), \(s_1s_2^n s_3\in L\). Observe that \(s_1s_2=0^k\) for some \(k\leq p\) (for otherwise \(|s_1s_2| > p\)), hence \(s_3=0^{p-k}21^{p+p!}\). Thus, we write \(s_1=0^{k-q}\) and \(s_2=0^{q}\) for some \(q\geq1\). By the pumping lemma, 
     \begin{align*}
         s_1s_2^n s_3 &= 0^{k-q}{(0^q)}^n0^{p-k}21^{p+p!}\\
                     &= 0^{k-q}0^{qn}0^{p-k}21^{p+p!}\\
@@ -189,3 +189,45 @@
         \item \(G=\left(\{a, b\}, \{S, A, B, C\}, S, \{S\to ASS\mid a, A\to bBBB\mid BAA\mid \varepsilon, B\to CSS\mid SSC, C\to SS\mid b\}\right)\)
     \end{enumerate}
 \end{exercise}
+
+\begin{solution}\mbox{\\}
+    \begin{enumerate}[(a)]
+        \item 
+        \begin{align*}
+            S &\to SaS\mid A\\
+            A &\to AAAb\mid B\mid \varepsilon \\
+            B &\to SSS\mid a
+        \end{align*}
+        There are no useless productions, since \(B\Rightarrow a\), \(A\Rightarrow b\), and \(S\Rightarrow b\). We eliminate \(\varepsilon \) productions:
+        
+        \begin{align*}
+            S &\to SaS\mid A\mid {\color{red}\cancel{A}}\\
+            A &\to AAAb\mid {\color{red}\cancel{A}}AAb\mid A{\color{red}\cancel{A}}Ab\mid AA{\color{red}\cancel{A}}b\mid {\color{red}\cancel{A}}{\color{red}\cancel{A}}Ab\mid {\color{red}\cancel{A}}A{\color{red}\cancel{A}}b\mid A{\color{red}\cancel{A}}{\color{red}\cancel{A}}b\mid {\color{red}\cancel{A}}{\color{red}\cancel{A}}{\color{red}\cancel{A}}b\mid B \\
+            B &\to SSS\mid a
+        \end{align*}
+
+        which reduces to
+
+        \begin{align*}
+            S &\to SaS\mid A\\
+            A &\to AAAb\mid AAb\mid Ab\mid b\mid B \\
+            B &\to SSS\mid a
+        \end{align*}
+        
+        We now remove the unit productions, \(S\to A\) and \(A\to B\):
+
+        \begin{align*}
+            S &\to SaS\mid AAAb\mid AAb\mid Ab\mid b\\
+            A &\to AAAb\mid AAb\mid Ab\mid b\mid SSS\mid a \\
+            B &\to SSS\mid a
+        \end{align*}
+        
+        \item 
+        \begin{align*}
+            S &\to ASS\mid a\\
+            A &\to bBBB\mid BAA\mid \varepsilon \\
+            B &\to CSS\mid SSC\\
+            C &\to SS\mid b
+        \end{align*}
+    \end{enumerate}
+\end{solution}
