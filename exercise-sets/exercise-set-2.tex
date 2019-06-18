@@ -84,6 +84,104 @@
     \end{enumerate}
 \end{exercise}
 
+\begin{solution}\mbox{\\}
+    \begin{enumerate}[(a)]
+        \item 
+        \begin{align*}
+            S &\to aAAaS\mid a\\
+            A &\to bAA\mid aSSSA\mid \varepsilon 
+        \end{align*}
+
+        There are no useless productions, since \(S\Rightarrow a\) and \(A\Rightarrow b\). \(A\) is clearly nullable, so we get  
+
+        \begin{align*}
+            S &\to aAAaS\mid a{\color{red}\cancel{A}}AaS\mid aA{\color{red}\cancel{A}}aS\mid a{\color{red}\cancel{A}}{\color{red}\cancel{A}}aS\mid a\\
+            A &\to bAA\mid b{\color{red}\cancel{A}}A\mid bA{\color{red}\cancel{A}}\mid b{\color{red}\cancel{A}}{\color{red}\cancel{A}} \mid aSSSA\mid aSSS{\color{red}\cancel{A}} 
+        \end{align*}
+
+        which reduces to 
+
+        \begin{align*}
+            S &\to aAAaS\mid aAaS\mid aaS\mid a\\
+            A &\to bAA\mid bA\mid b \mid aSSSA\mid aSSS 
+        \end{align*}
+        There are no unit productions. Setting \(X_a\to a\) and \(X_b\to b\), we have 
+
+        \begin{align*}
+            S &\to X_a AAX_a S\mid X_a AX_a S\mid X_a X_a S\mid a\\
+            A &\to X_b AA\mid X_b A\mid b \mid X_a SSSA\mid X_a SSS 
+        \end{align*}
+
+        Finally, we decompose:
+
+        \begin{align*}
+            S &\to X_a S_1\mid X_a S_2\mid X_a S_3\mid a\\
+            A &\to X_b A_1\mid X_b A\mid b \mid X_a A_2\mid X_a A_5 \\
+            S_1 &\to AS_2\\
+            S_2 &\to AS_3\\
+            S_3 &\to X_a S\\
+            A_1 &\to AA\\
+            A_2 &\to SA_3\\
+            A_3 &\to SA_4\\
+            A_4 &\to SA\\
+            A_5 &\to SA_6\\
+            A_6 &\to SS
+        \end{align*}
+
+        \item 
+        \begin{align*}
+            S &\to aAA\mid A\\ 
+            A &\to bBBB\mid B\mid \varepsilon \\
+            B &\to bSSS\mid S\mid \varepsilon 
+        \end{align*}
+
+        There are no useless productions, since \(S\Rightarrow a\), \(A\Rightarrow b\) and \(B\Rightarrow b\). Clearly, \(S\), \(A\), and \(B\) are all nullable. Thus, we have 
+
+        \begin{align*}
+            S &\to aAA\mid a{\color{red}\cancel{A}}\mid aA{\color{red}\cancel{A}}\mid a{\color{red}\cancel{A}}{\color{red}\cancel{A}}\mid A\mid {\color{red}\cancel{A}}\\ 
+            A &\to bBBB\mid b{\color{red}\cancel{B}}BB\mid bB{\color{red}\cancel{B}}B\mid bBB{\color{red}\cancel{B}}\mid b{\color{red}\cancel{B}}{\color{red}\cancel{B}}B\mid b{\color{red}\cancel{B}}B{\color{red}\cancel{B}}\mid bB{\color{red}\cancel{B}}{\color{red}\cancel{B}}\mid B\mid {\color{red}\cancel{B}}\\
+            B &\to bSSS\mid b{\color{red}\cancel{S}}SS\mid bS{\color{red}\cancel{S}}S\mid bSS{\color{red}\cancel{S}}\mid b{\color{red}\cancel{S}}{\color{red}\cancel{S}}S\mid b{\color{red}\cancel{S}}S{\color{red}\cancel{S}}\mid bS{\color{red}\cancel{S}}{\color{red}\cancel{S}}\mid b{\color{red}\cancel{S}}{\color{red}\cancel{S}}{\color{red}\cancel{S}}\mid S\mid {\color{red}\cancel{S}} 
+        \end{align*}
+
+        which reduces to
+
+        \begin{align*}
+            S &\to aAA\mid a\mid aA\mid A \\ 
+            A &\to bBBB\mid bBB\mid bB\mid B \\
+            B &\to bSSS\mid bSS\mid bS\mid b\mid S  
+        \end{align*}
+
+        We eliminate the unit productions \(S\to A\), \(A\to B\) and \(B\to S\).
+
+        \begin{align*}
+            S &\to aAA\mid a\mid aA\mid bBBB\mid bBB\mid bB \\ 
+            A &\to bBBB\mid bBB\mid bB\mid bSSS\mid bSS\mid bS\mid b \\
+            B &\to bSSS\mid bSS\mid bS\mid b\mid aAA\mid a\mid aA\mid bBBB\mid bBB\mid bB
+        \end{align*}
+
+        We now set \(X_a\to a\) and \(X_b\to b\):
+
+        \begin{align*}
+            S &\to X_a AA\mid a\mid X_a A\mid X_b BBB\mid X_b BB\mid X_b B \\ 
+            A &\to X_b BBB\mid X_b BB\mid X_b B\mid X_b SSS\mid X_b SS\mid X_b S\mid b \\
+            B &\to X_b SSS\mid X_b SS\mid X_b S\mid b\mid X_a AA\mid a\mid X_a A\mid X_b BBB\mid X_b BB\mid X_b B
+        \end{align*}
+
+        Finally, we decompose:
+
+        \begin{align*}
+            S &\to X_a S_1\mid a\mid X_a A\mid X_b S_2\mid X_b S_3\mid X_b B \\ 
+            A &\to X_b S_2\mid X_b S_3\mid X_b B\mid X_b A_1\mid X_bA_2\mid X_b S\mid b \\
+            B &\to X_b A_1\mid X_b A_2\mid X_b S\mid b\mid X_a S_1\mid a\mid X_a A\mid X_b S_2\mid X_b S_3\mid X_b B\\
+            S_1 &\to AA\\
+            S_2 &\to BS_3\\
+            S_3 &\to BB\\
+            A_1 &\to SA_2\\
+            A_2 &\to SS\\
+        \end{align*}
+    \end{enumerate}
+\end{solution}
+
 \begin{exercise}{4}
     Construct Greibach Normal Form grammars for \(L(G)-\varepsilon \) for the following cfgs \(G\):
     \begin{enumerate}[(a)]
