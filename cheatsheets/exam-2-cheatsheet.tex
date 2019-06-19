@@ -1,0 +1,43 @@
+\pagebreak\subsection{Exam 2}\label{subsec:exam-2-cheatsheet}
+\subsubsection{Proving that a Language is not Regular}
+Pick a word \(w\) in the language. Write \(w=xyz\) and pump: show that \(xy^nz\) is not in the language. This is a contradiction.
+
+Conversely, start with a word \(w\) not in the language. Write \(w=xyz\) and pump: show that \(xy^nz\) is in the language. This is a contradiction.
+
+\subsubsection{Eliminating \texorpdfstring{\(\varepsilon \)}{e} Productions}
+Find the nullable non-terminals (variables). These are the non-terminals from which \(\varepsilon \) can be derived. Specifically, a variable \(A\) is nullable if it is of the form \[A\to\varepsilon \] or \[A\to A_1A_2A_3\hdots A_n\] where each \(A_i\) is nullable. Then, simply replace each \textit{combination of nullable variables} with \(\varepsilon \) and eliminate \(\varepsilon \) from the right-hand side. 
+
+\subsubsection{Finding a DFA for an Extended Regular Expression}
+This is the same as finding a DFA for a regular expression, except when finding the complement. To find the complement, turn the NFA into a DFA and flip the accepting and rejecting states. Recall De Morgan's Laws
+
+\begin{align*}
+    \overline{A\cup B} &= \overline{A} \cap \overline{B}\\
+    \overline{A\cap B} &= \overline{A} \cup \overline{B}
+\end{align*}
+
+And note further that \[A-B=A\cap\overline{B} \]
+
+\subsubsection{Converting to Chomsky Normal Form}
+Eliminate useless variables, \(\varepsilon \)-productions, and unit productions. Then replace non-solitary terminals \(a\) with \(X_a\) and add \(X_a\to a\) to your grammar. Finally, decompose any \(X\to X_1X_2\hdots X_n\) as
+
+\begin{align*}
+    X &\to X_1A_1\\
+    A_1 &\to X_2A_2\\
+    A_2 &\to X_3A_3\\
+        &\vdots\\
+    A_{n-2} &\to X_{n-1}X_n
+\end{align*}
+
+\subsubsection{Converting to Greibach Normal Form}
+Eliminate useless variables, \(\varepsilon \)-productions, and unit productions. Order the variables. Then, where any higher-listed variable produces a lower-listed variable through left-recursion, replace the lower-listed variable. Remove all direct left-recursions with the following rule:
+
+\[A\to A\alpha_1 \mid A\alpha_2 \mid A\alpha_3 \mid \hdots \mid A\alpha_m \mid \beta_1 \mid \beta_2 \mid \beta_3 \mid \hdots \mid \beta_n\] 
+
+where no \(\beta_i\) begins with \(A\), by replacing the productions for \(A\) with 
+
+\begin{align*}
+    A  &\to \beta_1\mid \beta_2\mid \beta_3\mid \hdots \mid \beta_n\mid\beta_1 A'\mid \beta_2 A'\mid \beta_3 A'\mid \hdots \mid \beta_n A'\\
+    A' &\to \alpha_1\mid \alpha_2\mid \alpha_3\mid \hdots \mid \alpha_m\mid \alpha_1 A'\mid \alpha_2 A'\mid \alpha_3 A' \mid \hdots \mid \alpha_m A'
+\end{align*}
+
+Finally, substitute productions until they are all of the form \[X\to a\] or \[X\to aX_1 X_2\hdots X_n\]

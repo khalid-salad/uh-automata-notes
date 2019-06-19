@@ -31,16 +31,40 @@ To convert to Chomsky Normal Form, first preprocess the CFG. Then, for any produ
     \[A\to aA_1A_2\hdots A_n\]
 \end{definition}
 
-To convert a CFG to Greibach Normal Form, you must remove left-recursion. First, preprocess the CFG\@. Then, for any production 
+To convert a CFG to Greibach Normal Form, you must remove left-recursion. First, preprocess the CFG\@. We can remove any \textit{direct recursion} of the form 
 
 \[A\to A\alpha_1 \mid A\alpha_2 \mid A\alpha_3 \mid \hdots \mid A\alpha_m \mid \beta_1 \mid \beta_2 \mid \beta_3 \mid \hdots \mid \beta_n\] 
 
-where no \(\beta_i\) begins with \(A\), replace the productions for \(A\) with 
+where no \(\beta_i\) begins with \(A\), by replacing the productions for \(A\) with 
 
 \begin{align*}
-    A  &\to \beta_1 A'\mid \beta_2 A'\mid \beta_3 A'\mid \hdots \mid \beta_n A'\\
-    A' &\to \alpha_1 A'\mid \alpha_2 A'\mid \alpha_3 A' \mid \hdots \mid \alpha_m A'
+    A  &\to \beta_1\mid \beta_2\mid \beta_3\mid \hdots \mid \beta_n\mid\beta_1 A'\mid \beta_2 A'\mid \beta_3 A'\mid \hdots \mid \beta_n A'\\
+    A' &\to \alpha_1\mid \alpha_2\mid \alpha_3\mid \hdots \mid \alpha_m\mid \alpha_1 A'\mid \alpha_2 A'\mid \alpha_3 A' \mid \hdots \mid \alpha_m A'
 \end{align*}
+
+More generally, we eliminate \textit{indirect recursion} by ordering the non-terminals and performing the following algorithm:
+
+\begin{algorithm}[H]
+    \renewcommand{\thealgorithm}{}
+    \caption{Returns CFG with left-recursion removed}\label{remove-left-recursion}
+    \begin{algorithmic}[1]
+    \Procedure{S}{G}
+        \For{each non-terminal \(A_i\)}
+            \For{each production \(A_i\to\alpha_i\)}
+                \If{\(\alpha_i\) begins with \(A_j\) for \(j<i\)}
+                    \State{let \(\beta_i\) be \(\alpha_i\) without the leading \(A_j\)}
+                    \State{remove the production \(A_i\to\alpha_i\)}
+                    \For{each production \(A_j\to\alpha_j\)}
+                        \State{Add rule \(A_i\to\alpha_j \beta_i\)}
+                    \EndFor{}
+                \EndIf{}
+            \EndFor{}
+            \State{remove direct left recursion for \(A_i\)}
+        \EndFor{}
+    \EndProcedure{}
+    \end{algorithmic}
+    \end{algorithm}
+
 Consider the following example:
 
 \begin{align*}
@@ -50,3 +74,73 @@ Consider the following example:
     C &\to SS\mid d
 \end{align*}
 
+There is no preprocessing to do, since there are no useless or nullable variables and no unit productions. Notice that \(C\) includes indirect left-recursion. Thus, we write 
+
+\begin{align*}
+    C &\to ASS\mid aS\mid d\\
+      &\to BSSS\mid bSS \mid aS\mid d\\
+      &\to CSSSS\mid cSSS\mid bSS\mid aS\mid d
+\end{align*}
+
+Now, we eliminate the direct left-recursion from \(C\)
+
+\begin{align*}
+    C &\to cSSS\mid bSS\mid aS\mid d\mid cSSSC'\mid bSSC'\mid aSC'\mid dC'\\
+    C' &\to SSSS\mid SSSSC'
+\end{align*}
+
+Next, we substitute the productions for \(C\) into \(B\)
+
+\[B\to cSSSS\mid bSSS\mid aSS\mid dS\mid cSSSC'S\mid bSSC'S\mid aSC'S\mid dC'S\mid c\]
+
+And similarly for \(A\) and \(S\)
+
+\begin{align*}A&\to cSSSSS\mid bSSSS\mid aSSS\mid dSS\mid cSSSC'SS\mid bSSC'SS\mid aSC'SS\mid dC'SS\mid cS\mid b\\
+S&\to cSSSSSS\mid bSSSSS\mid aSSSS\mid dSSS\mid cSSSC'SSS\mid bSSC'SSS\mid aSC'SSS\mid dC'SSS\mid cSS\mid bS\mid a\end{align*}
+
+And finally for \(C'\)
+
+\begin{align*}C'&\to cSSSSSSSSS\mid bSSSSSSSS\mid aSSSSSSS\mid dSSSSSS\mid cSSSC'SSSSSS\\&\mid bSSC'SSSSSS\mid aSC'SSSSSS\mid dC'SSSSSS\mid cSSSSS\mid bSSSS\\&\mid aSSSC'\mid cSSSSSSSSSC'\mid bSSSSSSSSC'\mid aSSSSSSSC'\mid dSSSSSSC'\mid cSSSC'SSSSSSC'\\&\mid bSSC'SSSSSSC'\mid aSC'SSSSSSC'\mid dC'SSSSSSC'\mid cSSSSSC'\mid bSSSSC'\mid aSSSC'\end{align*}
+
+Consider similarly the example:
+
+\begin{align*}
+    S &\to AA\\
+    A &\to BaA\mid a\\
+    B &\to SBA\mid b
+\end{align*}
+
+Once again, there is no pre-processing to do. We see that \(B\) involves indirect left-recursion. Thus, we write 
+
+\begin{align*}
+    B &\to AABA\mid b\\
+      &\to BaAABA\mid aABA\mid b
+\end{align*}
+
+This involves direct left-recursion, so we write
+
+\begin{align*}
+    B &\to aABA\mid b\mid aABAB'\mid bB'\\
+    B' &\to aAABA\mid aAABAB'
+\end{align*}
+
+We then substitute the productions for \(B\) into \(A\)
+
+\begin{align*}
+    A &\to aABAaA\mid baA\mid aABAB'aA\mid bB'aA\mid a
+\end{align*}
+
+and finally substitute the productions for \(A\) into \(S\)
+
+\begin{align*}
+    S &\to aABAaAA\mid baAA\mid aABAB'aAA\mid bB'aAA\mid aA
+\end{align*}
+
+In total, our GNF is 
+
+\begin{align*}
+    S &\to aABAaAA\mid baAA\mid aABAB'aAA\mid bB'aAA\mid aA\\
+    A &\to aABAaA\mid baA\mid aABAB'aA\mid bB'aA\mid a\\
+    B &\to aABA\mid b\mid aABAB'\mid bB'\\
+    B' &\to aAABA\mid aAABAB'
+\end{align*}

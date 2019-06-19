@@ -193,41 +193,66 @@
 \begin{solution}\mbox{\\}
     \begin{enumerate}[(a)]
         \item 
-        \begin{align*}
-            S &\to SaS\mid A\\
-            A &\to AAAb\mid B\mid \varepsilon \\
-            B &\to SSS\mid a
-        \end{align*}
-        There are no useless productions, since \(B\Rightarrow a\), \(A\Rightarrow b\), and \(S\Rightarrow b\). We eliminate \(\varepsilon \) productions:
+        % \begin{align*}
+        %     S &\to SaS\mid A\\
+        %     A &\to AAAb\mid B\mid \varepsilon \\
+        %     B &\to SSS\mid a
+        % \end{align*}
+        % There are no useless productions, since \(B\Rightarrow a\), \(A\Rightarrow b\), and \(S\Rightarrow b\). We eliminate \(\varepsilon \) productions:
         
-        \begin{align*}
-            S &\to SaS\mid A\mid {\color{red}\cancel{A}}\\
-            A &\to AAAb\mid {\color{red}\cancel{A}}AAb\mid A{\color{red}\cancel{A}}Ab\mid AA{\color{red}\cancel{A}}b\mid {\color{red}\cancel{A}}{\color{red}\cancel{A}}Ab\mid {\color{red}\cancel{A}}A{\color{red}\cancel{A}}b\mid A{\color{red}\cancel{A}}{\color{red}\cancel{A}}b\mid {\color{red}\cancel{A}}{\color{red}\cancel{A}}{\color{red}\cancel{A}}b\mid B \\
-            B &\to SSS\mid a
-        \end{align*}
+        % \begin{align*}
+        %     S &\to SaS\mid A\mid {\color{red}\cancel{A}}\\
+        %     A &\to AAAb\mid {\color{red}\cancel{A}}AAb\mid A{\color{red}\cancel{A}}Ab\mid AA{\color{red}\cancel{A}}b\mid {\color{red}\cancel{A}}{\color{red}\cancel{A}}Ab\mid {\color{red}\cancel{A}}A{\color{red}\cancel{A}}b\mid A{\color{red}\cancel{A}}{\color{red}\cancel{A}}b\mid {\color{red}\cancel{A}}{\color{red}\cancel{A}}{\color{red}\cancel{A}}b\mid B \\
+        %     B &\to SSS\mid a
+        % \end{align*}
 
-        which reduces to
+        % which reduces to
 
-        \begin{align*}
-            S &\to SaS\mid A\\
-            A &\to AAAb\mid AAb\mid Ab\mid b\mid B \\
-            B &\to SSS\mid a
-        \end{align*}
+        % \begin{align*}
+        %     S &\to SaS\mid A\\
+        %     A &\to AAAb\mid AAb\mid Ab\mid b\mid B \\
+        %     B &\to SSS\mid a
+        % \end{align*}
         
-        We now remove the unit productions, \(S\to A\) and \(A\to B\):
+        % We now remove the unit productions, \(S\to A\) and \(A\to B\):
 
-        \begin{align*}
-            S &\to SaS\mid AAAb\mid AAb\mid Ab\mid b\\
-            A &\to AAAb\mid AAb\mid Ab\mid b\mid SSS\mid a \\
-            B &\to SSS\mid a
-        \end{align*}
+        % \begin{align*}
+        %     S &\to SaS\mid AAAb\mid AAb\mid Ab\mid b\\
+        %     A &\to AAAb\mid AAb\mid Ab\mid b\mid SSS\mid a \\
+        %     B &\to SSS\mid a
+        % \end{align*}
+        
+        % Finally, we eliminate left-recursion. Let us rename \(S\), \(A\), and \(B\) to \(A_1\), \(A_2\), and \(A_3\), respectively. 
+
+        % \begin{align*}
+        %     A_1 &\to A_1 aA_1\mid A_2 A_2 A_2b\mid A_2 A_2 b\mid A_2b\mid b\\
+        %     A_2 &\to A_2 A_2 A_2 b\mid A_2 A_2 b\mid A_2 b\mid b\mid A_1 A_1 A_1\mid a \\
+        %     A_3 &\to A_1 A_1 A_1\mid a
+        % \end{align*}
+        % We eliminate the left-recursion on \(A_1\)
+
+        % \begin{align*}
+        %     A_1 &\to A_2 A_2 A_2b\mid A_2 A_2 b\mid A_2b\mid b\mid A_2 A_2 A_2b A_4\mid A_2 A_2 bA_4\mid A_2bA_4\mid bA_4\\
+        %     A_2 &\to A_2 A_2 A_2 b\mid A_2 A_2 b\mid A_2 b\mid b\mid A_1 A_1 A_1\mid a \\
+        %     A_3 &\to A_1 A_1 A_1\mid a
+        %     A_4 &\to aA_1 A_4
+        % \end{align*}
+        
+        % Now, \(A_2\to A_1 A_1 A_1\) and \(A_3 \to A_1 A_1 A_1\) must be replaced:
+
+        % \begin{align*}
+        %     A_1 &\to A_2 A_2 A_2b\mid A_2 A_2 b\mid A_2b\mid b\mid A_2 A_2 A_2b A_4\mid A_2 A_2 bA_4\mid A_2bA_4\mid bA_4\\
+        %     A_2 &\to A_2 A_2 A_2 b\mid A_2 A_2 b\mid A_2 b\mid b\mid A_2 A_2 A_2b A_1 A_1\mid A_2 A_2 b A_1 A_1\mid A_2b\mid b A_1 A_1\mid A_1 A_1 A_1\mid A_1 A_1 A_1\mid A_1 A_1 A_1\mid A_1 A_1 A_1\mid A_1 A_1 A_1\mid a \\
+        %     A_3 &\to A_1 A_1 A_1\mid a
+        %     A_4 &\to aA_1 A_4
+        % \end{align*}
         
         \item 
-        \begin{align*}
-            S &\to ASS\mid a\\
-            A &\to bBBB\mid BAA\mid \varepsilon \\
-            B &\to CSS\mid SSC\\
-            C &\to SS\mid b
-        \end{align*}
+        % \begin{align*}
+        %     S &\to ASS\mid a\\
+        %     A &\to bBBB\mid BAA\mid \varepsilon \\
+        %     B &\to CSS\mid SSC\\
+        %     C &\to SS\mid b
+        % \end{align*}
     \end{enumerate}
 \end{solution}
