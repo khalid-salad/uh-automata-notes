@@ -3,10 +3,10 @@
 Like with regular languages, there exists a pumping lemma for context-free languages. 
 
 \begin{theorem}
-    Let \(L\) be a context-free language. Then there exists a \(p\) such that for all strings \(s\) such that \(|s|\geq p\), there exist strings \(s_1\), \(s_2\), \(s_3\), \(s_4\), \(s_5\) such that 
+    Let \(L\) be a context-free language. Then there exists a \(p\) such that for all strings \(s\) such that \(\abs{s}\geq p\), there exist strings \(s_1\), \(s_2\), \(s_3\), \(s_4\), \(s_5\) such that 
     \begin{itemize}
-        \item \(|s_2 s_4|\geq 1\)
-        \item \(|s_2 s_3 s_4|\leq p\)
+        \item \(\abs{s_2 s_4}\geq 1\)
+        \item \(\abs{s_2 s_3 s_4}\leq p\)
         \item \(s_1 s_2^n s_3 s_4^n s_5\in L\) for all \(n\geq0\)
   \end{itemize}
 \end{theorem}
@@ -22,7 +22,7 @@ We can use this to show that certain languages are not context-free. For example
 \end{theorem}
 
 \begin{proof}
-    Suppose, by way of contradiction, that \(L\) is a context-free language with pumping length \(p\). Without loss of generality, suppose it is in Chomsky Normal Form. Consider the string \(s=a^p b^p c^p\). Write \(s=s_1 s_2 s_3 s_4 s_5\) with \(|s_2 s_4|\geq 1\) and \(|s_2 s_3 s_4|\leq p\). We consider \(s_2 s_3 s_4\): clearly, it cannot contain \(a\), \(b\), \textit{and} \(c\), for then it would have length greater than \(p\). Thus, \(s_2 s_3 s_4\) must be one of the following
+    Suppose, by way of contradiction, that \(L\) is a context-free language with pumping length \(p\). Without loss of generality, suppose it is in Chomsky Normal Form. Consider the string \(s=a^p b^p c^p\). Write \(s=s_1 s_2 s_3 s_4 s_5\) with \(\abs{s_2 s_4}\geq 1\) and \(\abs{s_2 s_3 s_4}\leq p\). We consider \(s_2 s_3 s_4\): clearly, it cannot contain \(a\), \(b\), \textit{and} \(c\), for then it would have length greater than \(p\). Thus, \(s_2 s_3 s_4\) must be one of the following
     
     \begin{enumerate}[1.]
         \item \(s_2 s_3 s_4 = a^i\)

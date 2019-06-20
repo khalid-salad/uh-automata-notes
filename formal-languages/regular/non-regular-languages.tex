@@ -1,5 +1,5 @@
-\subsubsection{Non-Regular Languages}\label{subsubsec:non-regular-languages}
-Suppose we have a DFA \[\underset{\sim}{D}=(A, Q, \tau, q_0, \mathcal{F})\] with \(|Q|=n\). Consider the following set of equations
+\subsection{Non-Regular Languages}\label{subsubsec:non-regular-languages}
+Suppose we have a DFA \[\underset{\sim}{D}=(A, Q, \tau, q_0, \mathcal{F})\] with \(\abs{Q}=n\). Consider the following set of equations
 
 \begin{align*}
       q_1 &= \tau(q_0, a_1)\\
@@ -34,19 +34,19 @@ Thus, we state \textbf{The Pumping Lemma} and provide a proof:
 \begin{theorem}[The Pumping Lemma]
       Let \( L \) be any reguar language with corresponding DFA \((A, Q, \tau, q_0, \mathcal{F})\). Then there exists a \(p>0\) (called the \textbf{pumping length}) such that, for any string \(s\) of length \(p\) or longer, we can write \(s=s_1s_2s_3\) and
       \begin{itemize}
-            \item \(|s_2|\geq 1\)
-            \item \(|s_1s_2|\leq p\)
+            \item \(\abs{s_2}\geq 1\)
+            \item \(\abs{s_1s_2}\leq p\)
             \item \(\tau(q_0, s)=\tau(q_0, s_1s_2^n s_3)\) for all \(n\geq0\)
       \end{itemize}
 \end{theorem}
 We can use the above theorem to prove that certain languages are not regular. 
 
 \begin{theorem}
-      The language given by \[ L=\{a^i b^i|i\geq0\} \] is not regular.
+      The language given by \[ L=\{a^i b^i \mid i\geq0\} \] is not regular.
 \end{theorem}
 
 \begin{proof}
-      Suppose, by way of contradiction, that \(L\) is regular with pumping length \(p\). Consider the string \(s=a^p b^p\). By the pumping lemma, we can write \(s=s_1s_2s_3\) with \(|s_1s_2|\leq p\) and \(|s_2|\geq 1\). Then \(s_1=a^p-k\) and \(s_2=a^k\) for some \(1\leq k\leq p\). Further, we have 
+      Suppose, by way of contradiction, that \(L\) is regular with pumping length \(p\). Consider the string \(s=a^p b^p\). By the pumping lemma, we can write \(s=s_1s_2s_3\) with \(\abs{s_1s_2}\leq p\) and \(\abs{s_2}\geq 1\). Then \(s_1=a^p-k\) and \(s_2=a^k\) for some \(1\leq k\leq p\). Further, we have 
       \begin{align*}
             s_1s_2^n s_3 &= a^{p-k}{(a^k)}^n b^p\\
                          &= a^{p-k}a^{kn}b^p\\

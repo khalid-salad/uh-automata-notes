@@ -1,10 +1,10 @@
-\subsection{Exam 1}\label{subsec:exam-1-cheatsheet}
-\subsubsection{Converting an NFA to a DFA}
+\section{Exam 1}\label{subsec:exam-1-cheatsheet}
+\subsection{Converting an NFA to a DFA}
 Begin with the initial state. Apply the transitions and add any newly visited states. Stop when no new states can be visited. 
 
-\subsubsection{Reducing a DFA}
+\subsection{Reducing a DFA}
 Partition all states into accepting vs rejecting. Apply all transitions to a ``representative'' from a partition, then apply the transitions to the remaining members of the partition. If a member differs, move it to a new partition. 
-\subsubsection{Converting a Regular Expression to an NFA}
+\subsection{Converting a Regular Expression to an NFA}
 \begin{enumerate}
 
 \item[NFA for \(a\):]\begin{center}\begin{tabular}{r c c r}
@@ -40,6 +40,6 @@ If the initial state is accepting in \(\beta \), final states are final states f
 
 Union final states with the initial state. Copy non-final states. Final states are final states from \(\alpha \) and the initial state.
 
-\subsubsection{Converting an NFA to a Regular Expression}
+\subsection{Converting an NFA to a Regular Expression}
 
 Set up system of equations. Solve for equation corresponding to initial state. Remember the lemma: if \[X=LX\cup M\] then \[X=L^*M\]

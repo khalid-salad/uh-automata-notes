@@ -1,0 +1,56 @@
+\subsection{Pushdown Automata}\label{subsec:pushdown-automata}
+\begin{definition}
+    A \textbf{Pushdown Automaton} is a septuple \[\underset{\sim}{P}=\left(Q, T, \Gamma, \delta, q_0, Z_0, F\right)\] where
+
+    \begin{align*}
+        &Q \text{ is a finite non-empty set of states}\\
+        &T \text{ is an alphabet of input symbols}\\
+        &\Gamma \text{ is an alphabet of stack symbols}\\
+        &\delta: Q\times (T\cup \{\varepsilon \})\times\Gamma\to Q\times \Gamma^* \text{ is the move function}\\
+        &q_0\in Q \text{ is the initial state}\\
+        &Z_0\in\Gamma \text{ is the initial stack symbol}\\
+        &F\subseteq Q\text{ is the set of accepting states}
+    \end{align*}
+\end{definition}
+
+\begin{definition}
+    Let \(\underset{\sim}{P}=(Q, T, \Gamma, \delta, q_0, Z_0, F\)) be a pushdown automaton. The language given by \(\underset{\sim}{P}\) is defined \[L=\{w\in T^*\mid (q_0, w, z_0) \vdash^* (f, \varepsilon, \gamma), \text{ where } f\in F \text{ and } \gamma\in\Gamma^*\} \]
+
+    \[N=\{w\in T^*\mid (q_0, w, z_0) \vdash^* (q, \varepsilon, \varepsilon), \text{ where } q\in Q\} \]
+\end{definition}
+
+Consider the following example:
+
+\begin{center}\begin{tabular}{l r c c c}
+    & & \(a\) & \(b\) & \(\varepsilon \) \\\cmidrule{3-5}
+    \multirow{2}{*}{\(q_0\)} & \(z_0\) & \((q_0, z_0z)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(z\) & \((q_0, zz)\)  & \((q_1, \varepsilon) \) & \(\emptyset \) \\\midrule
+    \multirow{2}{*}{\(q_1\)} & \(z_0\) & \(\emptyset \) & \(\emptyset \) & \((q_f, \varepsilon)\) \\
+    & \(z\) & \(\emptyset \) & \((q_1, \varepsilon)\) & \(\emptyset \) \\\midrule
+    \multirow{2}{*}{\(q_f\)} & \(z_0\) & \multicolumn{3}{c}{\multirow{2}{*}{accept}}\\
+    & \(z\) & & &\\
+\end{tabular}\end{center}
+
+
+
+This describes the language \(L=\{a^n b^n\mid n\geq1\} \)
+
+Consider the following language on \( \{0, 1\} \):
+
+\[L=\{w2w^R \mid w\in {\{0, 1\}}^*\} \]
+
+where \(w^R\) is the reflection of \(w\). This is given by the context-free grammar 
+
+\[S\to 0S0\mid 1S1\mid 2\]
+
+This can also be defined by the following pushdown automaton:
+
+\begin{center}\begin{tabular}{l r c c c c}
+    & & 0 & 1 & 2 & \(\varepsilon \) \\\cmidrule{3-6}
+    \multirow{2}{*}{\(q_0\)} & \(z_0\) & \((q_0, z_0z)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(z\) & \((q_0, zz)\)  & \((q_1, \varepsilon) \) & \(\emptyset \) \\\midrule
+    \multirow{2}{*}{\(q_1\)} & \(z_0\) & \(\emptyset \) & \(\emptyset \) & \((q_f, \varepsilon)\) \\
+    & \(z\) & \(\emptyset \) & \((q_1, \varepsilon)\) & \(\emptyset \) \\\midrule
+    \multirow{2}{*}{\(q_f\)} & \(z_0\) & \multicolumn{3}{c}{\multirow{2}{*}{accept}}\\
+    & \(z\) & & &\\
+\end{tabular}\end{center}

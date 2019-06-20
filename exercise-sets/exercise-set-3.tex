@@ -1,0 +1,74 @@
+\section{Exercise Set 3}\label{sec:exercise-set-3}
+
+\begin{exercise}{1}
+    Prove that the following languages are not context-free:
+    \begin{enumerate}[(a)]
+        \item \(L=\{0^i1^j2^k \mid 0\leq i < j < k\} \)
+        \item \(L=\{0^{n^2}1^n \mid n\geq0\} \)
+        \item \(L=\{0^n1^n2^n \mid n\geq0\} \)
+        \item \(L=\{0^i1^j2^k \mid i>2j>3k\geq1\} \)
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}\mbox{\\}
+    \begin{enumerate}[(a)]
+        \item Suppose, by way of contradiction, that \(L\) is context-free with pumping length \(p\). Then, by the pumping lemma, there exist strings \(s_1\), \(s_2\), \(s_3\), \(s_4\), and \(s_5\) such that 
+        \item In order to reach a contradiction, suppose that \(L\) is context-free with pumping length \(p\). Then, by the pumping lemma, there exist strings \(s_1\), \(s_2\), \(s_3\), \(s_4\), and \(s_5\) such that \[s=0^{p^2}1^p=s_1 s_2 s_3 s_4 s_5\] with \(\abs{s_2 s_3 s_4}\leq p\) and \(\abs{s_2 s_4}\geq 1\). There are five cases, corresponding to the first occurrence of a 1 in \(s\)
+        \begin{enumerate}[{Case} 1:]
+            \item If the first 1 occurs in \(s_1\), then we write \(s_1=0^{p^2}1^i\), \(s_2=1^j\), \(s_3=1^k\), \(s_4=1^l\), and \(s_5=1^{p-(i+j+k+l)}\). Then 
+            \begin{align*}
+                s_1 s_2^n s_3 s_4^n s_5 &= 0^{p^2}1^i1^{nj}1^k1^{nl}1^{p-(i+j+k+l)}\\
+                                        &= 0^{p^2}1^{p+(n-1)(j+l)}
+            \end{align*}
+            Taking \(n=2\) yields a string with \(p^2\) 0s but \(p+j+l>p\) 1s, a contradiction.
+            \item If the first 1 occurs in \(s_2\), then we write \(s_1=0^i\), \(s_2=0^{p^2-i}1^j\), \(s_3=1^k\), \(s_4=1^l\), and \(s_5=1^{p-(j+k+l)}\). Then
+            \begin{align*}
+                s_1 s_2^n s_3 s_4^n s_5 &= 0^i 0^{n(p^2-i)}1^{nj}1^k1^{nl}1^{p-(j+k+l)}\\
+                                        &= 0^{np^2-(n-1)i}1^{p+(n-1)(j+l)}
+            \end{align*}
+            Taking \(n=0\) yields a string 
+        \end{enumerate}
+        
+        % There are two cases 
+        % \begin{enumerate}[1.]
+        %     \item \(1\in s_2 s_3 s_4 \)
+        %     \item \(1\not\in s_2 s_3 s_4 \)
+        % \end{enumerate}
+        % Case 2 is straightforward: if 1 is not in \(s_2 s_3 s_4\), then pumping will introduce additional 0s while keeping the number of 1s the same, which will violate the requirement that \(i=j^2\). In case 1, we note three additional cases:
+        % \begin{enumerate}[a)]
+        %     \item \(1\in s_2\)
+        %     \item \(1\not\in s_2\) and \(1\in s_3\)
+        %     \item \(1\not\in s_3\)
+        % \end{enumerate}
+        % In case 1a), we write \(s_1=0^i\), \(s_2=0^j1^k\), \(s_3=1^l\), \(s_4=)
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}{2}
+    Construct PDAs \(P\) such that
+    \begin{enumerate}[i.]
+        \item \(L=L(P)\)
+        \item \(L=N(P)\)
+    \end{enumerate}
+    for the following languages:
+    \begin{enumerate}[(a)]
+        \item \(L=\{0^i1^i\mid i\geq0\} \cup \{0^i1^{2i}\mid i\geq0\}\)
+        \item \(L=L(G)\) with \(G\) given by \(S\to aSd\mid aAd, A\to bAc\mid bc\)
+        \item \(L=L(G)\) with \(G\) given by \(S\to aSd\mid aAd, A\to bAc\mid bSc\mid\varepsilon \)
+        \item \(L=L(G)\) with \(G\) given by \(E\to +EE\mid *EE\mid id\)
+    \end{enumerate}
+\end{exercise}
+
+\begin{exercise}{3}
+    Construct a grammar for the language \(N(P)\):
+        \[P = (\{p, q\}, \{0, 1\}, \{Z, X\}, \delta, p, Z, \emptyset)\]
+    where
+        \begin{align*}
+            \delta(p, 1, Z) &= \{(p, XZ)\} &\delta(p, \varepsilon, Z) &= \{(p, \varepsilon)\} &\delta(p, 1, X) &= \{(p, XX)\}\\
+            \delta(a, 1, X) &= \{(q, \varepsilon)\} &\delta(p, 0, X) &= \{(q, X)\} &\delta(q, 0, Z) &= \{(p, Z)\}\\
+        \end{align*}
+\end{exercise}
+
+\begin{exercise}{4}
+    Construct Turing Machines for each fo the languages in exercise 1.
+\end{exercise}

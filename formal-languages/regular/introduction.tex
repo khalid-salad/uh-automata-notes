@@ -1,4 +1,4 @@
-\subsubsection{Introduction}\label{subsubsec:introduction}
+\subsection{Introduction}\label{subsubsec:introduction}
 \begin{definition}
  An \textbf{Alphabet} is a finite, non-empty set of atomic symbols.
 \end{definition}
@@ -8,7 +8,7 @@
 \end{definition}
 
 \begin{definition}
- The \textbf{length} of a string, \(s\), denoted \(|s|\), is the number of symbols in \(s\). 
+ The \textbf{length} of a string, \(s\), denoted \(\abs{s}\), is the number of symbols in \(s\). 
 \end{definition}
 
 \begin{definition}
@@ -30,7 +30,7 @@ We denote by \(\varepsilon \) the \textbf{empty string}, the unique string of 0 
 \begin{proof}
  That \(A^*\) is infinite is straightforward: since \(A\) is non-empty, take \(a\in A\). Then \[ \{a, aa, aaa, \hdots \}\subseteq A^*\]
  
- To see that it is countable, we first write \(|A|=n\). Now, consider the set of all strings of length 0. This is simply \( \{\varepsilon \} \). Moreover, there are \(n\) strings of length 1, \(n^2\) strings of length 2, \(n^3\) strings of length 3, and so on. Thus, we map \(\varepsilon \) to 0, the strings of length 1 to \(1, 2, \hdots, n\), the strings of length 2 to \(n+1, n+2, \hdots, n+n^2\), the strings of length 3 to \(n+n^2+1, n+n^2+2,\hdots, n+n^2+n^3\), and so on. This is a bijection from \(A^*\) to \(\mathbb{N}\), which completes the proof.
+ To see that it is countable, we first write \(\abs{A}=n\). Now, consider the set of all strings of length 0. This is simply \( \{\varepsilon \} \). Moreover, there are \(n\) strings of length 1, \(n^2\) strings of length 2, \(n^3\) strings of length 3, and so on. Thus, we map \(\varepsilon \) to 0, the strings of length 1 to \(1, 2, \hdots, n\), the strings of length 2 to \(n+1, n+2, \hdots, n+n^2\), the strings of length 3 to \(n+n^2+1, n+n^2+2,\hdots, n+n^2+n^3\), and so on. This is a bijection from \(A^*\) to \(\mathbb{N}\), which completes the proof.
 \end{proof}
 
 \begin{definition}
@@ -54,7 +54,7 @@ All set operations, such as union, intersection, complement, set-difference, etc
 \begin{definition}
  Given two languages \(L_1\) and \(L_2\), the concatenation \(L_1\cdot L_2\) is given by
  
- \[L_1\cdot L_2=\{s\cdot t|s\in L_1\text{ and } t\in L_2\} \]
+ \[L_1\cdot L_2=\{s\cdot t \mid s\in L_1\text{ and } t\in L_2\} \]
 \end{definition}
 
 Clearly, we have 

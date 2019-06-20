@@ -1,4 +1,4 @@
-\subsubsection{Context-Free Grammars}\label{subsec:context-free-grammars}
+\subsection{Context-Free Grammars}\label{subsec:context-free-grammars}
 \begin{definition}
     A \textbf{Context-Free Grammar} is a quartuple \(G=(N, T, P, S)\) where 
           \begin{align*}
@@ -27,7 +27,7 @@ By convention, we use upper-case letters to denote variables, lower-case to deno
 We can define the language of a context-free grammar:
 
 \begin{definition}
-      Given a context-free grammar \(G\), the corresponding \textbf{context-free language} is \[L(G)=\{w|S\Rightarrow w\} \]
+      Given a context-free grammar \(G\), the corresponding \textbf{context-free language} is \[L(G)=\{w \mid S\Rightarrow w\} \]
 \end{definition}
 
 \begin{theorem}
@@ -38,4 +38,4 @@ We can define the language of a context-free grammar:
       Let \(L\) be a regular language and let \(N=(Q, A, \tau, q_0, \mathcal{F})\) be its corresponding minimum DFA\@. 
 \end{proof}
 
-However, not every context-free language is regular. For example, the language \( \{a^n b^n|n\geq0\} \) is not regular, but is a context-free language given by
+However, not every context-free language is regular. For example, the language \( \{a^n b^n \mid n\geq0\} \) is not regular, but is a context-free language given by
