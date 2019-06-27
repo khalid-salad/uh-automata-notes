@@ -9,8 +9,8 @@ For all PDAs, left is top of stack.
 \begin{center}\begin{tabular}{l r c c c}
     \multicolumn{5}{c}{PDA for \(0^i 1^{ni}\) accepting by Empty Stack}\\\bottomrule
     & & 0 & 1 & \(\varepsilon \) \\\cmidrule{3-5}
-    \multirow{2}{*}{\(q_0\)} & \(Z_0\) & \((q_0, Z^n Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
-    & \(Z\) & \((q_0, Z^{n+1})\)  & \((q_1, Z) \) & \(\emptyset \) \\\midrule
+    \multirow{2}{*}{\(q_0\)} & \(Z_0\) & \((q_0, Z^n Z_0)\) & \(\emptyset \) & \((q_1, \varepsilon)\) \\
+    & \(Z\) & \((q_0, Z^{n+1})\)  & \((q_1, \varepsilon) \) & \(\emptyset \) \\\midrule
     \multirow{2}{*}{\(q_1\)} & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \((q_1, \varepsilon)\) \\
     & \(Z\) & \(\emptyset \) & \((q_1, \varepsilon)\) & \(\emptyset \) \\
 \end{tabular}\end{center}
@@ -18,8 +18,8 @@ For all PDAs, left is top of stack.
 \begin{center}\begin{tabular}{l r c c c}
     \multicolumn{5}{c}{PDA for \(0^{ni} 1^i\) accepting by Empty Stack}\\\bottomrule
     & & 0 & 1 & \(\varepsilon \) \\\cmidrule{3-5}
-    \multirow{2}{*}{\(q_0\)} & \(Z_0\) & \((q_1, Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
-    & \(Z\) & \((q_1, Z)\) & \((q_n, Z) \) & \(\emptyset \) \\\midrule
+    \multirow{2}{*}{\(q_0\)} & \(Z_0\) & \((q_1, Z_0)\) & \(\emptyset \) & \((q_0, \varepsilon)\) \\
+    & \(Z\) & \((q_1, Z)\) & \((q_n, \varepsilon) \) & \(\emptyset \) \\\midrule
     \multirow{2}{*}{\(q_1\)} & \(Z_0\) & \((q_2, Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
     & \(Z\) & \((q_2, Z) \)  & \(\emptyset \) & \(\emptyset \) \\\midrule
     \multicolumn{5}{c}{\vdots}\\\midrule
@@ -32,8 +32,6 @@ For all PDAs, left is top of stack.
     & \(Z\) & \(\emptyset \)  & \((q_n, \varepsilon ) \) &  \(\emptyset \) \\\midrule
 \end{tabular}\end{center}
 
-For \(i\geq0\), simply add \((q_0, \varepsilon)\) to the \(\varepsilon \) column for \(q_0\). 
-
 This PDA accepts by empty stack. To change to accepting by final state, add auxhiliary states \(q_0'\), \(q_f\) and stack letter \(Z_0'\):
 
 \begin{center}\begin{tabular}{l r c c c}
@@ -43,8 +41,8 @@ This PDA accepts by empty stack. To change to accepting by final state, add auxh
     & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
     & \(Z\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\\midrule
     \multirow{3}{*}{\(q_0\)}  & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
-    & \(Z_0\) & \((q_0, Z^n Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
-    & \(Z\) & \((q_0, Z^{n+1})\)  & \((q_1, Z) \) & \(\emptyset \) \\\midrule
+    & \(Z_0\) & \((q_0, Z^n Z_0)\) & \(\emptyset \) & \((q_1, \varepsilon) \) \\
+    & \(Z\) & \((q_0, Z^{n+1})\)  & \((q_1, \varepsilon) \) & \(\emptyset \) \\\midrule
     \multirow{3}{*}{\(q_1\)} & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \((q_f, \varepsilon)\) \\
     & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \((q_1, \varepsilon)\) \\
     & \(Z\) & \(\emptyset \) & \((q_1, \varepsilon)\) & \(\emptyset \) \\\midrule
@@ -59,9 +57,9 @@ This PDA accepts by empty stack. To change to accepting by final state, add auxh
     \multirow{3}{*}{\(q_0'\)} & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \((q_0, Z_0 Z_0')\) \\
     & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
     & \(Z\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\\midrule
-    \multirow{3}{*}{\(q_0\)}  & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
-    & \(Z_0\) & \((q_1, Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
-    & \(Z\) & \((q_1, Z)\) & \((q_n, Z) \) & \(\emptyset \) \\\midrule
+    \multirow{3}{*}{\(q_0\)}  & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \((q_f, \varepsilon)\) \\
+    & \(Z_0\) & \((q_1, Z_0)\) & \(\emptyset \) & \((q_0, \varepsilon)\) \\
+    & \(Z\) & \((q_1, Z)\) & \((q_n, \varepsilon) \) & \(\emptyset \) \\\midrule
     \multirow{3}{*}{\(q_1\)} & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
     & \(Z_0\) & \((q_2, Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
     & \(Z\) & \((q_2, Z) \)  & \(\emptyset \) & \(\emptyset \) \\\midrule
