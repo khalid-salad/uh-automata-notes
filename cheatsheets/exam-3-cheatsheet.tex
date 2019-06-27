@@ -1,1 +1,96 @@
 \section{Exam 3}\label{sec:exam-3-cheatsheet}
+
+\subsection{Proving a Language is not Context-Free}
+In order to reach a contradiction, assume the language is context-free with pumping length \(p\). Then, choose a string \(s\) in the language and write \(s=uvwxy\). Pump \(s\) as \(u v^n w x^n y\) and show that the pumped string is not in the language for some \(n\geq0\). Usually, this requires division into cases, e.g. ``the string contains only the letter a''.
+
+\subsection{Finding a Pushdown Automaton for a Language}
+For all PDAs, left is top of stack.
+
+\begin{center}\begin{tabular}{l r c c c}
+    \multicolumn{5}{c}{PDA for \(0^i 1^{ni}\) accepting by Empty Stack}\\\bottomrule
+    & & 0 & 1 & \(\varepsilon \) \\\cmidrule{3-5}
+    \multirow{2}{*}{\(q_0\)} & \(Z_0\) & \((q_0, Z^n Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\) & \((q_0, Z^{n+1})\)  & \((q_1, Z) \) & \(\emptyset \) \\\midrule
+    \multirow{2}{*}{\(q_1\)} & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \((q_1, \varepsilon)\) \\
+    & \(Z\) & \(\emptyset \) & \((q_1, \varepsilon)\) & \(\emptyset \) \\
+\end{tabular}\end{center}
+
+\begin{center}\begin{tabular}{l r c c c}
+    \multicolumn{5}{c}{PDA for \(0^{ni} 1^i\) accepting by Empty Stack}\\\bottomrule
+    & & 0 & 1 & \(\varepsilon \) \\\cmidrule{3-5}
+    \multirow{2}{*}{\(q_0\)} & \(Z_0\) & \((q_1, Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\) & \((q_1, Z)\) & \((q_n, Z) \) & \(\emptyset \) \\\midrule
+    \multirow{2}{*}{\(q_1\)} & \(Z_0\) & \((q_2, Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\) & \((q_2, Z) \)  & \(\emptyset \) & \(\emptyset \) \\\midrule
+    \multicolumn{5}{c}{\vdots}\\\midrule
+    \multirow{2}{*}{\(q_i\)} & \(Z_0\) & \((q_{i+1}, Z_0)\) & \(\emptyset \) &  \(\emptyset \) \\
+    & \(Z\) & \((q_{i+1}, Z) \) & \(\emptyset \) & \(\emptyset \) \\\midrule
+    \multicolumn{5}{c}{\vdots}\\\midrule
+    \multirow{2}{*}{\(q_{n-1}\)} & \(Z_0\) & \((q_0, ZZ_0)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\)  & \((q_0, Z^2) \) & \(\emptyset \) & \(\emptyset \) \\\midrule
+    \multirow{2}{*}{\(q_n\)} & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \((q_n, \varepsilon)\) \\
+    & \(Z\) & \(\emptyset \)  & \((q_n, \varepsilon ) \) &  \(\emptyset \) \\\midrule
+\end{tabular}\end{center}
+
+For \(i\geq0\), simply add \((q_0, \varepsilon)\) to the \(\varepsilon \) column for \(q_0\). 
+
+This PDA accepts by empty stack. To change to accepting by final state, add auxhiliary states \(q_0'\), \(q_f\) and stack letter \(Z_0'\):
+
+\begin{center}\begin{tabular}{l r c c c}
+    \multicolumn{5}{c}{PDA for \(0^i 1^{ni}\) accepting by Final State}\\\bottomrule
+    & & 0 & 1 & \(\varepsilon \) \\\cmidrule{3-5}
+    \multirow{3}{*}{\(q_0'\)} & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \((q_0, Z_0 Z_0')\) \\
+    & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\\midrule
+    \multirow{3}{*}{\(q_0\)}  & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z_0\) & \((q_0, Z^n Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\) & \((q_0, Z^{n+1})\)  & \((q_1, Z) \) & \(\emptyset \) \\\midrule
+    \multirow{3}{*}{\(q_1\)} & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \((q_f, \varepsilon)\) \\
+    & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \((q_1, \varepsilon)\) \\
+    & \(Z\) & \(\emptyset \) & \((q_1, \varepsilon)\) & \(\emptyset \) \\\midrule
+    \multirow{3}{*}{\(q_f\)} & \(Z_0'\) &\multicolumn{3}{c}{\multirow{3}{*}{accepting}} \\
+    & \(Z_0\) \\
+    & \(Z\)
+\end{tabular}\end{center}
+
+\begin{center}\begin{tabular}{l r c c c}
+    \multicolumn{5}{c}{PDA for \(0^{ni} 1^i\) accepting by Final State}\\\bottomrule
+    & & 0 & 1 & \(\varepsilon \) \\\cmidrule{3-5}
+    \multirow{3}{*}{\(q_0'\)} & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \((q_0, Z_0 Z_0')\) \\
+    & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\\midrule
+    \multirow{3}{*}{\(q_0\)}  & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z_0\) & \((q_1, Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\) & \((q_1, Z)\) & \((q_n, Z) \) & \(\emptyset \) \\\midrule
+    \multirow{3}{*}{\(q_1\)} & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z_0\) & \((q_2, Z_0)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\) & \((q_2, Z) \)  & \(\emptyset \) & \(\emptyset \) \\\midrule
+    \multicolumn{5}{c}{\vdots}\\\midrule
+    \multirow{3}{*}{\(q_i\)} & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
+     & \(Z_0\) & \((q_{i+1}, Z_0)\) & \(\emptyset \) &  \(\emptyset \) \\
+    & \(Z\) & \((q_{i+1}, Z) \) & \(\emptyset \) & \(\emptyset \) \\\midrule
+    \multicolumn{5}{c}{\vdots}\\\midrule
+    \multirow{3}{*}{\(q_{n-1}\)}  & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z_0\) & \((q_0, ZZ_0)\) & \(\emptyset \) & \(\emptyset \) \\
+    & \(Z\)  & \((q_0, Z^2) \) & \(\emptyset \) & \(\emptyset \) \\\midrule
+    \multirow{3}{*}{\(q_n\)} & \(Z_0'\) & \(\emptyset \) & \(\emptyset \) & \((q_f, \varepsilon)\) \\
+     & \(Z_0\) & \(\emptyset \) & \(\emptyset \) & \((q_n, \varepsilon)\) \\
+    & \(Z\) & \(\emptyset \)  & \((q_n, \varepsilon ) \) & \(\emptyset \) \\\midrule
+    \multirow{3}{*}{\(q_f\)} & \(Z_0'\) &\multicolumn{3}{c}{\multirow{3}{*}{accepting}} \\
+    & \(Z_0\) \\
+    & \(Z\)
+\end{tabular}\end{center}
+
+\subsection{Converting a CFG into a PDA}
+First, convert the CFG into Greibach Normal Form. Then, the non-terminals (variables) are the rows (stack symbols) of your PDA, with a single state \(q\). The columns are just the terminals. For any production \(X\to aX_1 X_2\hdots X_n\), add \((q, X_1 X_2\hdots X_n)\) to the row, column \((X, A)\). If \(X\to a\), add \((q, \varepsilon)\). 
+
+\subsection{Converting a PDA into a CFG}
+Suppose there are \(n\) states \(q_1, q_2, \hdots, q_n\). First, add the start productions:
+
+\[S\to (q_1, Z, q_1)\mid(q_1, Z, q_2)\mid\hdots\mid(q_1, Z, q_n)\]
+
+% For every value \((p, XY) \in \delta(q, a, X)\), add the production 
+
+% \[(p, X, q_i)]
+
+\subsection{Constructing a Turing Machine}

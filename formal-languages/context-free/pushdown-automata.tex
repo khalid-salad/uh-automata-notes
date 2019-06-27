@@ -11,12 +11,23 @@
         &Z_0\in\Gamma \text{ is the initial stack symbol}\\
         &F\subseteq Q\text{ is the set of accepting states}
     \end{align*}
+
+    We define \((q, a, \gamma)\vdash(q', a', \gamma')\) when \(\delta(q, a, \gamma)=(q', a', \gamma')\).
 \end{definition}
 
-\begin{definition}
-    Let \(\underset{\sim}{P}=(Q, T, \Gamma, \delta, q_0, Z_0, F\)) be a pushdown automaton. The language given by \(\underset{\sim}{P}\) is defined \[L=\{w\in T^*\mid (q_0, w, z_0) \vdash^* (f, \varepsilon, \gamma), \text{ where } f\in F \text{ and } \gamma\in\Gamma^*\} \]
+Informally, a pushdown automaton differs from a finite state machine in that it has a stack that allows it to: 
 
-    \[N=\{w\in T^*\mid (q_0, w, z_0) \vdash^* (q, \varepsilon, \varepsilon), \text{ where } q\in Q\} \]
+\begin{enumerate}[1.]
+    \item Choose a transition based on the top of the stack
+    \item Push to or pop from the stack during a transition
+\end{enumerate}
+
+\begin{definition}
+    Let \(\underset{\sim}{P}=(Q, T, \Gamma, \delta, q_0, Z_0, F\)) be a pushdown automaton. The \textbf{language accepted by final state} is given by \[L(\underset{\sim}{P})=\{w\in T^*\mid (q_0, w, z_0) \vdash^* (f, \varepsilon, \gamma), \text{ where } f\in F \text{ and } \gamma\in\Gamma^*\} \]
+    The \textbf{language accepted by empty stack} is given by 
+    \[N(\underset{\sim}{P})=\{w\in T^*\mid (q_0, w, z_0) \vdash^* (q, \varepsilon, \varepsilon), \text{ where } q\in Q\} \]
+
+    where \(\vdash^*\) denotes 0 or more transitions. 
 \end{definition}
 
 Consider the following example:
@@ -54,3 +65,7 @@ This can also be defined by the following pushdown automaton:
     \multirow{2}{*}{\(q_f\)} & \(z_0\) & \multicolumn{3}{c}{\multirow{2}{*}{accept}}\\
     & \(z\) & & &\\
 \end{tabular}\end{center}
+
+\begin{theorem}
+    For any pushdown automaton \(M\), there exist pushdown automata \(P\) and \(Q\) such that \(L(M)=N(P)\) and \(N(L)=L(Q)\).
+\end{theorem}
