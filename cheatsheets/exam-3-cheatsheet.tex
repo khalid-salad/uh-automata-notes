@@ -89,8 +89,17 @@ Suppose there are \(n\) states \(q_1, q_2, \hdots, q_n\). First, add the start p
 
 \[S\to (q_1, Z, q_1)\mid(q_1, Z, q_2)\mid\hdots\mid(q_1, Z, q_n)\]
 
-% For every value \((p, XY) \in \delta(q, a, X)\), add the production 
+For every \((p, XZ) \in \delta(p, b, Z)\), add the productions
 
-% \[(p, X, q_i)]
+\begin{align*}
+    (p, Z, q_1) &\to b(p, X, q_1)(q_1, Z, q_1)\mid b(p, X, q_2)(q_2, Z, q_1)\mid\hdots\mid b(p, X, q_n)(q_n, Z, q_1)\\
+    (p, Z, q_2) &\to b(p, X, q_1)(q_1, Z, q_2)\mid b(p, X, q_2)(q_2, Z, q_2)\mid\hdots\mid b(p, X, q_n)(q_n, Z, q_2)\\
+                &\vdots\\
+    (p, Z, q_n) &\to b(p, X, q_1)(q_1, Z, q_n)\mid b(p, X, q_2)(q_2, Z, q_n)\mid\hdots\mid b(p, X, q_n)(q_n, Z, q_n)\\    
+\end{align*}
+
+If \((p, \varepsilon)\in \delta(p, a, X)\), add 
+
+\[(p, X, p)\to a\]
 
 \subsection{Constructing a Turing Machine}
