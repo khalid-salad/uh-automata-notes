@@ -1,8 +1,18 @@
 \section{Exam 4}\label{sec:exam-4-cheatsheet}
 
-\subsection{Recursively Enumerate Languages}
+\subsection{Recursively Enumerable Languages}
+If \(L_1\) and \(L_2\) are recursive, then 
 
-If \(L_1\) and \(L_2\) are recursively enumerable, then
+\begin{itemize}
+    \item \(L_1^*\)
+    \item \(L_1\cdot L_2\)
+    \item \(L_1\cup L_2\)
+    \item \(L_1\cap L_2\)
+    \item \(\overline{L_1}\)
+    \item \(L_1 - L_2\)
+\end{itemize}
+
+are recursive. However, if \(L_1\) and \(L_2\) are recursively enumerable, then
 
 \begin{itemize}
     \item \(L_1^*\)
@@ -13,57 +23,101 @@ If \(L_1\) and \(L_2\) are recursively enumerable, then
 
 are also recursively enumerable. If \(L\) is recursively enumerable, then \(\overline{L}\) is recursively enumerable if and only if \(L\) is recursive.
 
+For all of the below cases, we answer six questions:
+
+\begin{enumerate}[i.]
+    \item Does the language contain a given fixed word \(w\)?
+    \item Does the language not contain a given fixed word \(w\)?
+    \item Is the language empty?
+    \item Is the language non-empty?
+    \item Does the language contain all words?
+    \item Are there any words not in the language?
+\end{enumerate}
+
 \begin{enumerate}[1.]
     \item \(L_1\) and \(L_2\) are both recursive.
     \begin{enumerate}[a.]
+        \item \(L_1 \cup L_2\)
+        \begin{enumerate}[i.]
+            \item We construct a Turing Machine which always halts and accepts if and only if \(w\) is in \(L_1 \cup L_2\): simply accept if either Turing Machine for \(L_1\) or \(L_2\) accepts \(w\), otherwise reject. Hence this problem is recursive. 
+            \item We construct a Turing Machine which always halts and accepts if and only if \(w\) is not in \(L_1 \cup L_2\): simply accept \(w\) if both Turing Machines for \(L_1\) and \(L_2\) reject \(w\), otherwise reject. Hence this problem is recursive. 
+            \item This problem is not recursively enumerable; if \(L = \emptyset \), then we must verify all words are not in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) is empty will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) in \(L_1 \cup L_2\) (i.e., it is non-empty): enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if either Turing Machine for \(L_1\) or \(L_2\) accepts \(w_i\). If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
+            \item This problem is not recursively enumerable; if \(L\) contains all words, then we must verify all words are in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) contains all words will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) not in the language: enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if both Turing Machines for \(L_1\) and \(L_2\) reject \(w_i\). If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
+        \end{enumerate}
         \item \(L_1 \cap L_2\)
         \begin{enumerate}[i.]
-            \item Does the language contain a given fixed word \(w\)?
-            \item Is the language empty?
+            \item We construct a Turing Machine which always halts and accepts if and only if \(w\) is in \(L_1 \cap L_2\): simply accept if both Turing Machines for \(L_1\) and \(L_2\) accept \(w\), otherwise reject. Hence this problem is recursive. 
+            \item We construct a Turing Machine which always halts and accepts if and only if \(w\) is not in \(L_1 \cap L_2\): simply accept \(w\) if either Turing Machine for \(L_1\) or \(L_2\) reject \(w\), otherwise reject. Hence this problem is recursive. 
+            \item This problem is not recursively enumerable; if \(L = \emptyset \), then we must verify all words are not in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) is empty will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) in \(L_1 \cap L_2\) (i.e., it is non-empty): enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if both Turing Machines for \(L_1\) and \(L_2\) accept \(w_i\). If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
+            \item This problem is not recursively enumerable; if \(L\) contains all words, then we must verify all words are in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) contains all words will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) not in the language: enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if either Turing Machines for \(L_1\) or \(L_2\) rejects \(w_i\). If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
         \end{enumerate}
         \item \(L_1 - L_2\)
         \begin{enumerate}[i.]
-            \item Does the language contain a given fixed word \(w\)?
-            \item Is the language empty?
+            \item We construct a Turing Machine which always halts and accepts if and only if \(w\) is in \(L_1 - L_2\): simply accept if the Turing Machine for \(L_1\) accepts \(w\) and the Turing Machine for \(L_2\) rejects \(w\), otherwise reject. Hence this problem is recursive. 
+            \item We construct a Turing Machine which always halts and accepts if and only if \(w\) is not in \(L_1 - L_2\): simply accept if the Turing Machine for \(L_1\) rejects \(w\) or the Turing Machine for \(L_2\) accepts \(w\), otherwise reject. Hence this problem is recursive. 
+            \item This problem is not recursively enumerable; if \(L = \emptyset \), then we must verify all words are not in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) is empty will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) in \(L_1 - L_2\) (i.e., it is non-empty): enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if the Turing Machine for \(L_1\) accepts \(w_i\) and the Turing Machine for \(L_2\) does not. If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
+            \item This problem is not recursively enumerable; if \(L\) contains all words, then we must verify all words are in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) contains all words will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) not in the language: enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if 
+            \begin{itemize}
+                \item the Turing Machines for \(L_1\) rejects
+                \item the Turing Machine for \(L_2\) accepts \(w_i\). 
+            \end{itemize}
+                If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
         \end{enumerate}
     \end{enumerate}
+
     \item \(L_1\) is recursively enumerable but not recursive and \(L_2\) is recursive.
     \begin{enumerate}[a.]
+        \item \(L_1 \cup L_2\)
+        \begin{enumerate}[i.]
+            \item We construct a Turing Machine which accepts if and only if \(w\) is in \(L_1 \cup L_2\): simply accept if either Turing Machine for \(L_1\) or \(L_2\) accepts \(w\), otherwise reject. Note, we run these machines in parallel: perform move 1 on \(L_1\), then \(L_2\), then move 2, and so on.  If \(w\) is not in the language, then the Turing Machine may not halt. Hence this problem is recursively enumerable but not recursive. 
+            \item This problem is not recursively enumerable; if the word is not in \(L_1 \cup L_2\), then it is not in \(L_1\) or \(L_2\). Then any Turing Machine for this problem must determine if \(w\not\in L_1\), which may not halt. 
+            \item This problem is not recursively enumerable; if \(L = \emptyset \), then we must verify all words are not in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) is empty will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) in \(L_1 \cup L_2\) (i.e., it is non-empty): enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if either Turing Machine for \(L_1\) or \(L_2\) accepts \(w_i\). Note, we run these machines in parallel: perform move 1 on \(w_1\), then move 2 on \(w_1\), then move 1 on \(w_2\), then move 3 on \(w_1\), and so on. If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
+            \item This problem is not recursively enumerable; if \(L\) contains all words, then we must verify all words are in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) contains all words will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) not in the language: enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if both Turing Machines for \(L_1\) and \(L_2\) reject \(w_i\). Note, we run these machines in parallel: perform move 1 on \(w_1\), then move 2 on \(w_1\), then move 1 on \(w_2\), then move 3 on \(w_1\), and so on. If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
+        \end{enumerate}
         \item \(L_1 \cap L_2\)
         \begin{enumerate}[i.]
-            \item Does the language contain a given fixed word \(w\)?
-            \item Is the language empty?
+            \item We construct a Turing Machine which always halts and accepts if and only if \(w\) is in \(L_1 \cap L_2\): simply accept if both Turing Machines for \(L_1\) and \(L_2\) accepts \(w\), otherwise reject. If \(w\) is in the language, then it is in both \(L_1\) and \(L_2\), and both machines will halt and accept on \(w\). Otherwise, \(w\) is not in \(L_1\), so the machine for \(L_1\) will never halt. Thus, the problem is recursively enumerable but not recursive.  
+            \item This problem is not recursively enumerable; if the word is not in \(L_1 \cap L_2\), then it is not in \(L_1\) nor \(L_2\). Then any Turing Machine for this problem must determine if \(w\not\in L_1\), which may not halt. 
+            \item This problem is not recursively enumerable; if \(L = \emptyset \), then we must verify all words are not in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) is empty will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) in \(L_1 \cap L_2\) (i.e., it is non-empty): enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if both Turing Machines for \(L_1\) and \(L_2\) accept \(w_i\). Note, we run these machines in parallel: perform move 1 on \(w_1\), then move 2 on \(w_1\), then move 1 on \(w_2\), then move 3 on \(w_1\), and so on. If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
+            \item This problem is not recursively enumerable; if \(L\) contains all words, then we must verify all words are in \(L\). However, there are infinitely many words, and thus any Turing Machine which determines if \(L\) contains all words will never halt. 
+            \item Construct a Turing Machine which accepts if and only if there exists a word \(w\) not in the language: enumerate all words as \(w_1, w_2, \hdots \). For \(i=0\) to \(\infty \), accept if both Turing Machines for \(L_1\) and \(L_2\) reject \(w_i\). Note, we run these machines in parallel: perform move 1 on \(w_1\), then move 2 on \(w_1\), then move 1 on \(w_2\), then move 3 on \(w_1\), and so on. If no such word exists, then the Turing Machine will not halt. Thus, this problem is recursively enumerable but not recursive.
         \end{enumerate}
         \item \(L_1 - L_2\)
-        \begin{enumerate}[i.]
-            \item Does the language contain a given fixed word \(w\)?
-            \item Is the language empty?
-        \end{enumerate}
     \end{enumerate}
     \item \(L_1\) is recursive and \(L_2\) is recursively enumerable but not recursive.
-    \begin{enumerate}[a.]
-        \item \(L_1 \cap L_2\)
-        \begin{enumerate}[i.]
-            \item Does the language contain a given fixed word \(w\)?
-            \item Is the language empty?
-        \end{enumerate}
-        \item \(L_1 - L_2\)
-        \begin{enumerate}[i.]
-            \item Does the language contain a given fixed word \(w\)?
-            \item Is the language empty?
-        \end{enumerate}
-    \end{enumerate}
+    
     \item \(L_1\) and \(L_2\) are both recursively enumerable.
-    \begin{enumerate}[a.]
-        \item \(L_1 \cap L_2\)
-        \begin{enumerate}[i.]
-            \item Does the language contain a given fixed word \(w\)?
-            \item Is the language empty?
-        \end{enumerate}
-        \item \(L_1 - L_2\)
-        \begin{enumerate}[i.]
-            \item Does the language contain a given fixed word \(w\)?
-            \item Is the language empty?
-        \end{enumerate}
-    \end{enumerate}
+    
 \end{enumerate}
+We write ``r.e.'' to indicate ``recursively enumerable but not recursive''. 
+
+\begin{tabular}{|l|c|c|c|}\hline
+    \multicolumn{4}{|c|}{\(L_1\) and \(L_2\) are both recursive}\\\hline
+    & \(L_1 \cup L_2\) & \(L_1 \cap L_2\) & \(L_1 - L_2\)\\\hline
+    Does the language contain a given fixed word \(w\)? & recursive & recursive & recursive\\\hline
+    Does the language not contain a given fixed word \(w\)? & recursive & recursive & recursive\\\hline
+    Is the language empty? & not r.e. & not r.e. & not r.e.\\\hline
+    Is the language non-empty? & r.e. & r.e. & r.e.\\\hline
+    Does the language contain all words? & not r.e. & not r.e. & not r.e.\\\hline
+    Are there any words not in the language? & r.e. & r.e. & r.e.\\\hline 
+\end{tabular}
+
+\begin{tabular}{|l|c|c|c|}\hline
+    \multicolumn{4}{|c|}{\(L_1\) is recursively enumerable but not recursive and \(L_2\) is recursive}\\\hline
+    & \(L_1 \cup L_2\) & \(L_1 \cap L_2\) & \(L_1 - L_2\)\\\hline
+    Does the language contain a given fixed word \(w\)? & r.e. & r.e. & r.e.\\\hline
+    Does the language not contain a given fixed word \(w\)? & not r.e. & not r.e. & not r.e.\\\hline
+    Is the language empty? & not r.e. & not r.e. & not r.e.\\\hline
+    Is the language non-empty? & r.e. & r.e. & r.e.\\\hline
+    Does the language contain all words? & not r.e. & not r.e. & not r.e.\\\hline
+    Are there any words not in the language? & not r.e. & not r.e. & not r.e.\\\hline 
+\end{tabular}
